@@ -11,7 +11,7 @@ public final class Troll extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		instance = this;
-		getLogger().warning("Troll plugin has been enabled!");
+		getLogger().warning("EpicTroll plugin has been enabled!");
 
 		getCommand("troll").setExecutor(new CommandManager());
 		getCommand("troll").setTabCompleter(new CommandManager());
@@ -23,7 +23,7 @@ public final class Troll extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		getLogger().warning("Troll plugin has been disabled!");
+		getLogger().warning("EpicTroll plugin has been disabled!");
 
 	}
 

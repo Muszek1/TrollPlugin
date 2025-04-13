@@ -11,7 +11,7 @@ Fire:
   Invalid_Duration: "&c> &fInvalid duration in second argument!"
 Mob:
   Message: "&e> &fYou spawned %mob%(s) behind %player%"
-  Usage: "&e> &fUsage: /troll mob <player> <mob>"
+  Usage: "&e> &fUsage: /troll mob <player> <mob> <amount>"
 Anvil:
   Message: "&e> &fYou spawned an anvil above %player%"
   Usage: "&e> &fUsage: /troll anvil <player>"
@@ -22,6 +22,6 @@ Freeze:
   Target_Message: "&b> &bYou are FROZEN!"
 ExplodePlayer:
   Message: "&e> You exploded %player%!"
-  Usage: "&e> &fUsage: /troll explodeplayer <player>"
+  Usage: "&e> &fUsage: /troll explode <player>"
   Going_To_Explode: "&c> &cYOU ARE GOING TO EXPLODE!"
   You_Were_Blown_Up: "&c> &cYOU EXPLODED!"

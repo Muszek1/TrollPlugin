@@ -77,7 +77,7 @@ public final class Settings {
 
 		PLAYER_NOT_FOUND = lang.getString("Player_Not_Found");
 		MOB_NOT_FOUND = lang.getString("Mob_Not_Found");
-		NO_PERMISSION = lang.getString("No_Permission");
+		NO_PERMISSION = lang.getString("No_Permissions");
 		PLUGIN_RELOADED = lang.getString("Plugin_Reloaded");
 		WRONG_NUMBER = lang.getString("Wrong_Number");
 		Fire.FIRE_DEFAULT_DURATION = config.getInt("Fire.Default_Duration", 3);

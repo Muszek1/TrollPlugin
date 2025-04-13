@@ -32,47 +32,46 @@ public class TrollCommandMob extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-
-		if (player.hasPermission("epictroll.mob")) {
-			if (args.length == 1 || args.length == 2) {
-				player.sendMessage(Colors.color(Settings.Mob.MOB_USAGE));
-				return;
-			}
-
-			Player target = Bukkit.getPlayerExact(args[1]);
-			if (target == null) {
-				player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[1])));
-				return;
-			}
-			EntityType mob;
-			try {
-				mob = EntityType.valueOf(args[2].toUpperCase());
-			} catch (IllegalArgumentException e) {
-				player.sendMessage(Colors.color(Settings.MOB_NOT_FOUND).replace("%mob%", args[2]));
-				return;
-			}
-
-			Location playerLocation = target.getLocation();
-			Location spawnLocation = playerLocation.clone().add(playerLocation.getDirection().normalize().multiply(-0.9));
-
-			int amount = 1;
-			if (args.length >= 3) {
-				try {
-					amount = Integer.parseInt(args[3]);
-				} catch (IllegalArgumentException e) {
-					player.sendMessage(Colors.color(Settings.WRONG_NUMBER));
-					return;
-				}
-			}
-			for (int i = 0; i < amount; i++) {
-				target.getWorld().spawnEntity(spawnLocation, mob);
-			}
-
-			player.sendMessage(Colors.color((Settings.Mob.MOB_MESSAGE).replace("%player%", target.getName()).replace("%mob%", mob.getName())));
-
-		} else {
+		if (!player.hasPermission("epictroll.mob")) {
 			player.sendMessage(Colors.color(Settings.NO_PERMISSION));
 		}
+		if (args.length == 1 || args.length == 2) {
+			player.sendMessage(Colors.color(Settings.Mob.MOB_USAGE));
+			return;
+		}
+
+
+		Player target = Bukkit.getPlayerExact(args[1]);
+		if (target == null) {
+			player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[1])));
+			return;
+		}
+		EntityType mob;
+		try {
+			mob = EntityType.valueOf(args[2].toUpperCase());
+		} catch (IllegalArgumentException e) {
+			player.sendMessage(Colors.color(Settings.MOB_NOT_FOUND).replace("%mob%", args[2]));
+			return;
+		}
+
+		Location playerLocation = target.getLocation();
+		Location spawnLocation = playerLocation.clone().add(playerLocation.getDirection().normalize().multiply(-0.9));
+		int amount = 1;
+		if (args.length >= 4) {
+			try {
+				amount = Integer.parseInt(args[3]);
+			} catch (NumberFormatException e) {
+				player.sendMessage(Colors.color(Settings.WRONG_NUMBER));
+				return;
+			}
+		}
+		for (int i = 0; i < amount; i++) {
+			target.getWorld().spawnEntity(spawnLocation, mob);
+		}
+
+		player.sendMessage(Colors.color((Settings.Mob.MOB_MESSAGE).replace("%player%", target.getName()).replace("%mob%", mob.getName())));
+
+
 	}
 
 	@Override

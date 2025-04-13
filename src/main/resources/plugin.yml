@@ -1,4 +1,4 @@
-name: Troll
+name: EpicTroll
 version: '1.0-SNAPSHOT'
 main: me.muszek_.troll.Troll
 api-version: '1.21'
@@ -9,8 +9,6 @@ commands:
       - trolling
       - etroll
       - epictroll
-    permission: troll.use
-    permission-message: 'You do not have permission to do that!'
     usage: |-
       /troll <arg>
 

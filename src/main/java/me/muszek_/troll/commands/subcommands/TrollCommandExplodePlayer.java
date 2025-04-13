@@ -49,7 +49,6 @@ public class TrollCommandExplodePlayer extends SubCommand {
 							target.playSound(target.getLocation(), Sound.ENTITY_CREEPER_PRIMED, 1, 1);
 							count++;
 						} else {
-							// Po 3 odtworzeniach, odtwarzamy dźwięk eksplozji, zabijamy gracza i wysyłamy wiadomość
 							target.playSound(target.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
 							target.setHealth(0);
 							target.sendMessage(Colors.color(Settings.ExplodePlayer.EXPLODEPLAYER_YOU_WERE_BLOWN_UP));

@@ -37,44 +37,44 @@ public class TrollCommandFire extends SubCommand {
 			return;
 		}
 
-		if (player.hasPermission("epictroll.fire")) {
-			if (args.length == 1) {
-				player.sendMessage(Colors.color(Settings.Fire.FIRE_USAGE));
+		if (!player.hasPermission("epictroll.fire")) {
+			player.sendMessage(Colors.color(Settings.NO_PERMISSION));
+			return;
+		}
+
+		if (args.length == 1) {
+			player.sendMessage(Colors.color(Settings.Fire.FIRE_USAGE));
+			return;
+		}
+
+		Player target = Bukkit.getPlayerExact(args[1]);
+		if (target == null) {
+			player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[0])));
+			return;
+		}
+		if (args.length == 2) {
+			int time = Settings.Fire.FIRE_DEFAULT_DURATION;
+			player.sendMessage(Colors.color(Settings.Fire.FIRE_MESSAGE.replace("%player%", args[1]).replace("%time%", Integer.toString(time))));
+			player.setFireTicks(time * 20);
+		}
+
+		if (args.length == 3) {
+			int time = 3;
+			try {
+				time = Integer.parseInt(args[2]);
+			} catch (NumberFormatException ex) {
+				player.sendMessage(Colors.color(Settings.Fire.FIRE_INVALID_DURATION));
 				return;
 			}
-			if (args.length == 2) {
-				if (Bukkit.getPlayerExact(args[1]) == null) {
-					player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[1])));
-					return;
-				}
-				Player target = Bukkit.getPlayerExact(args[1]);
-				int time = Settings.Fire.FIRE_DEFAULT_DURATION;
-				player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[1])));
-				player.setFireTicks(time * 20);
-			} else if (args.length == 3) {
-				if (Bukkit.getPlayerExact(args[1]) == null) {
-					player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[1])));
-					return;
-				}
-				int time;
-				try {
-					time = Integer.parseInt(args[2]);
-				} catch (NumberFormatException ex) {
-					player.sendMessage(Colors.color(Settings.Fire.FIRE_INVALID_DURATION));
-					return;
-				}
-				if (time <= 0) {
-					player.sendMessage(Colors.color(Settings.Fire.FIRE_INVALID_DURATION));
-					return;
-				}
-				Player target = Bukkit.getPlayerExact(args[1]);
-				player.sendMessage(Colors.color(Settings.Fire.FIRE_MESSAGE.replace("%player%", args[1]).replace("%time%", Integer.toString(time))));
-				target.setFireTicks(20 * time);
+			if (time <= 0) {
+				player.sendMessage(Colors.color(Settings.Fire.FIRE_INVALID_DURATION));
+				return;
 			}
-		} else {
-			player.sendMessage(Colors.color(Settings.NO_PERMISSION));
+			player.sendMessage(Colors.color(Settings.Fire.FIRE_MESSAGE.replace("%player%", args[1]).replace("%time%", Integer.toString(time))));
+			target.setFireTicks(20 * time);
 		}
 	}
+
 
 	@Override
 	public List<String> getSubcommandArguments(Player player, String[] args) {
