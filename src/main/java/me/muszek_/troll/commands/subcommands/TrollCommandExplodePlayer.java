@@ -31,7 +31,7 @@ public class TrollCommandExplodePlayer extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (player.hasPermission("troll.explode")) {
+		if (player.hasPermission("epictroll.explode")) {
 			if (args.length == 2) {
 				if (Bukkit.getPlayerExact(args[1]) == null) {
 					player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[1])));

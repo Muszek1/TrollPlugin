@@ -7,10 +7,12 @@ commands:
     description: '&eMake a joke on players'
     aliases:
       - trolling
+      - etroll
+      - epictroll
     permission: troll.use
     permission-message: 'You do not have permission to do that!'
     usage: |-
-      /trollanvil <player>
+      /troll <arg>
 
 permissions:
   epictroll.anvil:
@@ -27,6 +29,8 @@ permissions:
     default: op
   epictroll.reload:
     default: op
+  epictroll.explode:
+    default: op
   epictroll.*:
     default: op
     children:
@@ -36,4 +40,5 @@ permissions:
       epictroll.help: true
       epictroll.knockbackstick: true
       epictroll.mov: true
+      epictroll.explode: true
       epictroll.reload: true

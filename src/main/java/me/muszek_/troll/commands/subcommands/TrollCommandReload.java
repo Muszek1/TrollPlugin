@@ -28,7 +28,7 @@ public class TrollCommandReload extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (player.hasPermission("troll.reload")) {
+		if (player.hasPermission("epictroll.reload")) {
 			Troll.getInstance().reloadConfig();
 			Settings.load();
 			player.sendMessage(Colors.color(Settings.PLUGIN_RELOADED));

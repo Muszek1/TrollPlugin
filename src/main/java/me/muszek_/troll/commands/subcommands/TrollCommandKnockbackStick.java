@@ -33,7 +33,7 @@ public class TrollCommandKnockbackStick extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (player.hasPermission("troll.knockbackstick")) {
+		if (player.hasPermission("epictroll.knockbackstick")) {
 			ItemStack knockbackStick = new ItemStack(Material.STICK);
 			ItemMeta meta = knockbackStick.getItemMeta();
 			meta.addEnchant(Enchantment.KNOCKBACK, 10, true);

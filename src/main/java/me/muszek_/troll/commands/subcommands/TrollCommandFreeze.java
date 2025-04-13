@@ -28,7 +28,7 @@ public class TrollCommandFreeze extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (player.hasPermission("troll.freeze")) {
+		if (player.hasPermission("epictroll.freeze")) {
 			if (args.length == 1) {
 				player.sendMessage(Colors.color(Settings.Freeze.FREEZE_USAGE));
 				return;

@@ -29,7 +29,7 @@ public class TrollCommandHelp extends SubCommand {
 	public void perform(Player player, String[] args) {
 
 
-		if (player.hasPermission("troll.help")) {
+		if (player.hasPermission("epictroll.help")) {
 
 			player.sendMessage(Colors.color("&e> &fIf you need help, join to our discord: https://discord.gg/cT5MxqAYTd.\nList of commands are on spigot page."));
 		} else {

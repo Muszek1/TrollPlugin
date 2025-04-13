@@ -29,7 +29,7 @@ public class TrollCommandAnvil extends SubCommand {
 
 	@Override
 	public void perform(Player player, String[] args) {
-		if (player.hasPermission("troll.anvil")) {
+		if (player.hasPermission("epictroll.anvil")) {
 			if (args.length > 0) {
 
 				Player target = Bukkit.getPlayerExact(args[1]);

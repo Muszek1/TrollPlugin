@@ -33,7 +33,7 @@ public class TrollCommandMob extends SubCommand {
 	public void perform(Player player, String[] args) {
 
 
-		if (player.hasPermission("troll.mob")) {
+		if (player.hasPermission("epictroll.mob")) {
 			if (args.length == 1 || args.length == 2) {
 				player.sendMessage(Colors.color(Settings.Mob.MOB_USAGE));
 				return;

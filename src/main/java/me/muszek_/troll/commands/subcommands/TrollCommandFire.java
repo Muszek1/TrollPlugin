@@ -37,7 +37,7 @@ public class TrollCommandFire extends SubCommand {
 			return;
 		}
 
-		if (player.hasPermission("troll.fire")) {
+		if (player.hasPermission("epictroll.fire")) {
 			if (args.length == 1) {
 				player.sendMessage(Colors.color(Settings.Fire.FIRE_USAGE));
 				return;
