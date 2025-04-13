@@ -1,0 +1,27 @@
+Not_A_Player_Message: "&c> &fYou must be a player to use this command!"
+Player_Not_Found: "&c> &fPlayer %player% not found!"
+Mob_Not_Found: "&c> &fMob %mob% not found!"
+No_Permissions: "&c> &fYou do not have permissions to do that!"
+Plugin_Reloaded: "&a> &fYou have successfully reloaded the EpicTroll Plugin!"
+Wrong_Number: "&c> &fYou have provided a wrong number!"
+
+Fire:
+  Message: "&e> &fYou fired %player% for %time% seconds"
+  Usage: "&e> &fUsage: /troll fire <player> <duration in sec>"
+  Invalid_Duration: "&c> &fInvalid duration in second argument!"
+Mob:
+  Message: "&e> &fYou spawned %mob%(s) behind %player%"
+  Usage: "&e> &fUsage: /troll mob <player> <mob>"
+Anvil:
+  Message: "&e> &fYou spawned an anvil above %player%"
+  Usage: "&e> &fUsage: /troll anvil <player>"
+  Error: "&c> &fYou cannot spawn anvil - the block above is not air!"
+Freeze:
+  Message: "&b> &fYou froze %player% for %time% seconds"
+  Usage: "&e> &fUsage: /troll freeze <player> <duration in sec>"
+  Target_Message: "&b> &bYou are FROZEN!"
+ExplodePlayer:
+  Message: "&e> You exploded %player%!"
+  Usage: "&e> &fUsage: /troll explodeplayer <player>"
+  Going_To_Explode: "&c> &cYOU ARE GOING TO EXPLODE!"
+  You_Were_Blown_Up: "&c> &cYOU EXPLODED!"

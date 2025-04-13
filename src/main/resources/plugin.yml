@@ -1,0 +1,39 @@
+name: Troll
+version: '1.0-SNAPSHOT'
+main: me.muszek_.troll.Troll
+api-version: '1.21'
+commands:
+  troll:
+    description: '&eMake a joke on players'
+    aliases:
+      - trolling
+    permission: troll.use
+    permission-message: 'You do not have permission to do that!'
+    usage: |-
+      /trollanvil <player>
+
+permissions:
+  epictroll.anvil:
+    default: op
+  epictroll.fire:
+    default: op
+  epictroll.freeze:
+    default: op
+  epictroll.help:
+    default: op
+  epictroll.knockbackstick:
+    default: op
+  epictroll.mob:
+    default: op
+  epictroll.reload:
+    default: op
+  epictroll.*:
+    default: op
+    children:
+      epictroll.anvil: true
+      epictroll.fire: true
+      epictroll.freeze: true
+      epictroll.help: true
+      epictroll.knockbackstick: true
+      epictroll.mov: true
+      epictroll.reload: true

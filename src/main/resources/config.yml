@@ -1,0 +1,15 @@
+#############################################
+#                                           #
+#   Author: Muszek                          #
+#   If you need help, join to discord       #
+#   server: LINK                            #
+#                                           #
+#############################################
+
+
+Fire:
+  Default_Duration: 3
+Knockback:
+  Item_Name: "&eKnockback Stick"
+Freeze:
+  Default_Duration: 5
