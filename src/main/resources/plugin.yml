@@ -29,6 +29,8 @@ permissions:
     default: op
   epictroll.explode:
     default: op
+  epictroll.apple:
+    default: op
   epictroll.*:
     default: op
     children:
@@ -40,3 +42,4 @@ permissions:
       epictroll.mov: true
       epictroll.explode: true
       epictroll.reload: true
+      epictroll.apple: true

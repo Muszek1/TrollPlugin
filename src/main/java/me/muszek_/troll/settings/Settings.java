@@ -53,6 +53,12 @@ public final class Settings {
 
 	}
 
+	public final static class Apple {
+		public static String APPLE_USAGE;
+		public static String APPLE_EATEN;
+		public static String APPLE_GIVEN;
+	}
+
 	public static void load() {
 		Troll instance = Troll.getInstance();
 		String pathConfig = "config.yml";
@@ -99,6 +105,9 @@ public final class Settings {
 		ExplodePlayer.EXPLODEPLAYER_USAGE = lang.getString("ExplodePlayer.Usage");
 		ExplodePlayer.EXPLODEPLAYER_GOING_TO_EXPLODE = lang.getString("ExplodePlayer.Going_To_Explode");
 		ExplodePlayer.EXPLODEPLAYER_YOU_WERE_BLOWN_UP = lang.getString("ExplodePlayer.You_Were_Blown_Up");
+		Apple.APPLE_USAGE = lang.getString("Apple.Usage");
+		Apple.APPLE_EATEN = lang.getString("Apple.Eaten");
+		Apple.APPLE_GIVEN = lang.getString("Apple.Given");
 
 	}
 }

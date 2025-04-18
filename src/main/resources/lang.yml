@@ -25,3 +25,7 @@ ExplodePlayer:
   Usage: "&e> &fUsage: /troll explode <player>"
   Going_To_Explode: "&c> &cYOU ARE GOING TO EXPLODE!"
   You_Were_Blown_Up: "&c> &cYOU EXPLODED!"
+Apple:
+  Usage: "&e> &fUsage: /troll apple <player> <amount>"
+  Eaten: "&c> &fYou ate &2&lPOISONED &fapple!"
+  Given: "&e> &fYou gave %amount% poisoned apple to %player%"
