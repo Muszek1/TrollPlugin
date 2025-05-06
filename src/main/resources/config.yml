@@ -13,3 +13,5 @@ Knockback:
   Item_Name: "&eKnockback Stick"
 Freeze:
   Default_Duration: 5
+Diamond:
+  Duration: 10

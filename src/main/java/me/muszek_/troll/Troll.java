@@ -2,6 +2,7 @@ package me.muszek_.troll;
 
 import me.muszek_.troll.commands.CommandManager;
 import me.muszek_.troll.listeners.AppleListener;
+import me.muszek_.troll.listeners.DiamondListener;
 import me.muszek_.troll.settings.Settings;
 import me.muszek_.troll.utils.Logger;
 import me.muszek_.troll.utils.UpdateChecker;
@@ -24,6 +25,7 @@ public final class Troll extends JavaPlugin {
 		getCommand("troll").setExecutor(new CommandManager());
 		getCommand("troll").setTabCompleter(new CommandManager());
 		getServer().getPluginManager().registerEvents(new AppleListener(this), this);
+		getServer().getPluginManager().registerEvents(new DiamondListener(this), this);
 
 		Settings.load();
 
@@ -34,7 +36,7 @@ public final class Troll extends JavaPlugin {
 			if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
 				Logger.log(Logger.LogLevel.INFO, "Plugin EpicTroll is up to date. ");
 			} else {
-				Logger.log(Logger.LogLevel.WARNING, "Plugin EpicTroll has an update. ");
+				Logger.log(Logger.LogLevel.WARNING, "Plugin EpicTroll has an update. Update: https://www.spigotmc.org/resources/124041/ ");
 			}
 
 		});

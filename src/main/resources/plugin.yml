@@ -1,5 +1,5 @@
 name: EpicTroll
-version: '1.0.1'
+version: '1.0.3'
 main: me.muszek_.troll.Troll
 api-version: '1.21'
 commands:
@@ -31,6 +31,8 @@ permissions:
     default: op
   epictroll.apple:
     default: op
+  epictroll.diamond:
+    default: op
   epictroll.*:
     default: op
     children:
@@ -43,3 +45,4 @@ permissions:
       epictroll.explode: true
       epictroll.reload: true
       epictroll.apple: true
+      epictroll.diamond: true

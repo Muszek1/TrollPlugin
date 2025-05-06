@@ -29,3 +29,5 @@ Apple:
   Usage: "&e> &fUsage: /troll apple <player> <amount>"
   Eaten: "&c> &fYou ate &2&lPOISONED &fapple!"
   Given: "&e> &fYou gave %amount% poisoned apple to %player%"
+Diamond:
+  Given: "&e> You spawned untouchable diamond around %player%"

@@ -28,6 +28,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 		subCommands.add(new TrollCommandExplodePlayer());
 		subCommands.add(new TrollCommandReload());
 		subCommands.add(new TrollCommandApple());
+		subCommands.add(new TrollCommandDiamond());
 	}
 
 

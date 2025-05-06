@@ -59,6 +59,11 @@ public final class Settings {
 		public static String APPLE_GIVEN;
 	}
 
+	public final static class Diamond {
+		public static String DIAMOND_GIVEN;
+		public static int DIAMOND_DURATION;
+	}
+
 	public static void load() {
 		Troll instance = Troll.getInstance();
 		String pathConfig = "config.yml";
@@ -108,6 +113,9 @@ public final class Settings {
 		Apple.APPLE_USAGE = lang.getString("Apple.Usage");
 		Apple.APPLE_EATEN = lang.getString("Apple.Eaten");
 		Apple.APPLE_GIVEN = lang.getString("Apple.Given");
+		Diamond.DIAMOND_DURATION = config.getInt("Diamond.Duration", 10);
+		Diamond.DIAMOND_GIVEN = lang.getString("Diamond.Given");
+
 
 	}
 }
