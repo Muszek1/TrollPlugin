@@ -3,6 +3,7 @@ package me.muszek_.troll;
 import me.muszek_.troll.commands.CommandManager;
 import me.muszek_.troll.listeners.AppleListener;
 import me.muszek_.troll.listeners.DiamondListener;
+import me.muszek_.troll.listeners.LaunchListener;
 import me.muszek_.troll.settings.Settings;
 import me.muszek_.troll.utils.Logger;
 import me.muszek_.troll.utils.UpdateChecker;
@@ -26,6 +27,7 @@ public final class Troll extends JavaPlugin {
 		getCommand("troll").setTabCompleter(new CommandManager());
 		getServer().getPluginManager().registerEvents(new AppleListener(this), this);
 		getServer().getPluginManager().registerEvents(new DiamondListener(this), this);
+		getServer().getPluginManager().registerEvents(new LaunchListener(this), this);
 
 		Settings.load();
 

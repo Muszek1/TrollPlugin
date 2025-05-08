@@ -64,6 +64,11 @@ public final class Settings {
 		public static int DIAMOND_DURATION;
 	}
 
+	public final static class Launch {
+		public static String LAUNCHED_PLAYER;
+		public static String LAUNCH_USAGE;
+	}
+
 	public static void load() {
 		Troll instance = Troll.getInstance();
 		String pathConfig = "config.yml";
@@ -115,6 +120,8 @@ public final class Settings {
 		Apple.APPLE_GIVEN = lang.getString("Apple.Given");
 		Diamond.DIAMOND_DURATION = config.getInt("Diamond.Duration", 10);
 		Diamond.DIAMOND_GIVEN = lang.getString("Diamond.Given");
+		Launch.LAUNCH_USAGE = lang.getString("Launch.Usage");
+		Launch.LAUNCHED_PLAYER = lang.getString("Launch.Launched");
 
 
 	}
