@@ -6,7 +6,9 @@ import me.muszek_.troll.settings.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -14,26 +16,26 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrollCommandApple extends SubCommand {
+public class TrollCommandCookie extends SubCommand {
 	@Override
 	public String getName() {
-		return "apple";
+		return "cookie";
 	}
 
 	@Override
 	public String getDescription() {
-		return "gives you a gold poisoned apple";
+		return "Gives a player a infinite cookie";
 	}
 
 	@Override
 	public String getSyntax() {
-		return "/troll apple <player> <amount>";
+		return "/troll cookie <player> <amount>";
 	}
 
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (!player.hasPermission("epictroll.apple")) {
+		if (!player.hasPermission("epictroll.cookie")) {
 			player.sendMessage(Colors.color(Settings.NO_PERMISSION));
 		}
 		Player target = player;
@@ -49,7 +51,6 @@ public class TrollCommandApple extends SubCommand {
 			}
 		}
 
-		// Jeśli podano ilość
 		if (args.length >= 3) {
 			try {
 				amount = Integer.parseInt(args[2]);
@@ -59,16 +60,20 @@ public class TrollCommandApple extends SubCommand {
 				return;
 			}
 		}
-		ItemStack apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, amount);
-		ItemMeta metaApple = apple.getItemMeta();
-		NamespacedKey key = new NamespacedKey("troll", "apple");
-		metaApple.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 1);
-		apple.setItemMeta(metaApple);
-		target.getInventory().addItem(apple);
-		player.sendMessage(Colors.color(Settings.Apple.APPLE_GIVEN).replace("%player%", target.getName()).replace("%amount%", String.valueOf(amount)));
+		ItemStack cookie = new ItemStack(Material.COOKIE, amount);
+		ItemMeta metaCookie = cookie.getItemMeta();
+		NamespacedKey key = new NamespacedKey("troll", "cookie");
+		metaCookie.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 1);
+		metaCookie.setDisplayName(Colors.color(Settings.Cookie.COOKIE_ITEM_NAME));
+		if (Settings.Cookie.COOKIE_GLOW) {
+			metaCookie.addEnchant(Enchantment.INFINITY, 1, true);
+			metaCookie.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		}
+		cookie.setItemMeta(metaCookie);
+		target.getInventory().addItem(cookie);
+		player.sendMessage(Colors.color(Settings.Cookie.COOKIE_GIVEN).replace("%player%", target.getName()).replace("%amount%", String.valueOf(amount)));
 
 	}
-
 
 	@Override
 	public List<String> getSubcommandArguments(Player player, String[] args) {

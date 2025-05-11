@@ -15,3 +15,6 @@ Freeze:
   Default_Duration: 5
 Diamond:
   Duration: 10
+Cookie:
+  Item_Name: "&6&lInfinite Cookie 🍪"
+  Glow: true

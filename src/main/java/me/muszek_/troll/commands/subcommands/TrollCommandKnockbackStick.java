@@ -33,25 +33,33 @@ public class TrollCommandKnockbackStick extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (player.hasPermission("epictroll.knockbackstick")) {
-			ItemStack knockbackStick = new ItemStack(Material.STICK);
-			ItemMeta meta = knockbackStick.getItemMeta();
-			meta.addEnchant(Enchantment.KNOCKBACK, 10, true);
-			meta.setDisplayName(Colors.color(Settings.Knockback.KNOCKBACK_ITEM_NAME));
-			knockbackStick.setItemMeta(meta);
-			if (args.length == 0) {
-
-				player.getInventory().addItem(knockbackStick);
-			}
-			if (args.length > 0) {
-
-				Player target = Bukkit.getPlayer(args[1]);
-				target.getInventory().addItem(knockbackStick);
-
-			}
-		} else {
+		if (!player.hasPermission("epictroll.knockbackstick")) {
 			player.sendMessage(Colors.color(Settings.NO_PERMISSION));
+			return;
 		}
+
+
+		if (args.length <= 1) {
+			player.sendMessage(Colors.color(Settings.Knockback.KNOCKBACK_USAGE));
+			return;
+		}
+
+		ItemStack knockbackStick = new ItemStack(Material.STICK);
+		ItemMeta meta = knockbackStick.getItemMeta();
+		meta.addEnchant(Enchantment.KNOCKBACK, 10, true);
+		meta.setDisplayName(Colors.color(Settings.Knockback.KNOCKBACK_ITEM_NAME));
+		knockbackStick.setItemMeta(meta);
+		if (args.length == 0) {
+
+			player.getInventory().addItem(knockbackStick);
+		}
+		if (args.length > 1) {
+
+			Player target = Bukkit.getPlayer(args[1]);
+			target.getInventory().addItem(knockbackStick);
+
+		}
+
 
 	}
 

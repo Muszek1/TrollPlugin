@@ -34,3 +34,7 @@ Diamond:
 Launch:
   Usage: "&e> &fUsage: /troll launch <player>"
   Launched: "&e> You launched %player% into sky!"
+Knockback:
+  Usage: "&e> &fUsage: /troll knockback <player>"
+Cookie:
+  Given: "&e> &fYou gave %amount% infinite cookie(s) to %player%"

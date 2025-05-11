@@ -42,6 +42,7 @@ public final class Settings {
 
 	public final static class Knockback {
 		public static String KNOCKBACK_ITEM_NAME;
+		public static String KNOCKBACK_USAGE;
 	}
 
 	public final static class ExplodePlayer {
@@ -67,6 +68,12 @@ public final class Settings {
 	public final static class Launch {
 		public static String LAUNCHED_PLAYER;
 		public static String LAUNCH_USAGE;
+	}
+
+	public final static class Cookie {
+		public static String COOKIE_GIVEN;
+		public static String COOKIE_ITEM_NAME;
+		public static Boolean COOKIE_GLOW;
 	}
 
 	public static void load() {
@@ -106,6 +113,7 @@ public final class Settings {
 		Anvil.ANVIL_MESSAGE = lang.getString("Anvil.Message");
 		Anvil.ANVIL_ERROR = lang.getString("Anvil.Error");
 		Knockback.KNOCKBACK_ITEM_NAME = config.getString("Knockback.Item_Name");
+		Knockback.KNOCKBACK_USAGE = lang.getString("Knockback.Usage");
 		Freeze.FREEZE_MESSAGE = lang.getString("Freeze.Message");
 		Freeze.FREEZE_TARGET_MESSAGE = lang.getString("Freeze.Target_Message");
 		Freeze.FREEZE_USAGE = lang.getString("Freeze.Usage");
@@ -122,6 +130,9 @@ public final class Settings {
 		Diamond.DIAMOND_GIVEN = lang.getString("Diamond.Given");
 		Launch.LAUNCH_USAGE = lang.getString("Launch.Usage");
 		Launch.LAUNCHED_PLAYER = lang.getString("Launch.Launched");
+		Cookie.COOKIE_GIVEN = lang.getString("Cookie.Given");
+		Cookie.COOKIE_ITEM_NAME = config.getString("Cookie.Item_Name");
+		Cookie.COOKIE_GLOW = config.getBoolean("Cookie.Glow");
 
 
 	}
