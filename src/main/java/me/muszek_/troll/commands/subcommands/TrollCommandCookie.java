@@ -66,7 +66,7 @@ public class TrollCommandCookie extends SubCommand {
 		metaCookie.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 1);
 		metaCookie.setDisplayName(Colors.color(Settings.Cookie.COOKIE_ITEM_NAME));
 		if (Settings.Cookie.COOKIE_GLOW) {
-			metaCookie.addEnchant(Enchantment.INFINITY, 1, true);
+			metaCookie.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
 			metaCookie.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		}
 		cookie.setItemMeta(metaCookie);

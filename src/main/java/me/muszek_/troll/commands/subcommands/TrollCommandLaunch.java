@@ -47,7 +47,7 @@ public class TrollCommandLaunch extends SubCommand {
 		target.setVelocity(new Vector(0, 2.5, 0));
 
 		// Sound + particles
-		target.getWorld().spawnParticle(Particle.EXPLOSION, target.getLocation(), 20, 0.5, 0.5, 0.5);
+		target.getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, target.getLocation(), 20, 0.5, 0.5, 0.5);
 		target.getWorld().spawnParticle(Particle.CLOUD, target.getLocation(), 10, 0.5, 0.5, 0.5);
 		target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1f, 1f);
 		target.setFallDistance(0f);

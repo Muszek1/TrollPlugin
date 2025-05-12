@@ -18,7 +18,7 @@ public final class Troll extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		instance = this;
-		getLogger().warning("EpicTroll plugin has been enabled!");
+		Logger.log(Logger.LogLevel.INFO, "EpicTroll plugin has been enabled!");
 
 		YamlUpdater updater = new YamlUpdater(this);
 		FileConfiguration config = updater.update("config.yml");

@@ -1,7 +1,7 @@
 name: EpicTroll
-version: '1.0.5'
+version: '1.0.5.1'
 main: me.muszek_.troll.Troll
-api-version: '1.21'
+api-version: '1.20'
 commands:
   troll:
     description: '&eMake a joke on players'
