@@ -38,3 +38,7 @@ Knockback:
   Usage: "&e> &fUsage: /troll knockback <player>"
 Cookie:
   Given: "&e> &fYou gave %amount% infinite cookie(s) to %player%"
+Jumplock:
+  Usage: "&e> &fUsage: /troll jumplock <player>"
+  Lock: "&e> &fYou locked jumps for %player%"
+  Unlock: "&e> &fYou unlocked jumps for %player%"

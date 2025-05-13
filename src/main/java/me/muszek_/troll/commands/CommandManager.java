@@ -1,6 +1,7 @@
 package me.muszek_.troll.commands;
 
 import me.muszek_.troll.commands.subcommands.*;
+import me.muszek_.troll.listeners.JumplockListener;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,7 +19,8 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 
 	private ArrayList<SubCommand> subCommands = new ArrayList<>();
 
-	public CommandManager() {
+
+	public CommandManager(JumplockListener jumplockListener) {
 		subCommands.add(new TrollCommandAnvil());
 		subCommands.add(new TrollCommandFire());
 		subCommands.add(new TrollCommandMob());
@@ -31,6 +33,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 		subCommands.add(new TrollCommandDiamond());
 		subCommands.add(new TrollCommandLaunch());
 		subCommands.add(new TrollCommandCookie());
+		subCommands.add(new TrollCommandJumplock(jumplockListener));
 	}
 
 

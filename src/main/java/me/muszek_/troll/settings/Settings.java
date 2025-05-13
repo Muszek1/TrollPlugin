@@ -76,6 +76,13 @@ public final class Settings {
 		public static Boolean COOKIE_GLOW;
 	}
 
+	public final static class Jumplock {
+		public static String JUMPLOCK_USAGE;
+		public static String JUMPLOCK_LOCK;
+		public static String JUMPLOCK_UNLOCK;
+
+	}
+
 	public static void load() {
 		Troll instance = Troll.getInstance();
 		String pathConfig = "config.yml";
@@ -133,7 +140,9 @@ public final class Settings {
 		Cookie.COOKIE_GIVEN = lang.getString("Cookie.Given");
 		Cookie.COOKIE_ITEM_NAME = config.getString("Cookie.Item_Name");
 		Cookie.COOKIE_GLOW = config.getBoolean("Cookie.Glow");
-
+		Jumplock.JUMPLOCK_LOCK = lang.getString("Jumplock.Lock");
+		Jumplock.JUMPLOCK_USAGE = lang.getString("Jumplock.Usage");
+		Jumplock.JUMPLOCK_UNLOCK = lang.getString("Jumplock.Unlock");
 
 	}
 }

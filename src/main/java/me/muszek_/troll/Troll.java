@@ -1,10 +1,7 @@
 package me.muszek_.troll;
 
 import me.muszek_.troll.commands.CommandManager;
-import me.muszek_.troll.listeners.AppleListener;
-import me.muszek_.troll.listeners.CookieListener;
-import me.muszek_.troll.listeners.DiamondListener;
-import me.muszek_.troll.listeners.LaunchListener;
+import me.muszek_.troll.listeners.*;
 import me.muszek_.troll.settings.Settings;
 import me.muszek_.troll.utils.Logger;
 import me.muszek_.troll.utils.UpdateChecker;
@@ -24,12 +21,17 @@ public final class Troll extends JavaPlugin {
 		FileConfiguration config = updater.update("config.yml");
 		FileConfiguration lang = updater.update("lang.yml");
 
-		getCommand("troll").setExecutor(new CommandManager());
-		getCommand("troll").setTabCompleter(new CommandManager());
+		JumplockListener jumplockListener = new JumplockListener();
+		getServer().getPluginManager().registerEvents(jumplockListener, this);
+
+		CommandManager commandManager = new CommandManager(jumplockListener);
+		getCommand("troll").setExecutor(commandManager);
+		getCommand("troll").setTabCompleter(commandManager);
 		getServer().getPluginManager().registerEvents(new AppleListener(this), this);
 		getServer().getPluginManager().registerEvents(new DiamondListener(this), this);
 		getServer().getPluginManager().registerEvents(new LaunchListener(this), this);
 		getServer().getPluginManager().registerEvents(new CookieListener(this), this);
+
 
 		Settings.load();
 
