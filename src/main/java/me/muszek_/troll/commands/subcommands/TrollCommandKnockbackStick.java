@@ -3,6 +3,7 @@ package me.muszek_.troll.commands.subcommands;
 import me.muszek_.troll.Colors;
 import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.settings.Settings;
+import me.muszek_.troll.utils.TabCompletePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -10,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TrollCommandKnockbackStick extends SubCommand {
@@ -38,44 +38,44 @@ public class TrollCommandKnockbackStick extends SubCommand {
 			return;
 		}
 
+		Player target = player;
+		if (args.length >= 2) {
+			target = Bukkit.getPlayer(args[1]);
+			if (target == null) {
+				player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[1])));
+				return;
+			}
 
-		if (args.length <= 1) {
-			player.sendMessage(Colors.color(Settings.Knockback.KNOCKBACK_USAGE));
-			return;
 		}
 
-		ItemStack knockbackStick = new ItemStack(Material.STICK);
+		int amount = 1;
+
+		if (args.length >= 3) {
+			try {
+				amount = Integer.parseInt(args[2]);
+				if (amount <= 0) amount = 1;
+			} catch (NumberFormatException e) {
+				player.sendMessage(Colors.color(Settings.WRONG_NUMBER));
+				return;
+			}
+		}
+
+
+		ItemStack knockbackStick = new ItemStack(Material.STICK, amount);
 		ItemMeta meta = knockbackStick.getItemMeta();
 		meta.addEnchant(Enchantment.KNOCKBACK, 10, true);
 		meta.setDisplayName(Colors.color(Settings.Knockback.KNOCKBACK_ITEM_NAME));
 		knockbackStick.setItemMeta(meta);
-		if (args.length == 0) {
 
-			player.getInventory().addItem(knockbackStick);
-		}
-		if (args.length > 1) {
-
-			Player target = Bukkit.getPlayer(args[1]);
-			target.getInventory().addItem(knockbackStick);
-
-		}
+		target.getInventory().addItem(knockbackStick);
 
 
 	}
 
 	@Override
 	public List<String> getSubcommandArguments(Player player, String[] args) {
-		if (args.length == 1) {
-			List<String> playerNames = new ArrayList<>();
-			Player[] players = new Player[Bukkit.getServer().getOnlinePlayers().size()];
-			Bukkit.getServer().getOnlinePlayers().toArray(players);
-			for (int i = 0; i < players.length; i++) {
-				playerNames.add(players[i].getName());
-			}
-
-			return playerNames;
-
-
+		if (args.length == 2) {
+			return TabCompletePlayer.getOnlinePlayerNames();
 		}
 		return null;
 	}

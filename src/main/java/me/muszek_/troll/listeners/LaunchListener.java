@@ -19,7 +19,6 @@ public class LaunchListener implements Listener {
 		if (!(event.getEntity() instanceof Player player)) return;
 
 		if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
-			// Optional: check metadata or PersistentDataContainer to know it's our troll
 			event.setCancelled(true);
 		}
 	}

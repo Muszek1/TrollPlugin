@@ -4,10 +4,10 @@ import me.muszek_.troll.Colors;
 import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.listeners.JumplockListener;
 import me.muszek_.troll.settings.Settings;
+import me.muszek_.troll.utils.TabCompletePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TrollCommandJumplock extends SubCommand {
@@ -64,15 +64,7 @@ public class TrollCommandJumplock extends SubCommand {
 	@Override
 	public List<String> getSubcommandArguments(Player player, String[] args) {
 		if (args.length == 2) {
-			List<String> playerNames = new ArrayList<>();
-			Player[] players = new Player[Bukkit.getServer().getOnlinePlayers().size()];
-			Bukkit.getServer().getOnlinePlayers().toArray(players);
-			for (int i = 0; i < players.length; i++) {
-				playerNames.add(players[i].getName());
-			}
-
-			return playerNames;
-
+			return TabCompletePlayer.getOnlinePlayerNames();
 		}
 
 		return null;

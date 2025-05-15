@@ -11,8 +11,8 @@ import java.util.function.Consumer;
 
 public class UpdateChecker {
 
-	private Troll plugin;
-	private int resourceId;
+	private final Troll plugin;
+	private final int resourceId;
 
 	public UpdateChecker(Troll plugin, int resourceId) {
 		this.plugin = plugin;

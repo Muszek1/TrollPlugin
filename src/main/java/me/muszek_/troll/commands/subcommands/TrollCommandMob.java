@@ -3,6 +3,7 @@ package me.muszek_.troll.commands.subcommands;
 import me.muszek_.troll.Colors;
 import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.settings.Settings;
+import me.muszek_.troll.utils.TabCompletePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
@@ -77,15 +78,7 @@ public class TrollCommandMob extends SubCommand {
 	@Override
 	public List<String> getSubcommandArguments(Player player, String[] args) {
 		if (args.length == 2) {
-			List<String> playerNames = new ArrayList<>();
-			Player[] players = new Player[Bukkit.getServer().getOnlinePlayers().size()];
-			Bukkit.getServer().getOnlinePlayers().toArray(players);
-			for (int i = 0; i < players.length; i++) {
-				playerNames.add(players[i].getName());
-			}
-
-			return playerNames;
-
+			return TabCompletePlayer.getOnlinePlayerNames();
 		}
 		if (args.length == 3) {
 			List<String> mobList = new ArrayList<>();

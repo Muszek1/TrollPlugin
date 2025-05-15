@@ -1,8 +1,8 @@
 package me.muszek_.troll.commands;
 
+import me.muszek_.troll.Colors;
 import me.muszek_.troll.commands.subcommands.*;
 import me.muszek_.troll.listeners.JumplockListener;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CommandManager implements CommandExecutor, TabCompleter {
 
-	private ArrayList<SubCommand> subCommands = new ArrayList<>();
+	private final ArrayList<SubCommand> subCommands = new ArrayList<>();
 
 
 	public CommandManager(JumplockListener jumplockListener) {
@@ -40,8 +40,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 	@Override
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-		if (sender instanceof Player) {
-			Player player = (Player) sender;
+		if (sender instanceof Player player) {
 
 
 			if (args.length > 0) {
@@ -51,7 +50,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 					}
 				}
 			} else {
-				player.sendMessage(ChatColor.RED + "Usage: /troll help");
+				player.sendMessage(Colors.color("Usage: /troll help"));
 			}
 
 		}
