@@ -83,6 +83,12 @@ public final class Settings {
 
 	}
 
+	public final static class FakeOp {
+		public static String FAKEOP_USAGE;
+		public static String FAKEOP_MESSAGE_SENT;
+		public static String FAKEOP_MESSAGE_CONFIRMATION;
+	}
+
 	public static void load() {
 		Troll instance = Troll.getInstance();
 		String pathConfig = "config.yml";
@@ -143,6 +149,9 @@ public final class Settings {
 		Jumplock.JUMPLOCK_LOCK = lang.getString("Jumplock.Lock");
 		Jumplock.JUMPLOCK_USAGE = lang.getString("Jumplock.Usage");
 		Jumplock.JUMPLOCK_UNLOCK = lang.getString("Jumplock.Unlock");
+		FakeOp.FAKEOP_MESSAGE_SENT = lang.getString("Fakeop.Message_Sent");
+		FakeOp.FAKEOP_MESSAGE_CONFIRMATION = lang.getString("Fakeop.Message_Confirmation");
+		FakeOp.FAKEOP_USAGE = lang.getString("Fakeop.Usage");
 
 	}
 }

@@ -42,3 +42,7 @@ Jumplock:
   Usage: "&e> &fUsage: /troll jumplock <player>"
   Lock: "&e> &fYou locked jumps for %player%"
   Unlock: "&e> &fYou unlocked jumps for %player%"
+Fakeop:
+  Usage: "&e> &fUsage: /troll fakeop <player>"
+  Message_Sent: "&7&o[Server: Made %player% a server operator]"
+  Message_Confirmation: "&e> You send fake message to %player%"

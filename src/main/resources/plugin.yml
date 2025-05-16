@@ -1,5 +1,5 @@
 name: EpicTroll
-version: '1.0.6'
+version: '1.0.7'
 main: me.muszek_.troll.Troll
 api-version: '1.20'
 commands:
@@ -38,6 +38,8 @@ permissions:
   epictroll.cookie:
     default: op
   epictroll.jumplock:
+    default: op
+  epictroll.fakeop:
     default: op
   epictroll.*:
     default: op
