@@ -2,6 +2,7 @@ package me.muszek_.troll.commands.subcommands;
 
 import me.muszek_.troll.Colors;
 import me.muszek_.troll.commands.SubCommand;
+import me.muszek_.troll.listeners.BlockCraftListener;
 import me.muszek_.troll.settings.Settings;
 import me.muszek_.troll.utils.TabCompletePlayer;
 import org.bukkit.Bukkit;
@@ -9,31 +10,39 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class TrollCommandFakeOp extends SubCommand {
+public class TrollCommandBlockCraft extends SubCommand {
+
+	private final BlockCraftListener listener;
+
+	public TrollCommandBlockCraft(BlockCraftListener listener) {
+		this.listener = listener;
+	}
+
+
 	@Override
 	public String getName() {
-		return "fakeop";
+		return "blockcraft";
 	}
 
 	@Override
 	public String getDescription() {
-		return "sends fake message about receiving op";
+		return "blocks the possibility of crafting";
 	}
 
 	@Override
 	public String getSyntax() {
-		return "/troll fakeop <player>";
+		return "/troll blockcraft <player>";
 	}
 
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (!player.hasPermission("epictroll.fakeop")) {
+		if (!player.hasPermission("epictroll.blockcraft")) {
 			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
 			return;
 		}
 		if (args.length == 1) {
-			player.sendMessage(Colors.color(Settings.LangKey.FAKEOP_USAGE.get()));
+			player.sendMessage(Colors.color(Settings.LangKey.BLOCKCRAFT_USAGE.get()));
 			return;
 		}
 
@@ -42,9 +51,13 @@ public class TrollCommandFakeOp extends SubCommand {
 			player.sendMessage(Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get().replace("%player%", args[0])));
 			return;
 		}
-
-		target.sendMessage(Colors.color(Settings.LangKey.FAKEOP_MESSAGE_SENT.get()).replace("%player%", args[0]));
-		player.sendMessage(Colors.color(Settings.LangKey.FAKEOP_MESSAGE_CONFIRMATION.get()).replace("%player%", args[0]));
+		if (listener.isLocked(target)) {
+			listener.unlock(target);
+			player.sendMessage(Colors.color(Settings.LangKey.BLOCKCRAFT_UNBLOCK.get()).replace("%player%", args[1]));
+		} else {
+			listener.lock(target);
+			player.sendMessage(Colors.color(Settings.LangKey.BLOCKCRAFT_BLOCK.get()).replace("%player%", args[1]));
+		}
 
 
 	}
@@ -58,3 +71,4 @@ public class TrollCommandFakeOp extends SubCommand {
 		return null;
 	}
 }
+

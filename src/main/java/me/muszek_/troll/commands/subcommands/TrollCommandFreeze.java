@@ -31,16 +31,16 @@ public class TrollCommandFreeze extends SubCommand {
 	public void perform(Player player, String[] args) {
 
 		if (!player.hasPermission("epictroll.freeze")) {
-			player.sendMessage(Colors.color(Settings.NO_PERMISSION));
+			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
 			return;
 		}
 		if (args.length <= 1) {
-			player.sendMessage(Colors.color(Settings.Freeze.FREEZE_USAGE));
+			player.sendMessage(Colors.color(Settings.LangKey.FREEZE_USAGE.get()));
 			return;
 		}
 		Player target = Bukkit.getPlayerExact(args[1]);
 		if (target == null) {
-			player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[1])));
+			player.sendMessage(Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get().replace("%player%", args[1])));
 			return;
 		}
 		player.sendMessage(Colors.color("tutaj"));
@@ -49,17 +49,17 @@ public class TrollCommandFreeze extends SubCommand {
 			try {
 				time = Integer.parseInt(args[2]);
 			} catch (NumberFormatException ex) {
-				player.sendMessage(Colors.color(Settings.Freeze.FREEZE_INVALID_DURATION));
+				player.sendMessage(Colors.color(Settings.LangKey.FREEZE_INVALID_DURATION.get()));
 				return;
 			}
 			if (time <= 0) {
-				player.sendMessage(Colors.color(Settings.Freeze.FREEZE_INVALID_DURATION));
+				player.sendMessage(Colors.color(Settings.LangKey.FREEZE_INVALID_DURATION.get()));
 				return;
 			}
 		}
 
-		target.sendMessage(Colors.color(Settings.Freeze.FREEZE_TARGET_MESSAGE.replace("%player%", args[1])));
-		player.sendMessage(Colors.color(Settings.Freeze.FREEZE_MESSAGE.replace("%player%", args[1]).replace("%time%", Integer.toString(time))));
+		target.sendMessage(Colors.color(Settings.LangKey.FREEZE_TARGET_MESSAGE.get().replace("%player%", args[1])));
+		player.sendMessage(Colors.color(Settings.LangKey.FREEZE_MESSAGE.get().replace("%player%", args[1]).replace("%time%", Integer.toString(time))));
 		int finalTime = time;
 		new BukkitRunnable() {
 			int count = 0;

@@ -22,9 +22,11 @@ public final class Troll extends JavaPlugin {
 		FileConfiguration lang = updater.update("lang.yml");
 
 		JumplockListener jumplockListener = new JumplockListener();
+		BlockCraftListener BlockCraftListener = new BlockCraftListener();
 		getServer().getPluginManager().registerEvents(jumplockListener, this);
+		getServer().getPluginManager().registerEvents(BlockCraftListener, this);
 
-		CommandManager commandManager = new CommandManager(jumplockListener);
+		CommandManager commandManager = new CommandManager(jumplockListener, BlockCraftListener);
 		getCommand("troll").setExecutor(commandManager);
 		getCommand("troll").setTabCompleter(commandManager);
 		getServer().getPluginManager().registerEvents(new AppleListener(this), this);

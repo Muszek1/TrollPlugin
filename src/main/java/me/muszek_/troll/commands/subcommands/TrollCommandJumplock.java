@@ -36,28 +36,28 @@ public class TrollCommandJumplock extends SubCommand {
 	@Override
 	public void perform(Player sender, String[] args) {
 		if (!sender.hasPermission("epictroll.jumplock")) {
-			sender.sendMessage(Colors.color(Settings.NO_PERMISSION));
+			sender.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
 			return;
 		}
 
 
 		if (args.length <= 1) {
-			sender.sendMessage(Colors.color(Settings.Jumplock.JUMPLOCK_USAGE));
+			sender.sendMessage(Colors.color(Settings.LangKey.JUMPLOCK_USAGE.get()));
 			return;
 		}
 
 		Player target = Bukkit.getPlayer(args[1]);
 		if (target == null) {
-			sender.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[1])));
+			sender.sendMessage(Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get().replace("%player%", args[1])));
 			return;
 		}
 
 		if (listener.isLocked(target)) {
 			listener.unlock(target);
-			sender.sendMessage(Colors.color(Settings.Jumplock.JUMPLOCK_UNLOCK).replace("%player%", args[1]));
+			sender.sendMessage(Colors.color(Settings.LangKey.JUMPLOCK_UNLOCK.get()).replace("%player%", args[1]));
 		} else {
 			listener.lock(target);
-			sender.sendMessage(Colors.color(Settings.Jumplock.JUMPLOCK_LOCK).replace("%player%", args[1]));
+			sender.sendMessage(Colors.color(Settings.LangKey.JUMPLOCK_LOCK.get()).replace("%player%", args[1]));
 		}
 	}
 

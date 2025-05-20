@@ -31,9 +31,9 @@ public class TrollCommandReload extends SubCommand {
 		if (player.hasPermission("epictroll.reload")) {
 			Troll.getInstance().reloadConfig();
 			Settings.load();
-			player.sendMessage(Colors.color(Settings.PLUGIN_RELOADED));
+			player.sendMessage(Colors.color(Settings.LangKey.PLUGIN_RELOADED.get()));
 		} else {
-			player.sendMessage(Colors.color(Settings.NO_PERMISSION));
+			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
 		}
 	}
 

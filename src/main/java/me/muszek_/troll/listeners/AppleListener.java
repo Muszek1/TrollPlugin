@@ -33,23 +33,27 @@ public class AppleListener implements Listener {
 				NamespacedKey key = new NamespacedKey("troll", "apple");
 				if (container.has(key, PersistentDataType.BYTE)) {
 					event.setCancelled(true);
-					event.getPlayer().sendMessage(Colors.color(Settings.Apple.APPLE_EATEN));
+					event.getPlayer().sendMessage(Colors.color(Settings.LangKey.APPLE_EATEN.get()));
 					Player player = event.getPlayer();
 					ItemStack handItem = player.getInventory().getItemInMainHand();
 
 					if (handItem.isSimilar(item)) {
-						if (handItem.getAmount() > 1) {
-							handItem.setAmount(handItem.getAmount() - 1);
-						} else {
-							player.getInventory().setItemInMainHand(null);
+						if (player.getGameMode() != org.bukkit.GameMode.CREATIVE) {
+							if (handItem.getAmount() > 1) {
+								handItem.setAmount(handItem.getAmount() - 1);
+							} else {
+								player.getInventory().setItemInMainHand(null);
+							}
 						}
 					} else {
 						ItemStack offHandItem = player.getInventory().getItemInOffHand();
 						if (offHandItem.isSimilar(item)) {
-							if (offHandItem.getAmount() > 1) {
-								offHandItem.setAmount(offHandItem.getAmount() - 1);
-							} else {
-								player.getInventory().setItemInOffHand(null);
+							if (player.getGameMode() != org.bukkit.GameMode.CREATIVE) {
+								if (offHandItem.getAmount() > 1) {
+									offHandItem.setAmount(offHandItem.getAmount() - 1);
+								} else {
+									player.getInventory().setItemInOffHand(null);
+								}
 							}
 						}
 					}

@@ -38,23 +38,23 @@ public class TrollCommandFire extends SubCommand {
 		}
 
 		if (!player.hasPermission("epictroll.fire")) {
-			player.sendMessage(Colors.color(Settings.NO_PERMISSION));
+			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
 			return;
 		}
 
 		if (args.length == 1) {
-			player.sendMessage(Colors.color(Settings.Fire.FIRE_USAGE));
+			player.sendMessage(Colors.color(Settings.LangKey.FIRE_USAGE.get()));
 			return;
 		}
 
 		Player target = Bukkit.getPlayerExact(args[1]);
 		if (target == null) {
-			player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[0])));
+			player.sendMessage(Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get().replace("%player%", args[0])));
 			return;
 		}
 		if (args.length == 2) {
-			int time = Settings.Fire.FIRE_DEFAULT_DURATION;
-			player.sendMessage(Colors.color(Settings.Fire.FIRE_MESSAGE.replace("%player%", args[1]).replace("%time%", Integer.toString(time))));
+			int time = Settings.ConfigKey.FIRE_DEFAULT_DURATION.get();
+			player.sendMessage(Colors.color(Settings.LangKey.FIRE_MESSAGE.get().replace("%player%", args[1]).replace("%time%", Integer.toString(time))));
 			player.setFireTicks(time * 20);
 		}
 
@@ -63,14 +63,14 @@ public class TrollCommandFire extends SubCommand {
 			try {
 				time = Integer.parseInt(args[2]);
 			} catch (NumberFormatException ex) {
-				player.sendMessage(Colors.color(Settings.Fire.FIRE_INVALID_DURATION));
+				player.sendMessage(Colors.color(Settings.LangKey.FIRE_INVALID_DURATION.get()));
 				return;
 			}
 			if (time <= 0) {
-				player.sendMessage(Colors.color(Settings.Fire.FIRE_INVALID_DURATION));
+				player.sendMessage(Colors.color(Settings.LangKey.FIRE_INVALID_DURATION.get()));
 				return;
 			}
-			player.sendMessage(Colors.color(Settings.Fire.FIRE_MESSAGE.replace("%player%", args[1]).replace("%time%", Integer.toString(time))));
+			player.sendMessage(Colors.color(Settings.LangKey.FIRE_MESSAGE.get().replace("%player%", args[1]).replace("%time%", Integer.toString(time))));
 			target.setFireTicks(20 * time);
 		}
 	}

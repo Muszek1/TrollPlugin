@@ -32,16 +32,16 @@ public class TrollCommandLaunch extends SubCommand {
 	public void perform(Player player, String[] args) {
 
 		if (!player.hasPermission("epictroll.mob")) {
-			player.sendMessage(Colors.color(Settings.NO_PERMISSION));
+			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
 		}
 		if (args.length == 1) {
-			player.sendMessage(Colors.color(Settings.Launch.LAUNCH_USAGE));
+			player.sendMessage(Colors.color(Settings.LangKey.LAUNCH_USAGE.get()));
 			return;
 		}
 		Player target = Bukkit.getPlayer(args[1]);
 
 		if (target == null) {
-			player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[1])));
+			player.sendMessage(Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get().replace("%player%", args[1])));
 			return;
 		}
 		target.setVelocity(new Vector(0, 2.5, 0));
@@ -51,7 +51,7 @@ public class TrollCommandLaunch extends SubCommand {
 		target.getWorld().spawnParticle(Particle.CLOUD, target.getLocation(), 10, 0.5, 0.5, 0.5);
 		target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1f, 1f);
 		target.setFallDistance(0f);
-		player.sendMessage(Colors.color(Settings.Launch.LAUNCHED_PLAYER).replace("%player%", args[1]));
+		player.sendMessage(Colors.color(Settings.LangKey.LAUNCHED_PLAYER.get()).replace("%player%", args[1]));
 
 	}
 

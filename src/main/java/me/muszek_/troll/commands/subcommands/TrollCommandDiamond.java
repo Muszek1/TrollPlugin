@@ -36,7 +36,7 @@ public class TrollCommandDiamond extends SubCommand {
 	@Override
 	public void perform(Player sender, String[] args) {
 		if (!sender.hasPermission("epictroll.diamond")) {
-			sender.sendMessage(Colors.color(Settings.NO_PERMISSION));
+			sender.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
 			return;
 		}
 
@@ -45,7 +45,7 @@ public class TrollCommandDiamond extends SubCommand {
 		if (args.length >= 2) {
 			target = Bukkit.getPlayer(args[1]);
 			if (target == null) {
-				sender.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[1])));
+				sender.sendMessage(Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get().replace("%player%", args[1])));
 				return;
 			}
 		}
@@ -60,9 +60,9 @@ public class TrollCommandDiamond extends SubCommand {
 
 		Item item = target.getWorld().dropItem(loc, diamond);
 
-		Bukkit.getScheduler().runTaskLater(Bukkit.getPluginManager().getPlugin("EpicTroll"), item::remove, (20L * Settings.Diamond.DIAMOND_DURATION));
+		Bukkit.getScheduler().runTaskLater(Bukkit.getPluginManager().getPlugin("EpicTroll"), item::remove, (20L * (int) Settings.ConfigKey.DIAMOND_DURATION.get()));
 
-		sender.sendMessage(Colors.color((Settings.Diamond.DIAMOND_GIVEN).replace("%player%", target.getName())));
+		sender.sendMessage(Colors.color((Settings.LangKey.DIAMOND_GIVEN.get()).replace("%player%", target.getName())));
 	}
 
 	@Override

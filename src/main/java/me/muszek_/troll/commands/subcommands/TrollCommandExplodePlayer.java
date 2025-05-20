@@ -34,12 +34,12 @@ public class TrollCommandExplodePlayer extends SubCommand {
 		if (player.hasPermission("epictroll.explode")) {
 			if (args.length == 2) {
 				if (Bukkit.getPlayerExact(args[1]) == null) {
-					player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[1])));
+					player.sendMessage(Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get().replace("%player%", args[1])));
 					return;
 				}
 				Player target = Bukkit.getPlayerExact(args[1]);
-				target.sendMessage(Colors.color(Settings.ExplodePlayer.EXPLODEPLAYER_GOING_TO_EXPLODE));
-				player.sendMessage(Colors.color(Settings.ExplodePlayer.EXPLODEPLAYER_MESSAGE).replace("%player%", args[1]));
+				target.sendMessage(Colors.color(Settings.LangKey.EXPLODEPLAYER_GOING_TO_EXPLODE.get()));
+				player.sendMessage(Colors.color(Settings.LangKey.EXPLODEPLAYER_MESSAGE.get()).replace("%player%", args[1]));
 				new BukkitRunnable() {
 					int count = 0;
 
@@ -51,16 +51,16 @@ public class TrollCommandExplodePlayer extends SubCommand {
 						} else {
 							target.playSound(target.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
 							target.setHealth(0);
-							target.sendMessage(Colors.color(Settings.ExplodePlayer.EXPLODEPLAYER_YOU_WERE_BLOWN_UP));
+							target.sendMessage(Colors.color(Settings.LangKey.EXPLODEPLAYER_YOU_WERE_BLOWN_UP.get()));
 							cancel();
 						}
 					}
 				}.runTaskTimer(Troll.getInstance(), 0L, 15L);
 			} else {
-				player.sendMessage(Colors.color(Settings.ExplodePlayer.EXPLODEPLAYER_USAGE));
+				player.sendMessage(Colors.color(Settings.LangKey.EXPLODEPLAYER_USAGE.get()));
 			}
 		} else {
-			player.sendMessage(Colors.color(Settings.NO_PERMISSION));
+			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
 		}
 
 	}

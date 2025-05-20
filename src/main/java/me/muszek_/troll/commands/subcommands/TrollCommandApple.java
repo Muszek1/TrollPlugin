@@ -34,7 +34,7 @@ public class TrollCommandApple extends SubCommand {
 	public void perform(Player player, String[] args) {
 
 		if (!player.hasPermission("epictroll.apple")) {
-			player.sendMessage(Colors.color(Settings.NO_PERMISSION));
+			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
 		}
 		Player target = player;
 		int amount = 1;
@@ -44,7 +44,7 @@ public class TrollCommandApple extends SubCommand {
 			if (found != null) {
 				target = found;
 			} else {
-				player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND).replace("%player%", args[1]));
+				player.sendMessage(Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get()).replace("%player%", args[1]));
 				return;
 			}
 		}
@@ -54,7 +54,7 @@ public class TrollCommandApple extends SubCommand {
 				amount = Integer.parseInt(args[2]);
 				if (amount <= 0) amount = 1;
 			} catch (NumberFormatException e) {
-				player.sendMessage(Colors.color(Settings.WRONG_NUMBER));
+				player.sendMessage(Colors.color(Settings.LangKey.WRONG_NUMBER.get()));
 				return;
 			}
 		}
@@ -64,7 +64,7 @@ public class TrollCommandApple extends SubCommand {
 		metaApple.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 1);
 		apple.setItemMeta(metaApple);
 		target.getInventory().addItem(apple);
-		player.sendMessage(Colors.color(Settings.Apple.APPLE_GIVEN).replace("%player%", target.getName()).replace("%amount%", String.valueOf(amount)));
+		player.sendMessage(Colors.color(Settings.LangKey.APPLE_GIVEN.get()).replace("%player%", target.getName()).replace("%amount%", String.valueOf(amount)));
 
 	}
 

@@ -36,7 +36,7 @@ public class TrollCommandCookie extends SubCommand {
 	public void perform(Player player, String[] args) {
 
 		if (!player.hasPermission("epictroll.cookie")) {
-			player.sendMessage(Colors.color(Settings.NO_PERMISSION));
+			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
 		}
 		Player target = player;
 		int amount = 1;
@@ -46,7 +46,7 @@ public class TrollCommandCookie extends SubCommand {
 			if (found != null) {
 				target = found;
 			} else {
-				player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND).replace("%player%", args[1]));
+				player.sendMessage(Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get()).replace("%player%", args[1]));
 				return;
 			}
 		}
@@ -56,7 +56,7 @@ public class TrollCommandCookie extends SubCommand {
 				amount = Integer.parseInt(args[2]);
 				if (amount <= 0) amount = 1;
 			} catch (NumberFormatException e) {
-				player.sendMessage(Colors.color(Settings.WRONG_NUMBER));
+				player.sendMessage(Colors.color(Settings.LangKey.WRONG_NUMBER.get()));
 				return;
 			}
 		}
@@ -64,14 +64,14 @@ public class TrollCommandCookie extends SubCommand {
 		ItemMeta metaCookie = cookie.getItemMeta();
 		NamespacedKey key = new NamespacedKey("troll", "cookie");
 		metaCookie.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 1);
-		metaCookie.setDisplayName(Colors.color(Settings.Cookie.COOKIE_ITEM_NAME));
-		if (Settings.Cookie.COOKIE_GLOW) {
+		metaCookie.setDisplayName(Colors.color(Settings.ConfigKey.COOKIE_ITEM_NAME.get()));
+		if (Settings.ConfigKey.COOKIE_GLOW.get()) {
 			metaCookie.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
 			metaCookie.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		}
 		cookie.setItemMeta(metaCookie);
 		target.getInventory().addItem(cookie);
-		player.sendMessage(Colors.color(Settings.Cookie.COOKIE_GIVEN).replace("%player%", target.getName()).replace("%amount%", String.valueOf(amount)));
+		player.sendMessage(Colors.color(Settings.LangKey.COOKIE_GIVEN.get()).replace("%player%", target.getName()).replace("%amount%", String.valueOf(amount)));
 
 	}
 

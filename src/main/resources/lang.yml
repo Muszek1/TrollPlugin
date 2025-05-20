@@ -46,3 +46,7 @@ Fakeop:
   Usage: "&e> &fUsage: /troll fakeop <player>"
   Message_Sent: "&7&o[Server: Made %player% a server operator]"
   Message_Confirmation: "&e> You send fake message to %player%"
+Blockcraft:
+  Usage: "&e> &fUsage: /troll blockcraft <player>"
+  Block: "&e> &fYou blocked the possibility of crafting for %player%"
+  Unblock: "&e> &fYou unblocked the possibility of crafting for %player%"

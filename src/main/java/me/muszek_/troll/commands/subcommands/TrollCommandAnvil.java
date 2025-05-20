@@ -30,28 +30,28 @@ public class TrollCommandAnvil extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 		if (!player.hasPermission("epictroll.anvil")) {
-			player.sendMessage(Colors.color(Settings.NO_PERMISSION));
+			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
 			return;
 		}
 
 		if (args.length == 1) {
-			player.sendMessage(Colors.color(Settings.Anvil.ANVIL_USAGE));
+			player.sendMessage(Colors.color(Settings.LangKey.ANVIL_USAGE.get()));
 			return;
 		}
 
 		Player target = Bukkit.getPlayerExact(args[1]);
 		if (target == null) {
-			player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[0])));
+			player.sendMessage(Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get().replace("%player%", args[0])));
 			return;
 		}
 
-		player.sendMessage(Colors.color(Settings.Anvil.ANVIL_MESSAGE.replace("%player%", target.getName())));
+		player.sendMessage(Colors.color(Settings.LangKey.ANVIL_MESSAGE.get().replace("%player%", target.getName())));
 
 		Block block = target.getLocation().getBlock();
 		Block blockAbove = block.getRelative(0, 5, 0);
 
 		if (blockAbove.getType() != Material.AIR) {
-			player.sendMessage(Colors.color(Settings.Anvil.ANVIL_ERROR));
+			player.sendMessage(Colors.color(Settings.LangKey.ANVIL_ERROR.get()));
 			return;
 		}
 

@@ -34,24 +34,24 @@ public class TrollCommandMob extends SubCommand {
 	public void perform(Player player, String[] args) {
 
 		if (!player.hasPermission("epictroll.mob")) {
-			player.sendMessage(Colors.color(Settings.NO_PERMISSION));
+			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
 		}
 		if (args.length == 1 || args.length == 2) {
-			player.sendMessage(Colors.color(Settings.Mob.MOB_USAGE));
+			player.sendMessage(Colors.color(Settings.LangKey.MOB_USAGE.get()));
 			return;
 		}
 
 
 		Player target = Bukkit.getPlayerExact(args[1]);
 		if (target == null) {
-			player.sendMessage(Colors.color(Settings.PLAYER_NOT_FOUND.replace("%player%", args[1])));
+			player.sendMessage(Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get().replace("%player%", args[1])));
 			return;
 		}
 		EntityType mob;
 		try {
 			mob = EntityType.valueOf(args[2].toUpperCase());
 		} catch (IllegalArgumentException e) {
-			player.sendMessage(Colors.color(Settings.MOB_NOT_FOUND).replace("%mob%", args[2]));
+			player.sendMessage(Colors.color(Settings.LangKey.MOB_NOT_FOUND.get()).replace("%mob%", args[2]));
 			return;
 		}
 
@@ -62,7 +62,7 @@ public class TrollCommandMob extends SubCommand {
 			try {
 				amount = Integer.parseInt(args[3]);
 			} catch (NumberFormatException e) {
-				player.sendMessage(Colors.color(Settings.WRONG_NUMBER));
+				player.sendMessage(Colors.color(Settings.LangKey.WRONG_NUMBER.get()));
 				return;
 			}
 		}
@@ -70,7 +70,7 @@ public class TrollCommandMob extends SubCommand {
 			target.getWorld().spawnEntity(spawnLocation, mob);
 		}
 
-		player.sendMessage(Colors.color((Settings.Mob.MOB_MESSAGE).replace("%player%", target.getName()).replace("%mob%", mob.getName())));
+		player.sendMessage(Colors.color((Settings.LangKey.MOB_MESSAGE.get()).replace("%player%", target.getName()).replace("%mob%", mob.getName())));
 
 
 	}
