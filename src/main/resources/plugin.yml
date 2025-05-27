@@ -1,5 +1,5 @@
 name: EpicTroll
-version: '1.0.8'
+version: '1.1.0'
 main: me.muszek_.troll.Troll
 api-version: '1.20'
 commands:
@@ -43,6 +43,8 @@ permissions:
     default: op
   epictroll.bloccraft:
     default: op
+  epictroll.gui:
+    default: op
   epictroll.*:
     default: op
     children:
@@ -61,3 +63,4 @@ permissions:
       epictroll.jumplock: true
       epictroll.fakeop: true
       epictroll.blockcraft: true
+      epictroll.gui: true

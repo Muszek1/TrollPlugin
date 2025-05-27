@@ -50,3 +50,5 @@ Blockcraft:
   Usage: "&e> &fUsage: /troll blockcraft <player>"
   Block: "&e> &fYou blocked the possibility of crafting for %player%"
   Unblock: "&e> &fYou unblocked the possibility of crafting for %player%"
+Gui:
+  Usage: "&e> &fUsage: /troll gui <player>"

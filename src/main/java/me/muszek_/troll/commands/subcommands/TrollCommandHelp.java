@@ -31,7 +31,7 @@ public class TrollCommandHelp extends SubCommand {
 
 		if (player.hasPermission("epictroll.help")) {
 
-			player.sendMessage(Colors.color("&e> &fIf you need help, join to our discord: https://discord.gg/cT5MxqAYTd.\nList of commands are on spigot page."));
+			player.sendMessage(Colors.color("&e> &fIf you need help, join to our discord: https://discord.gg/cT5MxqAYTd.\nList of commands are on spigot page. Or use &e&l/troll gui <player>"));
 		} else {
 			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
 		}

@@ -56,7 +56,9 @@ public final class Settings {
 		KNOCKBACK_USAGE("Knockback.Usage"),
 		BLOCKCRAFT_USAGE("Blockcraft.Usage"),
 		BLOCKCRAFT_BLOCK("Blockcraft.Block"),
-		BLOCKCRAFT_UNBLOCK("Blockcraft.Unblock");
+		BLOCKCRAFT_UNBLOCK("Blockcraft.Unblock"),
+
+		GUI_USAGE("Gui.Usage");
 
 		private final String path;
 		private String value;

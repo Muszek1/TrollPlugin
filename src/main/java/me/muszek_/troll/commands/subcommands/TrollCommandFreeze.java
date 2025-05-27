@@ -43,7 +43,6 @@ public class TrollCommandFreeze extends SubCommand {
 			player.sendMessage(Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get().replace("%player%", args[1])));
 			return;
 		}
-		player.sendMessage(Colors.color("tutaj"));
 		int time = 3;
 		if (args.length >= 3) {
 			try {
