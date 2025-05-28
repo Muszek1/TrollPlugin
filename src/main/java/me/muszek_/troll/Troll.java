@@ -18,6 +18,8 @@ public final class Troll extends JavaPlugin {
 
 	private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
 
+	private String latestVersion;
+	private boolean updateAvailable = false;
 
 	@Override
 	public void onEnable() {
@@ -30,10 +32,12 @@ public final class Troll extends JavaPlugin {
 
 		JumplockListener jumplockListener = new JumplockListener();
 		BlockCraftListener BlockCraftListener = new BlockCraftListener();
+		ReverseChatListener ReverseChatListener = new ReverseChatListener();
 		getServer().getPluginManager().registerEvents(jumplockListener, this);
 		getServer().getPluginManager().registerEvents(BlockCraftListener, this);
+		getServer().getPluginManager().registerEvents(ReverseChatListener, this);
 
-		CommandManager commandManager = new CommandManager(jumplockListener, BlockCraftListener);
+		CommandManager commandManager = new CommandManager(jumplockListener, BlockCraftListener, ReverseChatListener);
 		getCommand("troll").setExecutor(commandManager);
 		getCommand("troll").setTabCompleter(commandManager);
 		getServer().getPluginManager().registerEvents(new AppleListener(this), this);
@@ -41,7 +45,7 @@ public final class Troll extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new LaunchListener(this), this);
 		getServer().getPluginManager().registerEvents(new CookieListener(this), this);
 		getServer().getPluginManager().registerEvents(new MenuListener(), this);
-
+		getServer().getPluginManager().registerEvents(new UpdateNotifyListener(this), this);
 
 		Settings.load();
 
@@ -49,15 +53,27 @@ public final class Troll extends JavaPlugin {
 		Metrics metrics = new Metrics(this, pluginId);
 
 		new UpdateChecker(this, 124041).getLatestVersion(version -> {
-			if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
-				Logger.log(Logger.LogLevel.INFO, "Plugin EpicTroll is up to date. ");
+			String current = this.getDescription().getVersion();
+			this.latestVersion = version;
+			this.updateAvailable = !current.equalsIgnoreCase(version);
+
+			if (!updateAvailable) {
+				Logger.log(Logger.LogLevel.INFO, "Plugin EpicTroll is up to date.");
 			} else {
-				Logger.log(Logger.LogLevel.WARNING, "Plugin EpicTroll has an update. Update: https://www.spigotmc.org/resources/124041/ ");
+				Logger.log(Logger.LogLevel.WARNING, "Plugin EpicTroll has an update. Update: https://www.spigotmc.org/resources/124041/");
 			}
 
 		});
 
 
+	}
+
+	public boolean isUpdateAvailable() {
+		return updateAvailable;
+	}
+
+	public String getLatestVersion() {
+		return latestVersion;
 	}
 
 	@Override

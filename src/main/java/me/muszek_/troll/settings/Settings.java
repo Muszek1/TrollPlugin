@@ -58,7 +58,12 @@ public final class Settings {
 		BLOCKCRAFT_BLOCK("Blockcraft.Block"),
 		BLOCKCRAFT_UNBLOCK("Blockcraft.Unblock"),
 
-		GUI_USAGE("Gui.Usage");
+		GUI_USAGE("Gui.Usage"),
+
+		REVERSEDCHAT_USAGE("Reversechat.Usage"),
+		REVERSEDCHAT_REVERSE("Reversechat.Reverse"),
+		REVERSEDCHAT_UNREVERSED("Reversechat.Unreversed"),
+		;
 
 		private final String path;
 		private String value;

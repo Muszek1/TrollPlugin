@@ -52,3 +52,7 @@ Blockcraft:
   Unblock: "&e> &fYou unblocked the possibility of crafting for %player%"
 Gui:
   Usage: "&e> &fUsage: /troll gui <player>"
+Reversechat:
+  Usage: "&e> &fUsage: /troll reversechat <player>"
+  Reverse: "&e> &fYou reversed players' messages for %player%"
+  Unreversed: "&e> &fYou restored players' chat to normal for %player%"

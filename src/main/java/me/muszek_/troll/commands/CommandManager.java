@@ -4,6 +4,7 @@ import me.muszek_.troll.Colors;
 import me.muszek_.troll.commands.subcommands.*;
 import me.muszek_.troll.listeners.BlockCraftListener;
 import me.muszek_.troll.listeners.JumplockListener;
+import me.muszek_.troll.listeners.ReverseChatListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,7 +22,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 	private final ArrayList<SubCommand> subCommands = new ArrayList<>();
 
 
-	public CommandManager(JumplockListener jumplockListener, BlockCraftListener BlockCraftListener) {
+	public CommandManager(JumplockListener jumplockListener, BlockCraftListener BlockCraftListener, ReverseChatListener ReversedChatListener) {
 		subCommands.add(new TrollCommandAnvil());
 		subCommands.add(new TrollCommandFire());
 		subCommands.add(new TrollCommandMob());
@@ -38,6 +39,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 		subCommands.add(new TrollCommandGui());
 		subCommands.add(new TrollCommandBlockCraft(BlockCraftListener));
 		subCommands.add(new TrollCommandJumplock(jumplockListener));
+		subCommands.add(new TrollCommandReverseChat(ReversedChatListener));
 	}
 
 

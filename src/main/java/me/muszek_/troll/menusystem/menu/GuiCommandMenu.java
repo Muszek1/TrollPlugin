@@ -18,7 +18,8 @@ public class GuiCommandMenu extends Menu {
 
 	@Override
 	public String getMenuName() {
-		return "Troll GUI";
+		Player target = playerMenuUtility.getTarget();
+		return "Troll GUI - " + target.getDisplayName();
 	}
 
 	@Override
@@ -81,6 +82,10 @@ public class GuiCommandMenu extends Menu {
 				break;
 			case BARRIER:
 				e.getWhoClicked().closeInventory();
+				break;
+			case PAPER:
+				e.getWhoClicked().closeInventory();
+				player.performCommand("troll reversechat " + target.getName());
 				break;
 		}
 
@@ -184,6 +189,14 @@ public class GuiCommandMenu extends Menu {
 		mobMeta.setLore(Arrays.asList(Colors.color("&e- &fSpawns creeper behind the player"), Colors.color("&e- &fUse /troll mob <player> <mob> for more mobs")));
 		mob.setItemMeta(mobMeta);
 		inventory.setItem(33, mob);
+
+		//Reversechat
+		ItemStack Reversechat = new ItemStack(Material.PAPER);
+		ItemMeta ReversechatMeta = Reversechat.getItemMeta();
+		ReversechatMeta.setDisplayName(Colors.color("&6&lReversechat"));
+		ReversechatMeta.setLore(Arrays.asList(Colors.color("&e- &fReverse players' massages for the player")));
+		Reversechat.setItemMeta(ReversechatMeta);
+		inventory.setItem(22, Reversechat);
 
 		//Exit
 		ItemStack exit = new ItemStack(Material.BARRIER);
