@@ -68,6 +68,7 @@ public class TrollCommandKnockbackStick extends SubCommand {
 		knockbackStick.setItemMeta(meta);
 
 		target.getInventory().addItem(knockbackStick);
+		player.sendMessage(Colors.color(Settings.LangKey.KNOCKBACK_GIVEN.get()).replace("%player%", target.getName()).replace("%amount%", String.valueOf(amount)));
 
 
 	}

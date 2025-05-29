@@ -37,7 +37,7 @@ public final class Troll extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(BlockCraftListener, this);
 		getServer().getPluginManager().registerEvents(ReverseChatListener, this);
 
-		CommandManager commandManager = new CommandManager(jumplockListener, BlockCraftListener, ReverseChatListener);
+		CommandManager commandManager = new CommandManager(this, jumplockListener, BlockCraftListener, ReverseChatListener);
 		getCommand("troll").setExecutor(commandManager);
 		getCommand("troll").setTabCompleter(commandManager);
 		getServer().getPluginManager().registerEvents(new AppleListener(this), this);

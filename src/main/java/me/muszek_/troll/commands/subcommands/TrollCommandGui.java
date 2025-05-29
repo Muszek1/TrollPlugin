@@ -9,10 +9,18 @@ import me.muszek_.troll.settings.Settings;
 import me.muszek_.troll.utils.TabCompletePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
 
 public class TrollCommandGui extends SubCommand {
+
+	private final JavaPlugin plugin;
+
+	public TrollCommandGui(JavaPlugin plugin) {
+		this.plugin = plugin;
+	}
+
 	@Override
 	public String getName() {
 		return "gui";
@@ -49,7 +57,8 @@ public class TrollCommandGui extends SubCommand {
 
 		PlayerMenuUtility util = Troll.getPlayerMenuUtility(player);
 		util.setTarget(target);
-		new GuiCommandMenu(util).open();
+
+		new GuiCommandMenu(util, plugin).open();
 	}
 
 

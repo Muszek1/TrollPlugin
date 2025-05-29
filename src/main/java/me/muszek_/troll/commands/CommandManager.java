@@ -10,6 +10,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,7 +23,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 	private final ArrayList<SubCommand> subCommands = new ArrayList<>();
 
 
-	public CommandManager(JumplockListener jumplockListener, BlockCraftListener BlockCraftListener, ReverseChatListener ReversedChatListener) {
+	public CommandManager(JavaPlugin plugin, JumplockListener jumplockListener, BlockCraftListener BlockCraftListener, ReverseChatListener ReversedChatListener) {
 		subCommands.add(new TrollCommandAnvil());
 		subCommands.add(new TrollCommandFire());
 		subCommands.add(new TrollCommandMob());
@@ -36,7 +37,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 		subCommands.add(new TrollCommandLaunch());
 		subCommands.add(new TrollCommandCookie());
 		subCommands.add(new TrollCommandFakeOp());
-		subCommands.add(new TrollCommandGui());
+		subCommands.add(new TrollCommandGui(plugin));
 		subCommands.add(new TrollCommandBlockCraft(BlockCraftListener));
 		subCommands.add(new TrollCommandJumplock(jumplockListener));
 		subCommands.add(new TrollCommandReverseChat(ReversedChatListener));

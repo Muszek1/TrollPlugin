@@ -54,6 +54,7 @@ public final class Settings {
 		FAKEOP_MESSAGE_CONFIRMATION("Fakeop.Message_Confirmation"),
 
 		KNOCKBACK_USAGE("Knockback.Usage"),
+		KNOCKBACK_GIVEN("Knockback.Given"),
 		BLOCKCRAFT_USAGE("Blockcraft.Usage"),
 		BLOCKCRAFT_BLOCK("Blockcraft.Block"),
 		BLOCKCRAFT_UNBLOCK("Blockcraft.Unblock"),

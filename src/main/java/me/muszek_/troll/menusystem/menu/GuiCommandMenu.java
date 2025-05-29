@@ -3,17 +3,24 @@ package me.muszek_.troll.menusystem.menu;
 import me.muszek_.troll.Colors;
 import me.muszek_.troll.menusystem.Menu;
 import me.muszek_.troll.menusystem.PlayerMenuUtility;
+import me.muszek_.troll.settings.Settings;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
 
 public class GuiCommandMenu extends Menu {
-	public GuiCommandMenu(PlayerMenuUtility playerMenuUtility) {
+	private final JavaPlugin plugin;
+
+	public GuiCommandMenu(PlayerMenuUtility playerMenuUtility, JavaPlugin plugin) {
 		super(playerMenuUtility);
+		this.plugin = plugin;
 	}
 
 	@Override
@@ -83,6 +90,10 @@ public class GuiCommandMenu extends Menu {
 			case BARRIER:
 				e.getWhoClicked().closeInventory();
 				break;
+			case STICK:
+				e.getWhoClicked().closeInventory();
+				player.performCommand("troll knockbackstick " + player.getName());
+				break;
 			case PAPER:
 				e.getWhoClicked().closeInventory();
 				player.performCommand("troll reversechat " + target.getName());
@@ -121,7 +132,7 @@ public class GuiCommandMenu extends Menu {
 		//Cookie
 		ItemStack cookie = new ItemStack(Material.COOKIE);
 		ItemMeta cookieMeta = cookie.getItemMeta();
-		cookieMeta.setDisplayName(Colors.color("&6&lInfinite Cookie"));
+		cookieMeta.setDisplayName(Colors.color(Settings.ConfigKey.COOKIE_ITEM_NAME.get()));
 		cookieMeta.setLore(Arrays.asList(Colors.color("&e- &fGives a cookie for player")));
 		cookie.setItemMeta(cookieMeta);
 		inventory.setItem(15, cookie);
@@ -198,6 +209,15 @@ public class GuiCommandMenu extends Menu {
 		Reversechat.setItemMeta(ReversechatMeta);
 		inventory.setItem(22, Reversechat);
 
+		//Knockbackstick
+		ItemStack Knockbackstick = new ItemStack(Material.STICK);
+		ItemMeta KnockbackstickMeta = Knockbackstick.getItemMeta();
+		KnockbackstickMeta.setDisplayName(Colors.color("&6&lKnockback Stick"));
+		KnockbackstickMeta.setLore(Arrays.asList(Colors.color("&e- &fGive you a knockback stick")));
+		KnockbackstickMeta.addEnchant(Enchantment.KNOCKBACK, 10, true);
+		Knockbackstick.setItemMeta(KnockbackstickMeta);
+		inventory.setItem(48, Knockbackstick);
+
 		//Exit
 		ItemStack exit = new ItemStack(Material.BARRIER);
 		ItemMeta exitMeta = exit.getItemMeta();
@@ -206,6 +226,42 @@ public class GuiCommandMenu extends Menu {
 		exit.setItemMeta(exitMeta);
 		inventory.setItem(49, exit);
 
+		//Panes
+		Player player = playerMenuUtility.getOwner();
+
+		new BukkitRunnable() {
+			private boolean toggle = false;
+
+			@Override
+			public void run() {
+				Material material = toggle ? Material.WHITE_STAINED_GLASS_PANE : Material.LIME_STAINED_GLASS_PANE;
+				ItemStack glass1 = new ItemStack(material);
+				ItemMeta meta = glass1.getItemMeta();
+				meta.setDisplayName(Colors.color("&f"));
+				glass1.setItemMeta(meta);
+				int[] panes = {
+						0, 9, 18, 35, 44, 53
+				};
+				for (int i : panes) {
+					inventory.setItem(i, glass1);
+				}
+
+
+				Material material2 = toggle ? Material.LIME_STAINED_GLASS_PANE : Material.WHITE_STAINED_GLASS_PANE;
+				ItemStack glass2 = new ItemStack(material2);
+				ItemMeta meta2 = glass2.getItemMeta();
+				meta2.setDisplayName(Colors.color("&f"));
+				glass2.setItemMeta(meta2);
+				int[] panes2 = {
+						8, 17, 26, 27, 36, 45
+				};
+				for (int i : panes2) {
+					inventory.setItem(i, glass2);
+				}
+
+				toggle = !toggle;
+			}
+		}.runTaskTimer(plugin, 0L, 20L);
 
 	}
 }

@@ -36,6 +36,7 @@ Launch:
   Launched: "&e> You launched %player% into sky!"
 Knockback:
   Usage: "&e> &fUsage: /troll knockback <player>"
+  Given: "&e> &fYou gave %amount% knockback stick(s) to %player%"
 Cookie:
   Given: "&e> &fYou gave %amount% infinite cookie(s) to %player%"
 Jumplock:
