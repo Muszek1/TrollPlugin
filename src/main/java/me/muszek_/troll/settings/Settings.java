@@ -64,6 +64,9 @@ public final class Settings {
 		REVERSEDCHAT_USAGE("Reversechat.Usage"),
 		REVERSEDCHAT_REVERSE("Reversechat.Reverse"),
 		REVERSEDCHAT_UNREVERSED("Reversechat.Unreversed"),
+
+		ANNOYSOUNDS_USAGE("Annoysounds.Usage"),
+		ANNOYSOUNDS_SENT("Annoysounds.Sent"),
 		;
 
 		private final String path;

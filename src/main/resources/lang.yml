@@ -57,3 +57,6 @@ Reversechat:
   Usage: "&e> &fUsage: /troll reversechat <player>"
   Reverse: "&e> &fYou reversed players' messages for %player%"
   Unreversed: "&e> &fYou restored players' chat to normal for %player%"
+Annoysounds:
+  Usage: "&e> &fUsage: /troll annoysounds <player>"
+  Sent: "&e> &fYou sent annoy sounds to %player%"

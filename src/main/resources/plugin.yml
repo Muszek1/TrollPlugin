@@ -1,5 +1,5 @@
 name: EpicTroll
-version: '1.1.2'
+version: '1.1.3'
 main: me.muszek_.troll.Troll
 api-version: '1.20'
 commands:
@@ -47,6 +47,8 @@ permissions:
     default: op
   epictroll.reversechat:
     default: op
+  epictroll.anooysounds:
+    default: op
   epictroll.*:
     default: op
     children:
@@ -67,3 +69,4 @@ permissions:
       epictroll.blockcraft: true
       epictroll.gui: true
       epictroll.reversechat: true
+      epictroll.annoysounds: true

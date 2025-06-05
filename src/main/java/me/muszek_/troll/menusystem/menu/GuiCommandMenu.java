@@ -94,6 +94,10 @@ public class GuiCommandMenu extends Menu {
 				e.getWhoClicked().closeInventory();
 				player.performCommand("troll knockbackstick " + player.getName());
 				break;
+			case BELL:
+				e.getWhoClicked().closeInventory();
+				player.performCommand("troll annoysounds " + player.getName());
+				break;
 			case PAPER:
 				e.getWhoClicked().closeInventory();
 				player.performCommand("troll reversechat " + target.getName());
@@ -208,6 +212,14 @@ public class GuiCommandMenu extends Menu {
 		ReversechatMeta.setLore(Arrays.asList(Colors.color("&e- &fReverse players' massages for the player")));
 		Reversechat.setItemMeta(ReversechatMeta);
 		inventory.setItem(22, Reversechat);
+
+		//Annoysounds
+		ItemStack Annoysounds = new ItemStack(Material.BELL);
+		ItemMeta AnnoysoundsMeta = Annoysounds.getItemMeta();
+		AnnoysoundsMeta.setDisplayName(Colors.color("&6&lAnnoysounds"));
+		AnnoysoundsMeta.setLore(Arrays.asList(Colors.color("&e- &fSend annoysounds to the player")));
+		Annoysounds.setItemMeta(AnnoysoundsMeta);
+		inventory.setItem(31, Annoysounds);
 
 		//Knockbackstick
 		ItemStack Knockbackstick = new ItemStack(Material.STICK);
