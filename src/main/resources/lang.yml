@@ -60,3 +60,6 @@ Reversechat:
 Annoysounds:
   Usage: "&e> &fUsage: /troll annoysounds <player>"
   Sent: "&e> &fYou sent annoy sounds to %player%"
+Dropinv:
+  Usage: "&e> &fUsage: /troll dropinv <player>"
+  Dropped: "&e> &fYou dropped items from %player%'s inventory"

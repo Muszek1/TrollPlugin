@@ -67,6 +67,9 @@ public final class Settings {
 
 		ANNOYSOUNDS_USAGE("Annoysounds.Usage"),
 		ANNOYSOUNDS_SENT("Annoysounds.Sent"),
+
+		DROPINV_USAGE("Dropinv.Usage"),
+		DROPINV_DROPPED("Dropinv.Dropped"),
 		;
 
 		private final String path;

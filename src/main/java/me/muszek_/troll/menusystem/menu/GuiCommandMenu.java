@@ -98,6 +98,10 @@ public class GuiCommandMenu extends Menu {
 				e.getWhoClicked().closeInventory();
 				player.performCommand("troll annoysounds " + player.getName());
 				break;
+			case CHEST:
+				e.getWhoClicked().closeInventory();
+				player.performCommand("troll dropinv " + player.getName());
+				break;
 			case PAPER:
 				e.getWhoClicked().closeInventory();
 				player.performCommand("troll reversechat " + target.getName());
@@ -220,6 +224,14 @@ public class GuiCommandMenu extends Menu {
 		AnnoysoundsMeta.setLore(Arrays.asList(Colors.color("&e- &fSend annoysounds to the player")));
 		Annoysounds.setItemMeta(AnnoysoundsMeta);
 		inventory.setItem(31, Annoysounds);
+
+		//Dropinv
+		ItemStack Dropinv = new ItemStack(Material.CHEST);
+		ItemMeta DropinvMeta = Dropinv.getItemMeta();
+		DropinvMeta.setDisplayName(Colors.color("&6&lDropinv"));
+		DropinvMeta.setLore(Arrays.asList(Colors.color("&e- &fDrop items from player's inventory")));
+		Dropinv.setItemMeta(DropinvMeta);
+		inventory.setItem(13, Dropinv);
 
 		//Knockbackstick
 		ItemStack Knockbackstick = new ItemStack(Material.STICK);
