@@ -70,6 +70,11 @@ public final class Settings {
 
 		DROPINV_USAGE("Dropinv.Usage"),
 		DROPINV_DROPPED("Dropinv.Dropped"),
+
+
+		BLOCKTOOLUSE_USAGE("Blocktooluse.Usage"),
+		BLOCKTOOLUSE_BLOCK("Blocktooluse.Block"),
+		BLOCKTOOLUSE_UNLOCK("Blocktooluse.Unlock"),
 		;
 
 		private final String path;

@@ -39,6 +39,10 @@ public class GuiCommandMenu extends Menu {
 		Player target = playerMenuUtility.getTarget();
 		Player player = playerMenuUtility.getOwner();
 		switch (e.getCurrentItem().getType()) {
+			case WOODEN_PICKAXE:
+				e.getWhoClicked().closeInventory();
+				player.performCommand("troll blocktooluse " + player.getName());
+				break;
 			case ANVIL:
 				e.getWhoClicked().closeInventory();
 				player.performCommand("troll anvil " + target.getName());
@@ -112,6 +116,14 @@ public class GuiCommandMenu extends Menu {
 
 	@Override
 	public void setMenuItems() {
+
+		//Wooden_pickaxe
+		ItemStack woodenpickaxe = new ItemStack(Material.WOODEN_PICKAXE);
+		ItemMeta woodenpickaxeMeta = woodenpickaxe.getItemMeta();
+		woodenpickaxeMeta.setDisplayName(Colors.color("&6&lBlock Tools use"));
+		woodenpickaxeMeta.setLore(Arrays.asList(Colors.color("&e- &fBlock tools use for player")));
+		woodenpickaxe.setItemMeta(woodenpickaxeMeta);
+		inventory.setItem(10, woodenpickaxe);
 
 		//Anvil
 		ItemStack anvil = new ItemStack(Material.ANVIL);

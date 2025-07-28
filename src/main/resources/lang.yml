@@ -63,3 +63,8 @@ Annoysounds:
 Dropinv:
   Usage: "&e> &fUsage: /troll dropinv <player>"
   Dropped: "&e> &fYou dropped items from %player%'s inventory"
+
+Blocktooluse:
+  Usage: "&e> &fUsage: /troll blocktooluse <player>"
+  Block: "&e> &fYou blocked use of tools for %player%"
+  Unlock: "&e> &fYou unlocked use of tools for %player%"
