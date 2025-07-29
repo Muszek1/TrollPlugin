@@ -31,38 +31,41 @@ public class TrollCommandExplodePlayer extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (player.hasPermission("epictroll.explode")) {
-			if (args.length == 2) {
-				if (Bukkit.getPlayerExact(args[1]) == null) {
-					player.sendMessage(Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get().replace("%player%", args[1])));
-					return;
-				}
-				Player target = Bukkit.getPlayerExact(args[1]);
-				target.sendMessage(Colors.color(Settings.LangKey.EXPLODEPLAYER_GOING_TO_EXPLODE.get()));
-				player.sendMessage(Colors.color(Settings.LangKey.EXPLODEPLAYER_MESSAGE.get()).replace("%player%", args[1]));
-				new BukkitRunnable() {
-					int count = 0;
-
-					@Override
-					public void run() {
-						if (count < 3) {
-							target.playSound(target.getLocation(), Sound.ENTITY_CREEPER_PRIMED, 1, 1);
-							count++;
-						} else {
-							target.playSound(target.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
-							target.setHealth(0);
-							target.sendMessage(Colors.color(Settings.LangKey.EXPLODEPLAYER_YOU_WERE_BLOWN_UP.get()));
-							cancel();
-						}
-					}
-				}.runTaskTimer(Troll.getInstance(), 0L, 15L);
-			} else {
-				player.sendMessage(Colors.color(Settings.LangKey.EXPLODEPLAYER_USAGE.get()));
+		if (args.length == 2) {
+			if (Bukkit.getPlayerExact(args[1]) == null) {
+				player.sendMessage(Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get().replace("%player%", args[1])));
+				return;
 			}
+			Player target = Bukkit.getPlayerExact(args[1]);
+			assert target != null;
+			target.sendMessage(Colors.color(Settings.LangKey.EXPLODEPLAYER_GOING_TO_EXPLODE.get()));
+			player.sendMessage(Colors.color(Settings.LangKey.EXPLODEPLAYER_MESSAGE.get()).replace("%player%", args[1]));
+			new BukkitRunnable() {
+				int count = 0;
+
+				@Override
+				public void run() {
+					if (count < 3) {
+						target.playSound(target.getLocation(), Sound.ENTITY_CREEPER_PRIMED, 1, 1);
+						count++;
+					} else {
+						target.playSound(target.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
+						target.setHealth(0);
+						target.sendMessage(Colors.color(Settings.LangKey.EXPLODEPLAYER_YOU_WERE_BLOWN_UP.get()));
+						cancel();
+					}
+				}
+			}.runTaskTimer(Troll.getInstance(), 0L, 15L);
 		} else {
-			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
+			player.sendMessage(Colors.color(Settings.LangKey.EXPLODEPLAYER_USAGE.get()));
 		}
 
+
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.explodeplayer";
 	}
 
 	@Override

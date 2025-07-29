@@ -28,13 +28,15 @@ public class TrollCommandReload extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (player.hasPermission("epictroll.reload")) {
-			Troll.getInstance().reloadConfig();
-			Settings.load();
-			player.sendMessage(Colors.color(Settings.LangKey.PLUGIN_RELOADED.get()));
-		} else {
-			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-		}
+		Troll.getInstance().reloadConfig();
+		Settings.load();
+		player.sendMessage(Colors.color(Settings.LangKey.PLUGIN_RELOADED.get()));
+
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.reload";
 	}
 
 	@Override

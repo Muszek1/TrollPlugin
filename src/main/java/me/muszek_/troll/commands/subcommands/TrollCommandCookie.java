@@ -35,9 +35,7 @@ public class TrollCommandCookie extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (!player.hasPermission("epictroll.cookie")) {
-			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-		}
+
 		Player target = player;
 		int amount = 1;
 
@@ -73,6 +71,11 @@ public class TrollCommandCookie extends SubCommand {
 		target.getInventory().addItem(cookie);
 		player.sendMessage(Colors.color(Settings.LangKey.COOKIE_GIVEN.get()).replace("%player%", target.getName()).replace("%amount%", String.valueOf(amount)));
 
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.cookie";
 	}
 
 	@Override

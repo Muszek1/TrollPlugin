@@ -28,10 +28,7 @@ public class TrollCommandFakeOp extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (!player.hasPermission("epictroll.fakeop")) {
-			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-			return;
-		}
+
 		if (args.length == 1) {
 			player.sendMessage(Colors.color(Settings.LangKey.FAKEOP_USAGE.get()));
 			return;
@@ -47,6 +44,11 @@ public class TrollCommandFakeOp extends SubCommand {
 		player.sendMessage(Colors.color(Settings.LangKey.FAKEOP_MESSAGE_CONFIRMATION.get()).replace("%player%", args[0]));
 
 
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.fakeop";
 	}
 
 	@Override

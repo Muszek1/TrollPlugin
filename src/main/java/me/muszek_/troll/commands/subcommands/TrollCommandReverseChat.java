@@ -25,17 +25,6 @@ public class TrollCommandReverseChat extends SubCommand {
 	private static final Set<UUID> reversedChatTargets = new HashSet<>();
 
 
-	public static void toggleReversedChat(Player player) {
-		UUID uuid = player.getUniqueId();
-		if (!reversedChatTargets.add(uuid)) {
-			reversedChatTargets.remove(uuid);
-		}
-	}
-
-	public static boolean hasReversedChat(Player player) {
-		return reversedChatTargets.contains(player.getUniqueId());
-	}
-
 	@Override
 	public String getName() {
 		return "reversechat";
@@ -54,9 +43,6 @@ public class TrollCommandReverseChat extends SubCommand {
 	@Override
 	public void perform(Player sender, String[] args) {
 
-		if (!sender.hasPermission("epictroll.mob")) {
-			sender.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-		}
 		if (args.length == 1) {
 			sender.sendMessage(Colors.color(Settings.LangKey.REVERSEDCHAT_USAGE.get()));
 			return;
@@ -75,6 +61,11 @@ public class TrollCommandReverseChat extends SubCommand {
 		} else {
 			sender.sendMessage(Colors.color(Settings.LangKey.REVERSEDCHAT_UNREVERSED.get()).replace("%player%", args[1]));
 		}
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.reversechat";
 	}
 
 	@Override

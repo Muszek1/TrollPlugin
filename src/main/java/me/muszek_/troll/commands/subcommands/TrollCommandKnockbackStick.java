@@ -33,10 +33,6 @@ public class TrollCommandKnockbackStick extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (!player.hasPermission("epictroll.knockbackstick")) {
-			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-			return;
-		}
 
 		Player target = player;
 		if (args.length >= 2) {
@@ -71,6 +67,11 @@ public class TrollCommandKnockbackStick extends SubCommand {
 		player.sendMessage(Colors.color(Settings.LangKey.KNOCKBACK_GIVEN.get()).replace("%player%", target.getName()).replace("%amount%", String.valueOf(amount)));
 
 
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.knockbackstick";
 	}
 
 	@Override

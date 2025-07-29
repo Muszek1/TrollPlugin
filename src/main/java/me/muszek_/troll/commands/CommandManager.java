@@ -6,6 +6,7 @@ import me.muszek_.troll.listeners.BlockCraftListener;
 import me.muszek_.troll.listeners.BlockToolUseListener;
 import me.muszek_.troll.listeners.JumplockListener;
 import me.muszek_.troll.listeners.ReverseChatListener;
+import me.muszek_.troll.settings.Settings;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -50,23 +51,25 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 
 	@Override
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-
 		if (sender instanceof Player player) {
-
-
 			if (args.length > 0) {
-				for (int i = 0; i < getSubCommands().size(); i++) {
-					if (args[0].equalsIgnoreCase(getSubCommands().get(i).getName())) {
-						getSubCommands().get(i).perform(player, args);
+				for (SubCommand subCommand : getSubCommands()) {
+					if (args[0].equalsIgnoreCase(subCommand.getName())) {
+
+						if (!player.hasPermission(subCommand.getPermission())) {
+							player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
+							return true;
+						}
+
+						subCommand.perform(player, args);
+						return true;
 					}
 				}
+				player.sendMessage(Colors.color("&cNieznana podkomenda. Użyj /troll help."));
 			} else {
 				player.sendMessage(Colors.color("Usage: /troll help"));
 			}
-
 		}
-
-
 		return true;
 	}
 

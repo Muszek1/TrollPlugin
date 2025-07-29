@@ -43,10 +43,6 @@ public class TrollCommandAnnoySounds extends SubCommand {
 
 	@Override
 	public void perform(Player player, String[] args) {
-		if (!player.hasPermission("epictroll.blockcraft")) {
-			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-			return;
-		}
 		if (args.length == 1) {
 			player.sendMessage(Colors.color(Settings.LangKey.ANNOYSOUNDS_USAGE.get()));
 			return;
@@ -73,6 +69,11 @@ public class TrollCommandAnnoySounds extends SubCommand {
 				count++;
 			}
 		}.runTaskTimer(getPlugin(), 0L, 10L);
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.annoysounds";
 	}
 
 	private org.bukkit.plugin.Plugin getPlugin() {

@@ -31,9 +31,7 @@ public class TrollCommandLaunch extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (!player.hasPermission("epictroll.mob")) {
-			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-		}
+
 		if (args.length == 1) {
 			player.sendMessage(Colors.color(Settings.LangKey.LAUNCH_USAGE.get()));
 			return;
@@ -53,6 +51,11 @@ public class TrollCommandLaunch extends SubCommand {
 		target.setFallDistance(0f);
 		player.sendMessage(Colors.color(Settings.LangKey.LAUNCHED_PLAYER.get()).replace("%player%", args[1]));
 
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.launch";
 	}
 
 	@Override

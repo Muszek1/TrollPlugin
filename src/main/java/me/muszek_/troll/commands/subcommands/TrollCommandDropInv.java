@@ -31,16 +31,14 @@ public class TrollCommandDropInv extends SubCommand {
 
 	@Override
 	public void perform(Player player, String[] args) {
-		if (!player.hasPermission("epictroll.blockcraft")) {
-			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-			return;
-		}
+
 		if (args.length == 1) {
 			player.sendMessage(Colors.color(Settings.LangKey.DROPINV_USAGE.get()));
 			return;
 		}
 
 		Player target = Bukkit.getPlayerExact(args[1]);
+		assert target != null;
 		PlayerInventory inv = target.getInventory();
 		Location loc = target.getLocation();
 
@@ -55,14 +53,16 @@ public class TrollCommandDropInv extends SubCommand {
 			}
 		}
 		ItemStack off = inv.getItemInOffHand();
-		if (off != null) {
-			target.getWorld().dropItemNaturally(loc, off.clone());
-		}
+		target.getWorld().dropItemNaturally(loc, off.clone());
 
-		// wyczyść ekwipunek
 		inv.clear();
 
 		player.sendMessage(Colors.color(Settings.LangKey.DROPINV_DROPPED.get()).replace("%player%", args[1]));
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.dropinv";
 	}
 
 	@Override

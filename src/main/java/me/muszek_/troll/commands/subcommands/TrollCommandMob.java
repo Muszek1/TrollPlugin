@@ -33,9 +33,7 @@ public class TrollCommandMob extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (!player.hasPermission("epictroll.mob")) {
-			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-		}
+
 		if (args.length == 1 || args.length == 2) {
 			player.sendMessage(Colors.color(Settings.LangKey.MOB_USAGE.get()));
 			return;
@@ -70,9 +68,15 @@ public class TrollCommandMob extends SubCommand {
 			target.getWorld().spawnEntity(spawnLocation, mob);
 		}
 
+		assert mob.getName() != null;
 		player.sendMessage(Colors.color((Settings.LangKey.MOB_MESSAGE.get()).replace("%player%", target.getName()).replace("%mob%", mob.getName())));
 
 
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.mob";
 	}
 
 	@Override

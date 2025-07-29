@@ -1,5 +1,5 @@
 name: EpicTroll
-version: '1.1.5'
+version: '1.1.6'
 main: me.muszek_.troll.Troll
 api-version: '1.20'
 commands:
@@ -11,68 +11,3 @@ commands:
       - epictroll
     usage: |-
       /troll <arg>
-
-permissions:
-  epictroll.blocktooluse:
-    default: op
-  epictroll.anvil:
-    default: op
-  epictroll.fire:
-    default: op
-  epictroll.freeze:
-    default: op
-  epictroll.help:
-    default: op
-  epictroll.knockbackstick:
-    default: op
-  epictroll.mob:
-    default: op
-  epictroll.reload:
-    default: op
-  epictroll.explode:
-    default: op
-  epictroll.apple:
-    default: op
-  epictroll.diamond:
-    default: op
-  epictroll.launch:
-    default: op
-  epictroll.cookie:
-    default: op
-  epictroll.jumplock:
-    default: op
-  epictroll.fakeop:
-    default: op
-  epictroll.bloccraft:
-    default: op
-  epictroll.gui:
-    default: op
-  epictroll.reversechat:
-    default: op
-  epictroll.annoysounds:
-    default: op
-  epictroll.dropinv:
-    default: op
-  epictroll.*:
-    default: op
-    children:
-      epictroll.anvil: true
-      epictroll.fire: true
-      epictroll.freeze: true
-      epictroll.help: true
-      epictroll.knockbackstick: true
-      epictroll.mov: true
-      epictroll.explode: true
-      epictroll.reload: true
-      epictroll.apple: true
-      epictroll.diamond: true
-      epictroll.launch: true
-      epictroll.cookie: true
-      epictroll.jumplock: true
-      epictroll.fakeop: true
-      epictroll.blockcraft: true
-      epictroll.gui: true
-      epictroll.reversechat: true
-      epictroll.annoysounds: true
-      epictroll.dropinv: true
-      epictroll.blocktooluse: true

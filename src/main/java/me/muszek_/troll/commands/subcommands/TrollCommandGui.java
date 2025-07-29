@@ -38,13 +38,10 @@ public class TrollCommandGui extends SubCommand {
 
 	@Override
 	public void perform(Player player, String[] args) {
-		if (!(player instanceof Player)) {
+		if (player == null) {
 			return;
 		}
-		if (!player.hasPermission("epictroll.gui")) {
-			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-			return;
-		}
+
 		if (args.length <= 1) {
 			player.sendMessage(Colors.color(Settings.LangKey.GUI_USAGE.get()));
 			return;
@@ -59,6 +56,11 @@ public class TrollCommandGui extends SubCommand {
 		util.setTarget(target);
 
 		new GuiCommandMenu(util, plugin).open();
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.gui";
 	}
 
 

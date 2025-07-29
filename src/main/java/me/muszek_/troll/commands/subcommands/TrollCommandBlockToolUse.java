@@ -35,10 +35,7 @@ public class TrollCommandBlockToolUse extends SubCommand {
 
 	@Override
 	public void perform(Player sender, String[] args) {
-		if (!sender.hasPermission("epictroll.blocktooluse")) {
-			sender.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-			return;
-		}
+
 		if (args.length == 1) {
 			sender.sendMessage(Colors.color(Settings.LangKey.BLOCKTOOLUSE_USAGE.get()));
 			return;
@@ -57,6 +54,11 @@ public class TrollCommandBlockToolUse extends SubCommand {
 			listener.lock(target);
 			sender.sendMessage(Colors.color(Settings.LangKey.BLOCKTOOLUSE_BLOCK.get().replace("%player%", args[1])));
 		}
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.blocktooluse";
 	}
 
 	@Override

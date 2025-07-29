@@ -30,10 +30,6 @@ public class TrollCommandFreeze extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (!player.hasPermission("epictroll.freeze")) {
-			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-			return;
-		}
 		if (args.length <= 1) {
 			player.sendMessage(Colors.color(Settings.LangKey.FREEZE_USAGE.get()));
 			return;
@@ -73,6 +69,11 @@ public class TrollCommandFreeze extends SubCommand {
 				}
 			}
 		}.runTaskTimer(Troll.getInstance(), 20L, 20L);
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.freeze";
 	}
 
 

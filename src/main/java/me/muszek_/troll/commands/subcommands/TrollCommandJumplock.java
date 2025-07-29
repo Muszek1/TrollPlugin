@@ -35,10 +35,6 @@ public class TrollCommandJumplock extends SubCommand {
 
 	@Override
 	public void perform(Player sender, String[] args) {
-		if (!sender.hasPermission("epictroll.jumplock")) {
-			sender.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-			return;
-		}
 
 
 		if (args.length <= 1) {
@@ -59,6 +55,11 @@ public class TrollCommandJumplock extends SubCommand {
 			listener.lock(target);
 			sender.sendMessage(Colors.color(Settings.LangKey.JUMPLOCK_LOCK.get()).replace("%player%", args[1]));
 		}
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.jumplock";
 	}
 
 	@Override

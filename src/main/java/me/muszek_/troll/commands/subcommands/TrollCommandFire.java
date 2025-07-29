@@ -6,14 +6,10 @@ import me.muszek_.troll.settings.Settings;
 import me.muszek_.troll.utils.TabCompletePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class TrollCommandFire extends SubCommand {
-	private static final Logger log = LoggerFactory.getLogger(TrollCommandFire.class);
-
 
 	@Override
 	public String getName() {
@@ -32,13 +28,8 @@ public class TrollCommandFire extends SubCommand {
 
 	@Override
 	public void perform(Player player, String[] args) {
-		if (!(player instanceof Player)) {
+		if (player == null) {
 			player.sendMessage("You must be a player to use this command!");
-			return;
-		}
-
-		if (!player.hasPermission("epictroll.fire")) {
-			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
 			return;
 		}
 
@@ -59,7 +50,7 @@ public class TrollCommandFire extends SubCommand {
 		}
 
 		if (args.length == 3) {
-			int time = 3;
+			int time;
 			try {
 				time = Integer.parseInt(args[2]);
 			} catch (NumberFormatException ex) {
@@ -73,6 +64,11 @@ public class TrollCommandFire extends SubCommand {
 			player.sendMessage(Colors.color(Settings.LangKey.FIRE_MESSAGE.get().replace("%player%", args[1]).replace("%time%", Integer.toString(time))));
 			target.setFireTicks(20 * time);
 		}
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.fire";
 	}
 
 

@@ -29,10 +29,6 @@ public class TrollCommandAnvil extends SubCommand {
 
 	@Override
 	public void perform(Player player, String[] args) {
-		if (!player.hasPermission("epictroll.anvil")) {
-			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-			return;
-		}
 
 		if (args.length == 1) {
 			player.sendMessage(Colors.color(Settings.LangKey.ANVIL_USAGE.get()));
@@ -57,6 +53,11 @@ public class TrollCommandAnvil extends SubCommand {
 
 		blockAbove.setType(Material.ANVIL);
 
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.anvil";
 	}
 
 

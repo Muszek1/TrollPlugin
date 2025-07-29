@@ -33,9 +33,6 @@ public class TrollCommandApple extends SubCommand {
 	@Override
 	public void perform(Player player, String[] args) {
 
-		if (!player.hasPermission("epictroll.apple")) {
-			player.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-		}
 		Player target = player;
 		int amount = 1;
 
@@ -66,6 +63,11 @@ public class TrollCommandApple extends SubCommand {
 		target.getInventory().addItem(apple);
 		player.sendMessage(Colors.color(Settings.LangKey.APPLE_GIVEN.get()).replace("%player%", target.getName()).replace("%amount%", String.valueOf(amount)));
 
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.apple";
 	}
 
 

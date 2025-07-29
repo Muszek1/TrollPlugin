@@ -15,6 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TrollCommandDiamond extends SubCommand {
 
@@ -35,10 +36,6 @@ public class TrollCommandDiamond extends SubCommand {
 
 	@Override
 	public void perform(Player sender, String[] args) {
-		if (!sender.hasPermission("epictroll.diamond")) {
-			sender.sendMessage(Colors.color(Settings.LangKey.NO_PERMISSION.get()));
-			return;
-		}
 
 		Player target = sender;
 
@@ -60,9 +57,14 @@ public class TrollCommandDiamond extends SubCommand {
 
 		Item item = target.getWorld().dropItem(loc, diamond);
 
-		Bukkit.getScheduler().runTaskLater(Bukkit.getPluginManager().getPlugin("EpicTroll"), item::remove, (20L * (int) Settings.ConfigKey.DIAMOND_DURATION.get()));
+		Bukkit.getScheduler().runTaskLater(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("EpicTroll")), item::remove, (20L * (int) Settings.ConfigKey.DIAMOND_DURATION.get()));
 
 		sender.sendMessage(Colors.color((Settings.LangKey.DIAMOND_GIVEN.get()).replace("%player%", target.getName())));
+	}
+
+	@Override
+	public String getPermission() {
+		return "epictroll.diamond";
 	}
 
 	@Override
