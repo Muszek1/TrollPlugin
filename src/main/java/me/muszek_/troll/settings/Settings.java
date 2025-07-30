@@ -75,6 +75,9 @@ public final class Settings {
 		BLOCKTOOLUSE_USAGE("Blocktooluse.Usage"),
 		BLOCKTOOLUSE_BLOCK("Blocktooluse.Block"),
 		BLOCKTOOLUSE_UNLOCK("Blocktooluse.Unlock"),
+
+		FAKEXP_USAGE("Fakexp.Usage"),
+		FAKEXP_GIVEN("Fakexp.Given"),
 		;
 
 		private final String path;

@@ -68,3 +68,6 @@ Blocktooluse:
   Usage: "&e> &fUsage: /troll blocktooluse <player>"
   Block: "&e> &fYou blocked use of tools for %player%"
   Unlock: "&e> &fYou unlocked use of tools for %player%"
+Fakexp:
+  Usage: "&e> &fUsage: /troll fakexp <player>"
+  Given: "&e> &fYou gave fake xp to %player%"

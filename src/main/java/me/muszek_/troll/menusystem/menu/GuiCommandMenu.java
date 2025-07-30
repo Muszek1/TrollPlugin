@@ -43,6 +43,10 @@ public class GuiCommandMenu extends Menu {
 				e.getWhoClicked().closeInventory();
 				player.performCommand("troll blocktooluse " + player.getName());
 				break;
+			case EXPERIENCE_BOTTLE:
+				e.getWhoClicked().closeInventory();
+				player.performCommand("troll fakexp " + player.getName());
+				break;
 			case ANVIL:
 				e.getWhoClicked().closeInventory();
 				player.performCommand("troll anvil " + target.getName());
@@ -124,6 +128,14 @@ public class GuiCommandMenu extends Menu {
 		woodenpickaxeMeta.setLore(Arrays.asList(Colors.color("&e- &fBlock tools use for player")));
 		woodenpickaxe.setItemMeta(woodenpickaxeMeta);
 		inventory.setItem(10, woodenpickaxe);
+
+		//Experience_bottle
+		ItemStack xp = new ItemStack(Material.EXPERIENCE_BOTTLE);
+		ItemMeta xpMeta = xp.getItemMeta();
+		xpMeta.setDisplayName(Colors.color("&6&lFake Xp"));
+		xpMeta.setLore(Arrays.asList(Colors.color("&e- &fGive fake xp to player")));
+		xp.setItemMeta(xpMeta);
+		inventory.setItem(19, xp);
 
 		//Anvil
 		ItemStack anvil = new ItemStack(Material.ANVIL);
