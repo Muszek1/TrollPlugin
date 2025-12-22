@@ -71,3 +71,6 @@ Blocktooluse:
 Fakexp:
   Usage: "&e> &fUsage: /troll fakexp <player>"
   Given: "&e> &fYou gave fake xp to %player%"
+Shuffle:
+  Usage: "&e> &fUsage: /troll shuffle <player>"
+  Sent: "&e> &fYou shuffled %player%'s inventory!"

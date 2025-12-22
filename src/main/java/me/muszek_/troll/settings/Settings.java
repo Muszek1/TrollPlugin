@@ -1,149 +1,155 @@
 package me.muszek_.troll.settings;
 
+import java.io.File;
 import me.muszek_.troll.Troll;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.File;
-
 public final class Settings {
-	public enum LangKey {
-		PLAYER_NOT_FOUND("Player_Not_Found"),
-		MOB_NOT_FOUND("Mob_Not_Found"),
-		NO_PERMISSION("No_Permissions"),
-		PLUGIN_RELOADED("Plugin_Reloaded"),
-		WRONG_NUMBER("Wrong_Number"),
 
-		FIRE_USAGE("Fire.Usage"),
-		FIRE_MESSAGE("Fire.Message"),
-		FIRE_INVALID_DURATION("Fire.Invalid_Duration"),
+  public enum LangKey {
+    PLAYER_NOT_FOUND("Player_Not_Found"),
+    MOB_NOT_FOUND("Mob_Not_Found"),
+    NO_PERMISSION("No_Permissions"),
+    PLUGIN_RELOADED("Plugin_Reloaded"),
+    WRONG_NUMBER("Wrong_Number"),
 
-		MOB_USAGE("Mob.Usage"),
-		MOB_MESSAGE("Mob.Message"),
+    FIRE_USAGE("Fire.Usage"),
+    FIRE_MESSAGE("Fire.Message"),
+    FIRE_INVALID_DURATION("Fire.Invalid_Duration"),
 
-		ANVIL_USAGE("Anvil.Usage"),
-		ANVIL_MESSAGE("Anvil.Message"),
-		ANVIL_ERROR("Anvil.Error"),
+    MOB_USAGE("Mob.Usage"),
+    MOB_MESSAGE("Mob.Message"),
 
-		FREEZE_USAGE("Freeze.Usage"),
-		FREEZE_MESSAGE("Freeze.Message"),
-		FREEZE_TARGET_MESSAGE("Freeze.Target_Message"),
-		FREEZE_INVALID_DURATION("Freeze.Invalid_Duration"),
+    ANVIL_USAGE("Anvil.Usage"),
+    ANVIL_MESSAGE("Anvil.Message"),
+    ANVIL_ERROR("Anvil.Error"),
 
-		EXPLODEPLAYER_MESSAGE("ExplodePlayer.Message"),
-		EXPLODEPLAYER_USAGE("ExplodePlayer.Usage"),
-		EXPLODEPLAYER_GOING_TO_EXPLODE("ExplodePlayer.Going_To_Explode"),
-		EXPLODEPLAYER_YOU_WERE_BLOWN_UP("ExplodePlayer.You_Were_Blown_Up"),
+    FREEZE_USAGE("Freeze.Usage"),
+    FREEZE_MESSAGE("Freeze.Message"),
+    FREEZE_TARGET_MESSAGE("Freeze.Target_Message"),
+    FREEZE_INVALID_DURATION("Freeze.Invalid_Duration"),
 
-		APPLE_USAGE("Apple.Usage"),
-		APPLE_EATEN("Apple.Eaten"),
-		APPLE_GIVEN("Apple.Given"),
+    EXPLODEPLAYER_MESSAGE("ExplodePlayer.Message"),
+    EXPLODEPLAYER_USAGE("ExplodePlayer.Usage"),
+    EXPLODEPLAYER_GOING_TO_EXPLODE("ExplodePlayer.Going_To_Explode"),
+    EXPLODEPLAYER_YOU_WERE_BLOWN_UP("ExplodePlayer.You_Were_Blown_Up"),
 
-		DIAMOND_GIVEN("Diamond.Given"),
+    APPLE_USAGE("Apple.Usage"),
+    APPLE_EATEN("Apple.Eaten"),
+    APPLE_GIVEN("Apple.Given"),
 
-		LAUNCH_USAGE("Launch.Usage"),
-		LAUNCHED_PLAYER("Launch.Launched"),
+    DIAMOND_GIVEN("Diamond.Given"),
 
-		COOKIE_GIVEN("Cookie.Given"),
+    LAUNCH_USAGE("Launch.Usage"),
+    LAUNCHED_PLAYER("Launch.Launched"),
 
-		JUMPLOCK_USAGE("Jumplock.Usage"),
-		JUMPLOCK_LOCK("Jumplock.Lock"),
-		JUMPLOCK_UNLOCK("Jumplock.Unlock"),
+    COOKIE_GIVEN("Cookie.Given"),
 
-		FAKEOP_USAGE("Fakeop.Usage"),
-		FAKEOP_MESSAGE_SENT("Fakeop.Message_Sent"),
-		FAKEOP_MESSAGE_CONFIRMATION("Fakeop.Message_Confirmation"),
+    JUMPLOCK_USAGE("Jumplock.Usage"),
+    JUMPLOCK_LOCK("Jumplock.Lock"),
+    JUMPLOCK_UNLOCK("Jumplock.Unlock"),
 
-		KNOCKBACK_USAGE("Knockback.Usage"),
-		KNOCKBACK_GIVEN("Knockback.Given"),
-		BLOCKCRAFT_USAGE("Blockcraft.Usage"),
-		BLOCKCRAFT_BLOCK("Blockcraft.Block"),
-		BLOCKCRAFT_UNBLOCK("Blockcraft.Unblock"),
+    FAKEOP_USAGE("Fakeop.Usage"),
+    FAKEOP_MESSAGE_SENT("Fakeop.Message_Sent"),
+    FAKEOP_MESSAGE_CONFIRMATION("Fakeop.Message_Confirmation"),
 
-		GUI_USAGE("Gui.Usage"),
+    KNOCKBACK_USAGE("Knockback.Usage"),
+    KNOCKBACK_GIVEN("Knockback.Given"),
+    BLOCKCRAFT_USAGE("Blockcraft.Usage"),
+    BLOCKCRAFT_BLOCK("Blockcraft.Block"),
+    BLOCKCRAFT_UNBLOCK("Blockcraft.Unblock"),
 
-		REVERSEDCHAT_USAGE("Reversechat.Usage"),
-		REVERSEDCHAT_REVERSE("Reversechat.Reverse"),
-		REVERSEDCHAT_UNREVERSED("Reversechat.Unreversed"),
+    GUI_USAGE("Gui.Usage"),
 
-		ANNOYSOUNDS_USAGE("Annoysounds.Usage"),
-		ANNOYSOUNDS_SENT("Annoysounds.Sent"),
+    REVERSEDCHAT_USAGE("Reversechat.Usage"),
+    REVERSEDCHAT_REVERSE("Reversechat.Reverse"),
+    REVERSEDCHAT_UNREVERSED("Reversechat.Unreversed"),
 
-		DROPINV_USAGE("Dropinv.Usage"),
-		DROPINV_DROPPED("Dropinv.Dropped"),
+    ANNOYSOUNDS_USAGE("Annoysounds.Usage"),
+    ANNOYSOUNDS_SENT("Annoysounds.Sent"),
+
+    DROPINV_USAGE("Dropinv.Usage"),
+    DROPINV_DROPPED("Dropinv.Dropped"),
 
 
-		BLOCKTOOLUSE_USAGE("Blocktooluse.Usage"),
-		BLOCKTOOLUSE_BLOCK("Blocktooluse.Block"),
-		BLOCKTOOLUSE_UNLOCK("Blocktooluse.Unlock"),
+    BLOCKTOOLUSE_USAGE("Blocktooluse.Usage"),
+    BLOCKTOOLUSE_BLOCK("Blocktooluse.Block"),
+    BLOCKTOOLUSE_UNLOCK("Blocktooluse.Unlock"),
 
-		FAKEXP_USAGE("Fakexp.Usage"),
-		FAKEXP_GIVEN("Fakexp.Given"),
-		;
+    FAKEXP_USAGE("Fakexp.Usage"),
+    FAKEXP_GIVEN("Fakexp.Given"),
 
-		private final String path;
-		private String value;
+    SHUFFLE_USAGE("Shuffle.Usage"),
+    SHUFFLE_SENT("Shuffle.Sent");
 
-		LangKey(String path) {
-			this.path = path;
+    private final String path;
+    private String value;
+
+    LangKey(String path) {
+      this.path = path;
+    }
+
+    public String get() {
+      return value;
+    }
+
+    public static void load(YamlConfiguration lang) {
+      for (LangKey key : values()) {
+        key.value = lang.getString(key.path, "§cMissing lang: " + key.path);
+      }
+    }
+  }
+
+  public enum ConfigKey {
+    FIRE_DEFAULT_DURATION("Fire.Default_Duration", 3),
+    FREEZE_DEFAULT_DURATION("Freeze.Default_Duration", 3),
+    DIAMOND_DURATION("Diamond.Duration", 10),
+    COOKIE_ITEM_NAME("Cookie.Item_Name", "Cookie of Doom"),
+    COOKIE_GLOW("Cookie.Glow", false),
+    KNOCKBACK_ITEM_NAME("Knockback.Item_Name", "Knockback Stick");
+
+    private final String path;
+    private final Object defaultValue;
+    private Object value;
+
+    ConfigKey(String path, Object defaultValue) {
+      this.path = path;
+      this.defaultValue = defaultValue;
+    }
+
+    public <T> T get() {
+      return (T) value;
+    }
+
+    public static void load(YamlConfiguration config) {
+      for (ConfigKey key : values()) {
+        if (key.defaultValue instanceof Integer) {
+          key.value = config.getInt(key.path, (Integer) key.defaultValue);
+        } else if (key.defaultValue instanceof Boolean) {
+          key.value = config.getBoolean(key.path, (Boolean) key.defaultValue);
+        } else {
+          key.value = config.getString(key.path, String.valueOf(key.defaultValue));
+        }
+      }
+    }
+  }
+
+  public static void load() {
+    Troll plugin = Troll.getInstance();
+    File configFile = new File(plugin.getDataFolder(), "config.yml");
+    File langFile = new File(plugin.getDataFolder(), "lang.yml");
+
+		if (!configFile.exists()) {
+			plugin.saveResource("config.yml", false);
+		}
+		if (!langFile.exists()) {
+			plugin.saveResource("lang.yml", false);
 		}
 
-		public String get() {
-			return value;
-		}
+    YamlConfiguration config = YamlConfiguration.loadConfiguration(configFile);
+    YamlConfiguration lang = YamlConfiguration.loadConfiguration(langFile);
 
-		public static void load(YamlConfiguration lang) {
-			for (LangKey key : values()) {
-				key.value = lang.getString(key.path, "§cMissing lang: " + key.path);
-			}
-		}
-	}
-
-	public enum ConfigKey {
-		FIRE_DEFAULT_DURATION("Fire.Default_Duration", 3),
-		FREEZE_DEFAULT_DURATION("Freeze.Default_Duration", 3),
-		DIAMOND_DURATION("Diamond.Duration", 10),
-		COOKIE_ITEM_NAME("Cookie.Item_Name", "Cookie of Doom"),
-		COOKIE_GLOW("Cookie.Glow", false),
-		KNOCKBACK_ITEM_NAME("Knockback.Item_Name", "Knockback Stick");
-
-		private final String path;
-		private final Object defaultValue;
-		private Object value;
-
-		ConfigKey(String path, Object defaultValue) {
-			this.path = path;
-			this.defaultValue = defaultValue;
-		}
-
-		public <T> T get() {
-			return (T) value;
-		}
-
-		public static void load(YamlConfiguration config) {
-			for (ConfigKey key : values()) {
-				if (key.defaultValue instanceof Integer) {
-					key.value = config.getInt(key.path, (Integer) key.defaultValue);
-				} else if (key.defaultValue instanceof Boolean) {
-					key.value = config.getBoolean(key.path, (Boolean) key.defaultValue);
-				} else {
-					key.value = config.getString(key.path, String.valueOf(key.defaultValue));
-				}
-			}
-		}
-	}
-
-	public static void load() {
-		Troll plugin = Troll.getInstance();
-		File configFile = new File(plugin.getDataFolder(), "config.yml");
-		File langFile = new File(plugin.getDataFolder(), "lang.yml");
-
-		if (!configFile.exists()) plugin.saveResource("config.yml", false);
-		if (!langFile.exists()) plugin.saveResource("lang.yml", false);
-
-		YamlConfiguration config = YamlConfiguration.loadConfiguration(configFile);
-		YamlConfiguration lang = YamlConfiguration.loadConfiguration(langFile);
-
-		LangKey.load(lang);
-		ConfigKey.load(config);
-	}
+    LangKey.load(lang);
+    ConfigKey.load(config);
+  }
 }
