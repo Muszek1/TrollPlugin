@@ -27,10 +27,6 @@ public class Fire extends SubCommand {
 
   @Override
   public void perform(Player player, String[] args) {
-    if (player == null) {
-      player.sendMessage("You must be a player to use this command!");
-      return;
-    }
 
     if (args.length == 1) {
       player.sendMessage(Colors.color(Settings.LangKey.FIRE_USAGE.get()));

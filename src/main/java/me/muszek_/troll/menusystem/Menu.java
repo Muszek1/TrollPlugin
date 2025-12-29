@@ -1,5 +1,6 @@
 package me.muszek_.troll.menusystem;
 
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
@@ -8,33 +9,34 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class Menu implements InventoryHolder {
 
-    protected Inventory inventory;
+  protected Inventory inventory;
 
-    protected PlayerMenuUtility playerMenuUtility;
+  protected PlayerMenuUtility playerMenuUtility;
 
-    public Menu(PlayerMenuUtility playerMenuUtility) {
-        this.playerMenuUtility = playerMenuUtility;
-    }
+  public Menu(PlayerMenuUtility playerMenuUtility) {
+    this.playerMenuUtility = playerMenuUtility;
+  }
 
-    public abstract String getMenuName();
+  public abstract String getMenuName();
 
-    public abstract int getSlot();
+  public abstract int getSlot();
 
-    public abstract void handleMenu(InventoryClickEvent e);
+  public abstract void handleMenu(InventoryClickEvent e);
 
-    public abstract void setMenuItems();
+  public abstract void setMenuItems();
 
-    public void open() {
+  public void open() {
 
-        inventory = Bukkit.createInventory(this, getSlot(), getMenuName());
+    inventory = Bukkit.createInventory(this, getSlot(),
+        LegacyComponentSerializer.legacySection().deserialize(getMenuName()));
 
-        this.setMenuItems();
+    this.setMenuItems();
 
-        playerMenuUtility.getOwner().openInventory(inventory);
-    }
+    playerMenuUtility.getOwner().openInventory(inventory);
+  }
 
-    @Override
-    public @NotNull Inventory getInventory() {
-        return inventory;
-    }
+  @Override
+  public @NotNull Inventory getInventory() {
+    return inventory;
+  }
 }

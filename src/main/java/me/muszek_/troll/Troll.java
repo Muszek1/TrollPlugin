@@ -52,10 +52,10 @@ public final class Troll extends JavaPlugin {
         BlockCraftListener, ReverseChatListener);
     Objects.requireNonNull(getCommand("troll")).setExecutor(commandManager);
     Objects.requireNonNull(getCommand("troll")).setTabCompleter(commandManager);
-    getServer().getPluginManager().registerEvents(new AppleListener(this), this);
-    getServer().getPluginManager().registerEvents(new DiamondListener(this), this);
-    getServer().getPluginManager().registerEvents(new LaunchListener(this), this);
-    getServer().getPluginManager().registerEvents(new CookieListener(this), this);
+    getServer().getPluginManager().registerEvents(new AppleListener(), this);
+    getServer().getPluginManager().registerEvents(new DiamondListener(), this);
+    getServer().getPluginManager().registerEvents(new LaunchListener(), this);
+    getServer().getPluginManager().registerEvents(new CookieListener(), this);
     getServer().getPluginManager().registerEvents(new MenuListener(), this);
     getServer().getPluginManager().registerEvents(new UpdateNotifyListener(this), this);
 

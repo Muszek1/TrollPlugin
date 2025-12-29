@@ -51,7 +51,7 @@ public class Launch extends SubCommand {
     target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1f, 1f);
     target.setFallDistance(0f);
     player.sendMessage(
-        Colors.color(Settings.LangKey.LAUNCHED_PLAYER.get()).replace("%player%", args[1]));
+        Colors.color(Settings.LangKey.LAUNCHED_PLAYER.get(), "%player%", args[1]));
 
   }
 

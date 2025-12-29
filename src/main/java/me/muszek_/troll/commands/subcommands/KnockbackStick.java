@@ -48,9 +48,9 @@ public class KnockbackStick extends SubCommand {
     if (args.length >= 3) {
       try {
         amount = Integer.parseInt(args[2]);
-				if (amount <= 0) {
-					amount = 1;
-				}
+        if (amount <= 0) {
+          amount = 1;
+        }
       } catch (NumberFormatException e) {
         player.sendMessage(Colors.color(Settings.LangKey.WRONG_NUMBER.get()));
         return;
@@ -60,13 +60,13 @@ public class KnockbackStick extends SubCommand {
     ItemStack knockbackStick = new ItemStack(Material.STICK, amount);
     ItemMeta meta = knockbackStick.getItemMeta();
     meta.addEnchant(Enchantment.KNOCKBACK, 10, true);
-    meta.setDisplayName(Colors.color(Settings.ConfigKey.KNOCKBACK_ITEM_NAME.get()));
+    meta.displayName((Colors.color(Settings.ConfigKey.KNOCKBACK_ITEM_NAME.get())));
     knockbackStick.setItemMeta(meta);
 
     target.getInventory().addItem(knockbackStick);
     player.sendMessage(
-        Colors.color(Settings.LangKey.KNOCKBACK_GIVEN.get()).replace("%player%", target.getName())
-            .replace("%amount%", String.valueOf(amount)));
+        Colors.color(Settings.LangKey.KNOCKBACK_GIVEN.get(), "%player%", target.getName(),
+            "%amount%", String.valueOf(amount)));
 
 
   }

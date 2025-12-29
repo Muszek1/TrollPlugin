@@ -10,22 +10,26 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class UpdateNotifyListener implements Listener {
 
-	private final Troll plugin;
+  private final Troll plugin;
 
-	public UpdateNotifyListener(Troll plugin) {
-		this.plugin = plugin;
-	}
+  public UpdateNotifyListener(Troll plugin) {
+    this.plugin = plugin;
+  }
 
-	@EventHandler
-	public void onJoin(PlayerJoinEvent event) {
-		Player player = event.getPlayer();
+  @EventHandler
+  public void onJoin(PlayerJoinEvent event) {
+    Player player = event.getPlayer();
 
-		if (!player.isOp() && !player.hasPermission("*")) return;
-		if (!plugin.isUpdateAvailable()) return;
+		if (!player.isOp() && !player.hasPermission("*")) {
+			return;
+		}
+		if (!plugin.isUpdateAvailable()) {
+			return;
+		}
 
-		Bukkit.getScheduler().runTaskLater(plugin, () -> {
-			player.sendMessage(Colors.color("&7[&2EpicTroll&7] &fPlugin &2EpicTroll&f has new update " +
-					plugin.getLatestVersion() + "&f! Check:&b https://www.spigotmc.org/resources/124041/"));
-		}, 60L);
-	}
+    Bukkit.getScheduler().runTaskLater(plugin, () -> player.sendMessage(
+            Colors.color("&7[&2EpicTroll&7] &fPlugin &2EpicTroll&f has new update " +
+                plugin.getLatestVersion() + "&f! Check:&b https://www.spigotmc.org/resources/124041/")),
+        60L);
+  }
 }

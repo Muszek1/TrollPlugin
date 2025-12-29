@@ -44,7 +44,7 @@ public class Cookie extends SubCommand {
         target = found;
       } else {
         player.sendMessage(
-            Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get()).replace("%player%", args[1]));
+            Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get(), "%player%", args[1]));
         return;
       }
     }
@@ -64,7 +64,7 @@ public class Cookie extends SubCommand {
     ItemMeta metaCookie = cookie.getItemMeta();
     NamespacedKey key = new NamespacedKey("troll", "cookie");
     metaCookie.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 1);
-    metaCookie.setDisplayName(Colors.color(Settings.ConfigKey.COOKIE_ITEM_NAME.get()));
+    metaCookie.displayName(Colors.color(Settings.ConfigKey.COOKIE_ITEM_NAME.get()));
     if (Settings.ConfigKey.COOKIE_GLOW.get()) {
       metaCookie.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
       metaCookie.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -72,8 +72,8 @@ public class Cookie extends SubCommand {
     cookie.setItemMeta(metaCookie);
     target.getInventory().addItem(cookie);
     player.sendMessage(
-        Colors.color(Settings.LangKey.COOKIE_GIVEN.get()).replace("%player%", target.getName())
-            .replace("%amount%", String.valueOf(amount)));
+        Colors.color(Settings.LangKey.COOKIE_GIVEN.get(), "%player%", target.getName(), "%amount%",
+            String.valueOf(amount)));
 
   }
 

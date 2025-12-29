@@ -2,7 +2,6 @@ package me.muszek_.troll.commands.subcommands;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import me.muszek_.troll.Colors;
 import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.settings.Settings;
@@ -14,7 +13,6 @@ import org.bukkit.entity.Player;
 
 public class AnnoySounds extends SubCommand {
 
-  private final Random random = new Random();
   private final List<Sound> annoyingSounds = Arrays.asList(
       Sound.ENTITY_VILLAGER_NO,
       Sound.ENTITY_ENDERMAN_SCREAM,
@@ -53,7 +51,7 @@ public class AnnoySounds extends SubCommand {
     }
 
     player.sendMessage(
-        Colors.color(Settings.LangKey.ANNOYSOUNDS_SENT.get()).replace("%player%", args[1]));
+        Colors.color(Settings.LangKey.ANNOYSOUNDS_SENT.get(), "%player%", args[1]));
 
     new AnnoySoundsTask(target, annoyingSounds)
         .runTaskTimer(getPlugin(), 0L, 10L);
@@ -76,4 +74,5 @@ public class AnnoySounds extends SubCommand {
 
     return null;
   }
+
 }

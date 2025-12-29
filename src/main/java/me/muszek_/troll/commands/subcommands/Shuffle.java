@@ -48,7 +48,7 @@ public class Shuffle extends SubCommand {
     target.getInventory().setContents(items.toArray(new ItemStack[0]));
 
     player.sendMessage(
-        Colors.color(Settings.LangKey.SHUFFLE_SENT.get()).replace("%player%", args[1]));
+        Colors.color(Settings.LangKey.SHUFFLE_SENT.get(), "%player%", args[1]));
 
   }
 

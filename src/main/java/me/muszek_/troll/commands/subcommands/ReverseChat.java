@@ -1,9 +1,6 @@
 package me.muszek_.troll.commands.subcommands;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import me.muszek_.troll.Colors;
 import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.listeners.ReverseChatListener;
@@ -19,9 +16,6 @@ public class ReverseChat extends SubCommand {
   public ReverseChat(ReverseChatListener listener) {
     this.listener = listener;
   }
-
-
-  private static final Set<UUID> reversedChatTargets = new HashSet<>();
 
 
   @Override
@@ -56,10 +50,10 @@ public class ReverseChat extends SubCommand {
 
     if (listener.isReversed(target)) {
       sender.sendMessage(
-          Colors.color(Settings.LangKey.REVERSEDCHAT_REVERSE.get()).replace("%player%", args[1]));
+          Colors.color(Settings.LangKey.REVERSEDCHAT_REVERSE.get(), "%player%", args[1]));
     } else {
-      sender.sendMessage(Colors.color(Settings.LangKey.REVERSEDCHAT_UNREVERSED.get())
-          .replace("%player%", args[1]));
+      sender.sendMessage(
+          Colors.color(Settings.LangKey.REVERSEDCHAT_UNREVERSED.get(), "%player%", args[1]));
     }
   }
 

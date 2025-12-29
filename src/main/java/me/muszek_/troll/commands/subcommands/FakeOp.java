@@ -39,9 +39,9 @@ public class FakeOp extends SubCommand {
     }
 
     target.sendMessage(
-        Colors.color(Settings.LangKey.FAKEOP_MESSAGE_SENT.get()).replace("%player%", args[0]));
-    player.sendMessage(Colors.color(Settings.LangKey.FAKEOP_MESSAGE_CONFIRMATION.get())
-        .replace("%player%", args[0]));
+        Colors.color(Settings.LangKey.FAKEOP_MESSAGE_SENT.get(), "%player%", args[0]));
+    player.sendMessage(
+        Colors.color(Settings.LangKey.FAKEOP_MESSAGE_CONFIRMATION.get(), "%player%", args[0]));
 
 
   }

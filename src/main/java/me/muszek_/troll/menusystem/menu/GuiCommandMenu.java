@@ -2,7 +2,6 @@ package me.muszek_.troll.menusystem.menu;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import me.muszek_.troll.Colors;
 import me.muszek_.troll.menusystem.Menu;
 import me.muszek_.troll.menusystem.PlayerMenuUtility;
@@ -28,7 +27,7 @@ public class GuiCommandMenu extends Menu {
   @Override
   public String getMenuName() {
     Player target = playerMenuUtility.getTarget();
-    return "Troll GUI - " + target.getDisplayName();
+    return "Troll GUI - " + target.getName();
   }
 
   @Override
@@ -40,7 +39,12 @@ public class GuiCommandMenu extends Menu {
   public void handleMenu(InventoryClickEvent e) {
     Player target = playerMenuUtility.getTarget();
     Player player = playerMenuUtility.getOwner();
-    switch (Objects.requireNonNull(e.getCurrentItem()).getType()) {
+
+    if (e.getCurrentItem() == null) {
+      return;
+    }
+
+    switch (e.getCurrentItem().getType()) {
       case WOODEN_PICKAXE:
         e.getWhoClicked().closeInventory();
         player.performCommand("troll blocktooluse " + player.getName());
@@ -130,40 +134,40 @@ public class GuiCommandMenu extends Menu {
     //Wooden_pickaxe
     ItemStack woodenpickaxe = new ItemStack(Material.WOODEN_PICKAXE);
     ItemMeta woodenpickaxeMeta = woodenpickaxe.getItemMeta();
-    woodenpickaxeMeta.setDisplayName(Colors.color("&6&lBlock Tools use"));
-    woodenpickaxeMeta.setLore(List.of(Colors.color("&e- &fBlock tools use for player")));
+    woodenpickaxeMeta.displayName(Colors.color("&6&lBlock Tools use"));
+    woodenpickaxeMeta.lore(List.of(Colors.color("&e- &fBlock tools use for player")));
     woodenpickaxe.setItemMeta(woodenpickaxeMeta);
     inventory.setItem(10, woodenpickaxe);
 
     //Experience_bottle
     ItemStack xp = new ItemStack(Material.EXPERIENCE_BOTTLE);
     ItemMeta xpMeta = xp.getItemMeta();
-    xpMeta.setDisplayName(Colors.color("&6&lFake Xp"));
-    xpMeta.setLore(List.of(Colors.color("&e- &fGive fake xp to player")));
+    xpMeta.displayName(Colors.color("&6&lFake Xp"));
+    xpMeta.lore(List.of(Colors.color("&e- &fGive fake xp to player")));
     xp.setItemMeta(xpMeta);
     inventory.setItem(19, xp);
 
     //Anvil
     ItemStack anvil = new ItemStack(Material.ANVIL);
     ItemMeta anvilMeta = anvil.getItemMeta();
-    anvilMeta.setDisplayName(Colors.color("&7&lAnvil"));
-    anvilMeta.setLore(List.of(Colors.color("&e- &fSpawns anvil above player")));
+    anvilMeta.displayName(Colors.color("&7&lAnvil"));
+    anvilMeta.lore(List.of(Colors.color("&e- &fSpawns anvil above player")));
     anvil.setItemMeta(anvilMeta);
     inventory.setItem(11, anvil);
 
     //Apple
     ItemStack apple = new ItemStack(Material.GOLDEN_APPLE);
     ItemMeta appleMeta = apple.getItemMeta();
-    appleMeta.setDisplayName(Colors.color("&a&lPoisoned Apple"));
-    appleMeta.setLore(List.of(Colors.color("&e- &fGives a poisoned apple")));
+    appleMeta.displayName(Colors.color("&a&lPoisoned Apple"));
+    appleMeta.lore(List.of(Colors.color("&e- &fGives a poisoned apple")));
     apple.setItemMeta(appleMeta);
     inventory.setItem(12, apple);
 
     //CRAFTING_TABLE
     ItemStack craftingtable = new ItemStack(Material.CRAFTING_TABLE);
     ItemMeta craftingtableMeta = craftingtable.getItemMeta();
-    craftingtableMeta.setDisplayName(Colors.color("&c&lBlock/Unblock crafting"));
-    craftingtableMeta.setLore(
+    craftingtableMeta.displayName(Colors.color("&c&lBlock/Unblock crafting"));
+    craftingtableMeta.lore(
         List.of(Colors.color("&e- &fBlocks/Unblocks crafting for player")));
     craftingtable.setItemMeta(craftingtableMeta);
     inventory.setItem(14, craftingtable);
@@ -171,80 +175,80 @@ public class GuiCommandMenu extends Menu {
     //Cookie
     ItemStack cookie = new ItemStack(Material.COOKIE);
     ItemMeta cookieMeta = cookie.getItemMeta();
-    cookieMeta.setDisplayName(Colors.color(Settings.ConfigKey.COOKIE_ITEM_NAME.get()));
-    cookieMeta.setLore(List.of(Colors.color("&e- &fShuffles player's inventory")));
+    cookieMeta.displayName(Colors.color(Settings.ConfigKey.COOKIE_ITEM_NAME.get()));
+    cookieMeta.lore(List.of(Colors.color("&e- &fShuffles player's inventory")));
     cookie.setItemMeta(cookieMeta);
     inventory.setItem(15, cookie);
 
     //SHUFFLE
     ItemStack shuffle = new ItemStack(Material.COBWEB);
     ItemMeta shuffleMeta = cookie.getItemMeta();
-    shuffleMeta.setDisplayName(Colors.color("&d&lShuffle"));
-    shuffleMeta.setLore(List.of(Colors.color("&e- &fGives a cookie for player")));
+    shuffleMeta.displayName(Colors.color("&d&lShuffle"));
+    shuffleMeta.lore(List.of(Colors.color("&e- &fGives a cookie for player")));
     shuffle.setItemMeta(shuffleMeta);
     inventory.setItem(16, shuffle);
 
     //Diamond
     ItemStack diamond = new ItemStack(Material.DIAMOND);
     ItemMeta diamondMeta = diamond.getItemMeta();
-    diamondMeta.setDisplayName(Colors.color("&b&lFake diamond"));
-    diamondMeta.setLore(List.of(Colors.color("&e- &fSpawn fake diamond around player")));
+    diamondMeta.displayName(Colors.color("&b&lFake diamond"));
+    diamondMeta.lore(List.of(Colors.color("&e- &fSpawn fake diamond around player")));
     diamond.setItemMeta(diamondMeta);
     inventory.setItem(20, diamond);
 
     //Explode
     ItemStack explode = new ItemStack(Material.TNT);
     ItemMeta explodeMeta = explode.getItemMeta();
-    explodeMeta.setDisplayName(Colors.color("&c&lExplode"));
-    explodeMeta.setLore(List.of(Colors.color("&e- &fCreate explosion on player")));
+    explodeMeta.displayName(Colors.color("&c&lExplode"));
+    explodeMeta.lore(List.of(Colors.color("&e- &fCreate explosion on player")));
     explode.setItemMeta(explodeMeta);
     inventory.setItem(21, explode);
 
     //FakeOp
     ItemStack fakeop = new ItemStack(Material.BEACON);
     ItemMeta fakeopMeta = fakeop.getItemMeta();
-    fakeopMeta.setDisplayName(Colors.color("&6&lFakeop"));
-    fakeopMeta.setLore(List.of(Colors.color("&e- &fSend player fake message")));
+    fakeopMeta.displayName(Colors.color("&6&lFakeop"));
+    fakeopMeta.lore(List.of(Colors.color("&e- &fSend player fake message")));
     fakeop.setItemMeta(fakeopMeta);
     inventory.setItem(23, fakeop);
 
     //Fire
     ItemStack fire = new ItemStack(Material.FLINT_AND_STEEL);
     ItemMeta fireMeta = fire.getItemMeta();
-    fireMeta.setDisplayName(Colors.color("&6&lFire"));
-    fireMeta.setLore(List.of(Colors.color("&e- &fFires the player")));
+    fireMeta.displayName(Colors.color("&6&lFire"));
+    fireMeta.lore(List.of(Colors.color("&e- &fFires the player")));
     fire.setItemMeta(fireMeta);
     inventory.setItem(24, fire);
 
     //Freeze
     ItemStack freeze = new ItemStack(Material.PACKED_ICE);
     ItemMeta freezeMeta = freeze.getItemMeta();
-    freezeMeta.setDisplayName(Colors.color("&b&lFreeze"));
-    freezeMeta.setLore(List.of(Colors.color("&e- &fFreezes the player")));
+    freezeMeta.displayName(Colors.color("&b&lFreeze"));
+    freezeMeta.lore(List.of(Colors.color("&e- &fFreezes the player")));
     freeze.setItemMeta(freezeMeta);
     inventory.setItem(29, freeze);
 
     //JumpLock
     ItemStack JumpLock = new ItemStack(Material.RABBIT_FOOT);
     ItemMeta JumpLockMeta = JumpLock.getItemMeta();
-    JumpLockMeta.setDisplayName(Colors.color("&6&lJump Lock"));
-    JumpLockMeta.setLore(List.of(Colors.color("&e- &fBlocks player's jumps")));
+    JumpLockMeta.displayName(Colors.color("&6&lJump Lock"));
+    JumpLockMeta.lore(List.of(Colors.color("&e- &fBlocks player's jumps")));
     JumpLock.setItemMeta(JumpLockMeta);
     inventory.setItem(30, JumpLock);
 
     //Launch
     ItemStack launch = new ItemStack(Material.FIREWORK_ROCKET);
     ItemMeta launchMeta = launch.getItemMeta();
-    launchMeta.setDisplayName(Colors.color("&6&lLaunch"));
-    launchMeta.setLore(List.of(Colors.color("&e- &fLaunches the player")));
+    launchMeta.displayName(Colors.color("&6&lLaunch"));
+    launchMeta.lore(List.of(Colors.color("&e- &fLaunches the player")));
     launch.setItemMeta(launchMeta);
     inventory.setItem(32, launch);
 
     //Mob
     ItemStack mob = new ItemStack(Material.CREEPER_HEAD);
     ItemMeta mobMeta = mob.getItemMeta();
-    mobMeta.setDisplayName(Colors.color("&6&lCreeper"));
-    mobMeta.setLore(Arrays.asList(Colors.color("&e- &fSpawns creeper behind the player"),
+    mobMeta.displayName(Colors.color("&6&lCreeper"));
+    mobMeta.lore(Arrays.asList(Colors.color("&e- &fSpawns creeper behind the player"),
         Colors.color("&e- &fUse /troll mob <player> <mob> for more mobs")));
     mob.setItemMeta(mobMeta);
     inventory.setItem(33, mob);
@@ -252,8 +256,8 @@ public class GuiCommandMenu extends Menu {
     //Reversechat
     ItemStack Reversechat = new ItemStack(Material.PAPER);
     ItemMeta ReversechatMeta = Reversechat.getItemMeta();
-    ReversechatMeta.setDisplayName(Colors.color("&6&lReversechat"));
-    ReversechatMeta.setLore(
+    ReversechatMeta.displayName(Colors.color("&6&lReversechat"));
+    ReversechatMeta.lore(
         List.of(Colors.color("&e- &fReverse players' massages for the player")));
     Reversechat.setItemMeta(ReversechatMeta);
     inventory.setItem(22, Reversechat);
@@ -261,24 +265,24 @@ public class GuiCommandMenu extends Menu {
     //Annoysounds
     ItemStack Annoysounds = new ItemStack(Material.BELL);
     ItemMeta AnnoysoundsMeta = Annoysounds.getItemMeta();
-    AnnoysoundsMeta.setDisplayName(Colors.color("&6&lAnnoysounds"));
-    AnnoysoundsMeta.setLore(List.of(Colors.color("&e- &fSend annoysounds to the player")));
+    AnnoysoundsMeta.displayName(Colors.color("&6&lAnnoysounds"));
+    AnnoysoundsMeta.lore(List.of(Colors.color("&e- &fSend annoysounds to the player")));
     Annoysounds.setItemMeta(AnnoysoundsMeta);
     inventory.setItem(31, Annoysounds);
 
     //Dropinv
     ItemStack Dropinv = new ItemStack(Material.CHEST);
     ItemMeta DropinvMeta = Dropinv.getItemMeta();
-    DropinvMeta.setDisplayName(Colors.color("&6&lDropinv"));
-    DropinvMeta.setLore(List.of(Colors.color("&e- &fDrop items from player's inventory")));
+    DropinvMeta.displayName(Colors.color("&6&lDropinv"));
+    DropinvMeta.lore(List.of(Colors.color("&e- &fDrop items from player's inventory")));
     Dropinv.setItemMeta(DropinvMeta);
     inventory.setItem(13, Dropinv);
 
     //Knockbackstick
     ItemStack Knockbackstick = new ItemStack(Material.STICK);
     ItemMeta KnockbackstickMeta = Knockbackstick.getItemMeta();
-    KnockbackstickMeta.setDisplayName(Colors.color("&6&lKnockback Stick"));
-    KnockbackstickMeta.setLore(List.of(Colors.color("&e- &fGive you a knockback stick")));
+    KnockbackstickMeta.displayName(Colors.color("&6&lKnockback Stick"));
+    KnockbackstickMeta.lore(List.of(Colors.color("&e- &fGive you a knockback stick")));
     KnockbackstickMeta.addEnchant(Enchantment.KNOCKBACK, 10, true);
     Knockbackstick.setItemMeta(KnockbackstickMeta);
     inventory.setItem(48, Knockbackstick);
@@ -286,24 +290,27 @@ public class GuiCommandMenu extends Menu {
     //Exit
     ItemStack exit = new ItemStack(Material.BARRIER);
     ItemMeta exitMeta = exit.getItemMeta();
-    exitMeta.setDisplayName(Colors.color("&c&lExit"));
-    exitMeta.setLore(List.of(Colors.color("&e- &fExit the menu")));
+    exitMeta.displayName(Colors.color("&c&lExit"));
+    exitMeta.lore(List.of(Colors.color("&e- &fExit the menu")));
     exit.setItemMeta(exitMeta);
     inventory.setItem(49, exit);
 
     //Panes
-    Player player = playerMenuUtility.getOwner();
-
     new BukkitRunnable() {
       private boolean toggle = false;
 
       @Override
       public void run() {
+        if (inventory.getViewers().isEmpty()) { // Zatrzymanie taska, jeśli nikt nie patrzy
+          this.cancel();
+          return;
+        }
+
         Material material =
             toggle ? Material.WHITE_STAINED_GLASS_PANE : Material.LIME_STAINED_GLASS_PANE;
         ItemStack glass1 = new ItemStack(material);
         ItemMeta meta = glass1.getItemMeta();
-        meta.setDisplayName(Colors.color("&f"));
+        meta.displayName(Colors.color("&f"));
         glass1.setItemMeta(meta);
         int[] panes = {
             0, 9, 18, 35, 44, 53
@@ -316,7 +323,7 @@ public class GuiCommandMenu extends Menu {
             toggle ? Material.LIME_STAINED_GLASS_PANE : Material.WHITE_STAINED_GLASS_PANE;
         ItemStack glass2 = new ItemStack(material2);
         ItemMeta meta2 = glass2.getItemMeta();
-        meta2.setDisplayName(Colors.color("&f"));
+        meta2.displayName(Colors.color("&f"));
         glass2.setItemMeta(meta2);
         int[] panes2 = {
             8, 17, 26, 27, 36, 45

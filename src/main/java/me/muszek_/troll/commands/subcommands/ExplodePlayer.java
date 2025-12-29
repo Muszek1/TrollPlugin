@@ -41,7 +41,7 @@ public class ExplodePlayer extends SubCommand {
       assert target != null;
       target.sendMessage(Colors.color(Settings.LangKey.EXPLODEPLAYER_GOING_TO_EXPLODE.get()));
       player.sendMessage(
-          Colors.color(Settings.LangKey.EXPLODEPLAYER_MESSAGE.get()).replace("%player%", args[1]));
+          Colors.color(Settings.LangKey.EXPLODEPLAYER_MESSAGE.get(), "%player%", args[1]));
       new BukkitRunnable() {
         int count = 0;
 

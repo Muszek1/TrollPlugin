@@ -48,11 +48,11 @@ public class Jumplock extends SubCommand {
     if (listener.isLocked(target)) {
       listener.unlock(target);
       sender.sendMessage(
-          Colors.color(Settings.LangKey.JUMPLOCK_UNLOCK.get()).replace("%player%", args[1]));
+          Colors.color(Settings.LangKey.JUMPLOCK_UNLOCK.get(), "%player%", args[1]));
     } else {
       listener.lock(target);
       sender.sendMessage(
-          Colors.color(Settings.LangKey.JUMPLOCK_LOCK.get()).replace("%player%", args[1]));
+          Colors.color(Settings.LangKey.JUMPLOCK_LOCK.get(), "%player%", args[1]));
     }
   }
 

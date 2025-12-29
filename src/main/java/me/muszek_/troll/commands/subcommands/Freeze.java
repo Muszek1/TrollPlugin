@@ -57,8 +57,8 @@ public class Freeze extends SubCommand {
     target.sendMessage(
         Colors.color(Settings.LangKey.FREEZE_TARGET_MESSAGE.get().replace("%player%", args[1])));
     player.sendMessage(Colors.color(
-        Settings.LangKey.FREEZE_MESSAGE.get().replace("%player%", args[1])
-            .replace("%time%", Integer.toString(time))));
+        Settings.LangKey.FREEZE_MESSAGE.get(), "%player%", args[1], "%time%",
+        Integer.toString(time)));
     int finalTime = time;
     new BukkitRunnable() {
       int count = 0;

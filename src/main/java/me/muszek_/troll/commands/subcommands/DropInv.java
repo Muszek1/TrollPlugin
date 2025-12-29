@@ -60,7 +60,7 @@ public class DropInv extends SubCommand {
     inv.clear();
 
     player.sendMessage(
-        Colors.color(Settings.LangKey.DROPINV_DROPPED.get()).replace("%player%", args[1]));
+        Colors.color(Settings.LangKey.DROPINV_DROPPED.get(), "%player%", args[1]));
   }
 
   @Override

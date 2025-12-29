@@ -47,7 +47,7 @@ public class Mob extends SubCommand {
       mob = EntityType.valueOf(args[2].toUpperCase());
     } catch (IllegalArgumentException e) {
       player.sendMessage(
-          Colors.color(Settings.LangKey.MOB_NOT_FOUND.get()).replace("%mob%", args[2]));
+          Colors.color(Settings.LangKey.MOB_NOT_FOUND.get(), "%mob%", args[2]));
       return;
     }
 
@@ -67,10 +67,9 @@ public class Mob extends SubCommand {
       target.getWorld().spawnEntity(spawnLocation, mob);
     }
 
-    assert mob.getName() != null;
     player.sendMessage(Colors.color(
         (Settings.LangKey.MOB_MESSAGE.get()).replace("%player%", target.getName())
-            .replace("%mob%", mob.getName())));
+            .replace("%mob%", mob.name())));
 
 
   }

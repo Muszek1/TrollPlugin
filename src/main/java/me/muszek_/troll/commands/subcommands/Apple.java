@@ -61,8 +61,9 @@ public class Apple extends SubCommand {
     apple.setItemMeta(metaApple);
     target.getInventory().addItem(apple);
     player.sendMessage(
-        Colors.color(Settings.LangKey.APPLE_GIVEN.get()).replace("%player%", target.getName())
-            .replace("%amount%", String.valueOf(amount)));
+        Colors.color(Settings.LangKey.APPLE_GIVEN.get(),
+            "%player%", target.getName(),
+            "%amount%", String.valueOf(amount)));
 
   }
 

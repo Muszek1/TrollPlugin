@@ -49,11 +49,11 @@ public class BlockCraft extends SubCommand {
     if (listener.isLocked(target)) {
       listener.unlock(target);
       player.sendMessage(
-          Colors.color(Settings.LangKey.BLOCKCRAFT_UNBLOCK.get()).replace("%player%", args[1]));
+          Colors.color(Settings.LangKey.BLOCKCRAFT_UNBLOCK.get(), "%player%", args[1]));
     } else {
       listener.lock(target);
       player.sendMessage(
-          Colors.color(Settings.LangKey.BLOCKCRAFT_BLOCK.get()).replace("%player%", args[1]));
+          Colors.color(Settings.LangKey.BLOCKCRAFT_BLOCK.get(), "%player%", args[1]));
     }
 
 
