@@ -1,15 +1,14 @@
 package me.muszek_.troll.commands.subcommands;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import dev.rollczi.litecommands.annotations.argument.Arg;
+import dev.rollczi.litecommands.annotations.command.Command;
+import dev.rollczi.litecommands.annotations.context.Context;
+import dev.rollczi.litecommands.annotations.execute.Execute;
+import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.settings.Settings;
-import me.muszek_.troll.utils.TabCompletePlayer;
-import me.muszek_.troll.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,7 +16,13 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class FakeXp extends SubCommand implements Listener {
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+@Command(name = "troll fakexp")
+@Permission("epictroll.fakexp")
+public class FakeXp implements Listener {
 
   private final JavaPlugin plugin;
   private static final Map<UUID, LevelExp> restoreMap = new HashMap<>();
@@ -27,46 +32,14 @@ public class FakeXp extends SubCommand implements Listener {
     Bukkit.getPluginManager().registerEvents(this, plugin);
   }
 
-  @Override
-  public String getName() {
-    return "fakexp";
-  }
-
-  @Override
-  public String getDescription() {
-    return "give a fake XP";
-  }
-
-  @Override
-  public String getSyntax() {
-    return "/troll fakexp <player> <amount>";
-  }
-
-  @Override
-  public void perform(Player sender, String[] args) {
-    if (args.length < 2) {
-      sender.sendMessage(Colors.color(Settings.LangKey.FAKEXP_USAGE.get()));
-      return;
-    }
-
-    Player target = Utils.getTarget(sender, args[1]);
-    if (target == null) {
-      return;
-    }
+  @Execute
+  public void execute(@Context CommandSender sender, @Arg("player") Player target, @Arg("number") int number) {
 
     int amount = 200;
-    if (args.length >= 3) {
-      try {
-        amount = Integer.parseInt(args[2]);
-      } catch (NumberFormatException e) {
-        sender.sendMessage(Colors.color(Settings.LangKey.WRONG_NUMBER.get()));
-        return;
-      }
-    }
 
     restoreMap.put(target.getUniqueId(), new LevelExp(target.getLevel(), target.getExp()));
 
-    int finalAmount = amount;
+    int finalAmount = number;
     new BukkitRunnable() {
       int given = 0;
 
@@ -119,21 +92,6 @@ public class FakeXp extends SubCommand implements Listener {
       this.level = level;
       this.exp = exp;
     }
-  }
-
-
-  @Override
-  public String getPermission() {
-    return "epictroll.fakexp";
-  }
-
-  @Override
-  public List<String> getSubcommandArguments(Player player, String[] args) {
-    if (args.length == 2) {
-      return TabCompletePlayer.getOnlinePlayerNames();
-    }
-
-    return null;
   }
 }
 

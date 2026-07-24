@@ -1,51 +1,32 @@
 package me.muszek_.troll.commands.subcommands;
 
-import java.util.List;
-import java.util.Objects;
+import dev.rollczi.litecommands.annotations.argument.Arg;
+import dev.rollczi.litecommands.annotations.command.Command;
+import dev.rollczi.litecommands.annotations.context.Context;
+import dev.rollczi.litecommands.annotations.execute.Execute;
+import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.settings.Settings;
-import me.muszek_.troll.utils.TabCompletePlayer;
-import me.muszek_.troll.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-public class Diamond extends SubCommand {
+import java.util.Objects;
 
-  @Override
-  public String getName() {
-    return "diamond";
-  }
+@Command(name = "troll diamond")
+@Permission("epictroll.diamond")
+public class Diamond {
 
-  @Override
-  public String getDescription() {
-    return "Spawns a diamond that can't be picked up.";
-  }
 
-  @Override
-  public String getSyntax() {
-    return "/troll diamond [player]";
-  }
-
-  @Override
-  public void perform(Player sender, String[] args) {
-
-    Player target = sender;
-
-    if (args.length >= 2) {
-
-      target = Utils.getTarget(sender, args[1]);
-      if (target == null) {
-        return;
-      }
-    }
+  @Execute
+  public void execute(@Context CommandSender sender, @Arg("player") Player target) {
 
     Location loc = target.getLocation().add(0, 1, 0);
     ItemStack diamond = new ItemStack(Material.DIAMOND);
@@ -63,19 +44,5 @@ public class Diamond extends SubCommand {
 
     sender.sendMessage(
         Colors.color((Settings.LangKey.DIAMOND_GIVEN.get()).replace("%player%", target.getName())));
-  }
-
-  @Override
-  public String getPermission() {
-    return "epictroll.diamond";
-  }
-
-  @Override
-  public List<String> getSubcommandArguments(Player player, String[] args) {
-    if (args.length == 2) {
-      return TabCompletePlayer.getOnlinePlayerNames();
-    }
-
-    return null;
   }
 }

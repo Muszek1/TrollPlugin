@@ -1,15 +1,19 @@
 package me.muszek_.troll.commands.subcommands;
 
-import java.util.List;
+import dev.rollczi.litecommands.annotations.argument.Arg;
+import dev.rollczi.litecommands.annotations.command.Command;
+import dev.rollczi.litecommands.annotations.context.Context;
+import dev.rollczi.litecommands.annotations.execute.Execute;
+import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.listeners.BlockCraftListener;
 import me.muszek_.troll.settings.Settings;
-import me.muszek_.troll.utils.TabCompletePlayer;
-import me.muszek_.troll.utils.Utils;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class BlockCraft extends SubCommand {
+@Command(name = "troll blockcraft")
+@Permission("epictroll.blockcraft")
+public class BlockCraft {
 
   private final BlockCraftListener listener;
 
@@ -17,60 +21,19 @@ public class BlockCraft extends SubCommand {
     this.listener = listener;
   }
 
-
-  @Override
-  public String getName() {
-    return "blockcraft";
-  }
-
-  @Override
-  public String getDescription() {
-    return "blocks the possibility of crafting";
-  }
-
-  @Override
-  public String getSyntax() {
-    return "/troll blockcraft <player>";
-  }
-
-  @Override
-  public void perform(Player player, String[] args) {
-
-    if (args.length == 1) {
-      player.sendMessage(Colors.color(Settings.LangKey.BLOCKCRAFT_USAGE.get()));
-      return;
-    }
-
-    Player target = Utils.getTarget(player, args[1]);
-    if (target == null) {
-      return;
-    }
+  @Execute
+  public void execute(@Context CommandSender sender, @Arg("player") Player target) {
 
     if (listener.isLocked(target)) {
       listener.unlock(target);
-      player.sendMessage(
-          Colors.color(Settings.LangKey.BLOCKCRAFT_UNBLOCK.get(), "%player%", args[1]));
+      sender.sendMessage(
+              Colors.color(Settings.LangKey.BLOCKCRAFT_UNBLOCK.get(), "%player%", target.getName()));
     } else {
       listener.lock(target);
-      player.sendMessage(
-          Colors.color(Settings.LangKey.BLOCKCRAFT_BLOCK.get(), "%player%", args[1]));
+      sender.sendMessage(
+              Colors.color(Settings.LangKey.BLOCKCRAFT_BLOCK.get(), "%player%", target.getName()));
     }
 
-
-  }
-
-  @Override
-  public String getPermission() {
-    return "epictroll.blockcraft";
-  }
-
-  @Override
-  public List<String> getSubcommandArguments(Player player, String[] args) {
-    if (args.length == 2) {
-      return TabCompletePlayer.getOnlinePlayerNames();
-    }
-
-    return null;
   }
 }
 

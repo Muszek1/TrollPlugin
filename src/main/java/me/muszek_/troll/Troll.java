@@ -1,30 +1,26 @@
 package me.muszek_.troll;
 
-import java.util.HashMap;
-import java.util.Objects;
-import me.muszek_.troll.commands.CommandManager;
-import me.muszek_.troll.listeners.AppleListener;
-import me.muszek_.troll.listeners.BlockCraftListener;
-import me.muszek_.troll.listeners.BlockToolUseListener;
-import me.muszek_.troll.listeners.CookieListener;
-import me.muszek_.troll.listeners.DiamondListener;
-import me.muszek_.troll.listeners.JumplockListener;
-import me.muszek_.troll.listeners.LaunchListener;
-import me.muszek_.troll.listeners.MenuListener;
-import me.muszek_.troll.listeners.ReverseChatListener;
-import me.muszek_.troll.listeners.UpdateNotifyListener;
+import dev.rollczi.litecommands.LiteCommands;
+import dev.rollczi.litecommands.bukkit.LiteBukkitFactory;
+import dev.rollczi.litecommands.invalidusage.InvalidUsage;
+import me.muszek_.troll.commands.subcommands.*;
+import me.muszek_.troll.listeners.*;
 import me.muszek_.troll.menusystem.PlayerMenuUtility;
 import me.muszek_.troll.settings.Settings;
 import me.muszek_.troll.utils.Logger;
 import me.muszek_.troll.utils.UpdateChecker;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
+
 public final class Troll extends JavaPlugin {
 
+  private LiteCommands<CommandSender> liteCommands;
   private static Troll instance;
-
   private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
 
   private String latestVersion;
@@ -40,18 +36,54 @@ public final class Troll extends JavaPlugin {
     FileConfiguration lang = updater.update("lang.yml");
 
     JumplockListener jumplockListener = new JumplockListener();
-    BlockCraftListener BlockCraftListener = new BlockCraftListener();
-    ReverseChatListener ReverseChatListener = new ReverseChatListener();
-    BlockToolUseListener BlockToolUseListener = new BlockToolUseListener();
-    getServer().getPluginManager().registerEvents(jumplockListener, this);
-    getServer().getPluginManager().registerEvents(BlockCraftListener, this);
-    getServer().getPluginManager().registerEvents(ReverseChatListener, this);
-    getServer().getPluginManager().registerEvents(BlockToolUseListener, this);
+    BlockCraftListener blockCraftListener = new BlockCraftListener();
+    ReverseChatListener reverseChatListener = new ReverseChatListener();
+    BlockToolUseListener blockToolUseListener = new BlockToolUseListener();
 
-    CommandManager commandManager = new CommandManager(this, BlockToolUseListener, jumplockListener,
-        BlockCraftListener, ReverseChatListener);
-    Objects.requireNonNull(getCommand("troll")).setExecutor(commandManager);
-    Objects.requireNonNull(getCommand("troll")).setTabCompleter(commandManager);
+    getServer().getPluginManager().registerEvents(jumplockListener, this);
+    getServer().getPluginManager().registerEvents(blockCraftListener, this);
+    getServer().getPluginManager().registerEvents(reverseChatListener, this);
+    getServer().getPluginManager().registerEvents(blockToolUseListener, this);
+    this.liteCommands = LiteBukkitFactory.builder("EpicTroll", this)
+            .commands(new ExplodePlayer(),
+                    new AnnoySounds(this),
+                    new Anvil(),
+                    new Apple(),
+                    new BlockCraft(blockCraftListener),
+                    new BlockToolUse(blockToolUseListener),
+                    new Cookie(),
+                    new Diamond(),
+                    new DropInv(),
+                    new FakeOp(),
+                    new FakeXp(this),
+                    new Fire(),
+                    new Freeze(),
+                    new Gui(this),
+                    new Help(),
+                    new Jumplock(jumplockListener),
+                    new KnockbackStick(),
+                    new Launch(),
+                    new Mob(),
+                    new Reload(),
+                    new ReverseChat(reverseChatListener),
+                    new Shuffle())
+            .result(InvalidUsage.class, (invocation, result, chain) -> {
+              CommandSender sender = invocation.sender();
+
+              String rawArg = invocation.arguments().asList().isEmpty()
+                      ? ""
+                      : invocation.arguments().asList().get(0);
+
+              if (!rawArg.isEmpty()) {
+                String message = Settings.LangKey.PLAYER_NOT_FOUND.get().replace("%player%", rawArg);
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+                return;
+              }
+
+              sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cUżycie: " + result.getSchematic()));
+            })
+            .build();
+
     getServer().getPluginManager().registerEvents(new AppleListener(), this);
     getServer().getPluginManager().registerEvents(new DiamondListener(), this);
     getServer().getPluginManager().registerEvents(new LaunchListener(), this);
@@ -73,12 +105,9 @@ public final class Troll extends JavaPlugin {
         Logger.log(Logger.LogLevel.INFO, "Plugin EpicTroll is up to date.");
       } else {
         Logger.log(Logger.LogLevel.WARNING,
-            "Plugin EpicTroll has an update. Update: https://www.spigotmc.org/resources/124041/");
+                "Plugin EpicTroll has an update. Update: https://www.spigotmc.org/resources/124041/");
       }
-
     });
-
-
   }
 
   public boolean isUpdateAvailable() {
@@ -91,8 +120,10 @@ public final class Troll extends JavaPlugin {
 
   @Override
   public void onDisable() {
+    if (this.liteCommands != null) {
+      this.liteCommands.unregister();
+    }
     getLogger().warning("EpicTroll plugin has been disabled!");
-
   }
 
   public static Troll getInstance() {
@@ -100,12 +131,10 @@ public final class Troll extends JavaPlugin {
   }
 
   public static PlayerMenuUtility getPlayerMenuUtility(Player player) {
-    PlayerMenuUtility playerMenuUtility;
-
     if (playerMenuUtilityMap.containsKey(player)) {
       return playerMenuUtilityMap.get(player);
     } else {
-      playerMenuUtility = new PlayerMenuUtility(player);
+      PlayerMenuUtility playerMenuUtility = new PlayerMenuUtility(player);
       playerMenuUtilityMap.put(player, playerMenuUtility);
       return playerMenuUtility;
     }

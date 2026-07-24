@@ -1,82 +1,39 @@
 package me.muszek_.troll.commands.subcommands;
 
-import java.util.List;
+import dev.rollczi.litecommands.annotations.argument.Arg;
+import dev.rollczi.litecommands.annotations.command.Command;
+import dev.rollczi.litecommands.annotations.context.Context;
+import dev.rollczi.litecommands.annotations.execute.Execute;
+import dev.rollczi.litecommands.annotations.optional.OptionalArg;
+import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.settings.Settings;
-import me.muszek_.troll.utils.TabCompletePlayer;
-import me.muszek_.troll.utils.Utils;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Fire extends SubCommand {
+@Command(name = "troll fire")
+@Permission("epictroll.fire")
+public class Fire {
 
-  @Override
-  public String getName() {
-    return "fire";
-  }
+  @Execute
+  public void execute(@Context CommandSender sender, @Arg("player") Player target, @OptionalArg("number") Integer number) {
+    Integer time = number;
+    if (number == null){
+      time = Settings.ConfigKey.FIRE_DEFAULT_DURATION.get();}
 
-  @Override
-  public String getDescription() {
-    return "Fire a player";
-  }
-
-  @Override
-  public String getSyntax() {
-    return "/troll fire <player>";
-  }
-
-  @Override
-  public void perform(Player player, String[] args) {
-
-    if (args.length == 1) {
-      player.sendMessage(Colors.color(Settings.LangKey.FIRE_USAGE.get()));
+    if (time <= 0) {
+      sender.sendMessage(Colors.color(Settings.LangKey.FIRE_INVALID_DURATION.get()));
       return;
     }
+    target.setFireTicks(20 * time);
 
-    Player target = Utils.getTarget(player, args[1]);
-    if (target == null) {
-      return;
-    }
-
-    if (args.length == 2) {
-      int time = Settings.ConfigKey.FIRE_DEFAULT_DURATION.get();
-      player.sendMessage(Colors.color(
-          Settings.LangKey.FIRE_MESSAGE.get().replace("%player%", args[1])
+    target.sendMessage(Colors.color(
+          Settings.LangKey.FIRE_MESSAGE.get().replace("%player%", target.getName())
               .replace("%time%", Integer.toString(time))));
-      player.setFireTicks(time * 20);
-    }
 
-    if (args.length == 3) {
-      int time;
-      try {
-        time = Integer.parseInt(args[2]);
-      } catch (NumberFormatException ex) {
-        player.sendMessage(Colors.color(Settings.LangKey.FIRE_INVALID_DURATION.get()));
-        return;
-      }
-      if (time <= 0) {
-        player.sendMessage(Colors.color(Settings.LangKey.FIRE_INVALID_DURATION.get()));
-        return;
-      }
-      player.sendMessage(Colors.color(
-          Settings.LangKey.FIRE_MESSAGE.get().replace("%player%", args[1])
+
+      sender.sendMessage(Colors.color(
+          Settings.LangKey.FIRE_MESSAGE.get().replace("%player%", target.getName())
               .replace("%time%", Integer.toString(time))));
-      target.setFireTicks(20 * time);
     }
   }
-
-  @Override
-  public String getPermission() {
-    return "epictroll.fire";
-  }
-
-
-  @Override
-  public List<String> getSubcommandArguments(Player player, String[] args) {
-    if (args.length == 2) {
-      return TabCompletePlayer.getOnlinePlayerNames();
-    }
-
-    return null;
-  }
-}

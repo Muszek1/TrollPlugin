@@ -1,13 +1,15 @@
 package me.muszek_.troll.commands.subcommands;
 
-import java.util.List;
+import dev.rollczi.litecommands.annotations.argument.Arg;
+import dev.rollczi.litecommands.annotations.command.Command;
+import dev.rollczi.litecommands.annotations.context.Context;
+import dev.rollczi.litecommands.annotations.execute.Execute;
+import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.settings.Settings;
-import me.muszek_.troll.utils.TabCompletePlayer;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -15,51 +17,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-public class Cookie extends SubCommand {
+@Command(name = "troll cookie")
+@Permission("epictroll.cookie")
+public class Cookie{
 
-  @Override
-  public String getName() {
-    return "cookie";
-  }
+  @Execute
+  public void execute(@Context CommandSender sender, @Arg("player") Player target, @Arg("number") int number) {
 
-  @Override
-  public String getDescription() {
-    return "Gives a player a infinite cookie";
-  }
+    int amount = (number <= 0) ? 1 : number;
 
-  @Override
-  public String getSyntax() {
-    return "/troll cookie <player> <amount>";
-  }
-
-  @Override
-  public void perform(Player player, String[] args) {
-
-    Player target = player;
-    int amount = 1;
-
-    if (args.length >= 2) {
-      Player found = Bukkit.getPlayer(args[1]);
-      if (found != null) {
-        target = found;
-      } else {
-        player.sendMessage(
-            Colors.color(Settings.LangKey.PLAYER_NOT_FOUND.get(), "%player%", args[1]));
-        return;
-      }
-    }
-
-    if (args.length >= 3) {
-      try {
-        amount = Integer.parseInt(args[2]);
-        if (amount <= 0) {
-          amount = 1;
-        }
-      } catch (NumberFormatException e) {
-        player.sendMessage(Colors.color(Settings.LangKey.WRONG_NUMBER.get()));
-        return;
-      }
-    }
     ItemStack cookie = new ItemStack(Material.COOKIE, amount);
     ItemMeta metaCookie = cookie.getItemMeta();
     NamespacedKey key = new NamespacedKey("troll", "cookie");
@@ -71,22 +37,10 @@ public class Cookie extends SubCommand {
     }
     cookie.setItemMeta(metaCookie);
     target.getInventory().addItem(cookie);
-    player.sendMessage(
+    sender.sendMessage(
         Colors.color(Settings.LangKey.COOKIE_GIVEN.get(), "%player%", target.getName(), "%amount%",
             String.valueOf(amount)));
 
   }
 
-  @Override
-  public String getPermission() {
-    return "epictroll.cookie";
-  }
-
-  @Override
-  public List<String> getSubcommandArguments(Player player, String[] args) {
-    if (args.length == 2) {
-      return TabCompletePlayer.getOnlinePlayerNames();
-    }
-    return null;
-  }
 }

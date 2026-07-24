@@ -1,45 +1,25 @@
 package me.muszek_.troll.commands.subcommands;
 
-import java.util.List;
+import dev.rollczi.litecommands.annotations.command.Command;
+import dev.rollczi.litecommands.annotations.context.Context;
+import dev.rollczi.litecommands.annotations.execute.Execute;
+import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
 import me.muszek_.troll.Troll;
-import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.settings.Settings;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 
-public class Reload extends SubCommand {
+@Command(name = "troll reload")
+@Permission("epictroll.reload")
+public class Reload{
 
-  @Override
-  public String getName() {
-    return "reload";
-  }
-
-  @Override
-  public String getDescription() {
-    return "reloads the plugin";
-  }
-
-  @Override
-  public String getSyntax() {
-    return "/troll reload";
-  }
-
-  @Override
-  public void perform(Player player, String[] args) {
+  @Execute
+  public void execute(@Context CommandSender sender) {
 
     Troll.getInstance().reloadConfig();
     Settings.load();
-    player.sendMessage(Colors.color(Settings.LangKey.PLUGIN_RELOADED.get()));
+    sender.sendMessage(Colors.color(Settings.LangKey.PLUGIN_RELOADED.get()));
 
   }
 
-  @Override
-  public String getPermission() {
-    return "epictroll.reload";
-  }
-
-  @Override
-  public List<String> getSubcommandArguments(Player player, String[] args) {
-    return null;
-  }
 }

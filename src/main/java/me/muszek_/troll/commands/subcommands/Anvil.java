@@ -1,53 +1,32 @@
 package me.muszek_.troll.commands.subcommands;
 
-import java.util.List;
+import dev.rollczi.litecommands.annotations.argument.Arg;
+import dev.rollczi.litecommands.annotations.command.Command;
+import dev.rollczi.litecommands.annotations.context.Context;
+import dev.rollczi.litecommands.annotations.execute.Execute;
+import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.settings.Settings;
-import me.muszek_.troll.utils.TabCompletePlayer;
-import me.muszek_.troll.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Anvil extends SubCommand {
+@Command(name = "troll anvil")
+@Permission("epictroll.anvil")
+public class Anvil{
 
-  @Override
-  public String getName() {
-    return "anvil";
-  }
+  @Execute
+  public void execute(@Context CommandSender sender, @Arg("player") Player target) {
 
-  @Override
-  public String getDescription() {
-    return "Spawns an Anvil above the player";
-  }
-
-  @Override
-  public String getSyntax() {
-    return "/troll anvil <player>";
-  }
-
-  @Override
-  public void perform(Player player, String[] args) {
-
-    if (args.length == 1) {
-      player.sendMessage(Colors.color(Settings.LangKey.ANVIL_USAGE.get()));
-      return;
-    }
-
-    Player target = Utils.getTarget(player, args[1]);
-    if (target == null) {
-      return;
-    }
-
-    player.sendMessage(
+    sender.sendMessage(
         Colors.color(Settings.LangKey.ANVIL_MESSAGE.get().replace("%player%", target.getName())));
 
     Block block = target.getLocation().getBlock();
     Block blockAbove = block.getRelative(0, 5, 0);
 
     if (blockAbove.getType() != Material.AIR) {
-      player.sendMessage(Colors.color(Settings.LangKey.ANVIL_ERROR.get()));
+      sender.sendMessage(Colors.color(Settings.LangKey.ANVIL_ERROR.get()));
       return;
     }
 
@@ -55,18 +34,4 @@ public class Anvil extends SubCommand {
 
   }
 
-  @Override
-  public String getPermission() {
-    return "epictroll.anvil";
-  }
-
-
-  @Override
-  public List<String> getSubcommandArguments(Player player, String[] args) {
-    if (args.length == 2) {
-      return TabCompletePlayer.getOnlinePlayerNames();
-    }
-
-    return null;
-  }
 }

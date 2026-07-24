@@ -1,17 +1,31 @@
 package me.muszek_.troll.commands.subcommands;
 
-import java.util.Arrays;
-import java.util.List;
+import dev.rollczi.litecommands.annotations.argument.Arg;
+import dev.rollczi.litecommands.annotations.command.Command;
+import dev.rollczi.litecommands.annotations.context.Context;
+import dev.rollczi.litecommands.annotations.execute.Execute;
+import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.commands.SubCommand;
+import me.muszek_.troll.Troll;
 import me.muszek_.troll.settings.Settings;
 import me.muszek_.troll.tasks.AnnoySoundsTask;
-import me.muszek_.troll.utils.TabCompletePlayer;
-import me.muszek_.troll.utils.Utils;
 import org.bukkit.Sound;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class AnnoySounds extends SubCommand {
+import java.util.Arrays;
+import java.util.List;
+
+
+@Command(name = "troll annoysounds")
+@Permission("epictroll.annoysounds")
+public class AnnoySounds {
+
+  private final Troll plugin;
+
+  public AnnoySounds(Troll plugin) {
+    this.plugin = plugin;
+  }
 
   private final List<Sound> annoyingSounds = Arrays.asList(
       Sound.ENTITY_VILLAGER_NO,
@@ -23,56 +37,13 @@ public class AnnoySounds extends SubCommand {
       Sound.BLOCK_BELL_USE
   );
 
-  @Override
-  public String getName() {
-    return "annoysounds";
-  }
+  @Execute
+  public void execute(@Context CommandSender sender, @Arg("player") Player target) {
 
-  @Override
-  public String getDescription() {
-    return "plays annoying sounds for the player";
-  }
-
-  @Override
-  public String getSyntax() {
-    return "/troll annoysounds <player>";
-  }
-
-  @Override
-  public void perform(Player player, String[] args) {
-    if (args.length == 1) {
-      player.sendMessage(Colors.color(Settings.LangKey.ANNOYSOUNDS_USAGE.get()));
-      return;
-    }
-
-    Player target = Utils.getTarget(player, args[1]);
-    if (target == null) {
-      return;
-    }
-
-    player.sendMessage(
-        Colors.color(Settings.LangKey.ANNOYSOUNDS_SENT.get(), "%player%", args[1]));
+    sender.sendMessage(
+        Colors.color(Settings.LangKey.ANNOYSOUNDS_SENT.get().replace("%player%", target.getName())));
 
     new AnnoySoundsTask(target, annoyingSounds)
-        .runTaskTimer(getPlugin(), 0L, 10L);
+        .runTaskTimer(this.plugin, 0L, 10L);
   }
-
-  @Override
-  public String getPermission() {
-    return "epictroll.annoysounds";
-  }
-
-  private org.bukkit.plugin.Plugin getPlugin() {
-    return org.bukkit.Bukkit.getPluginManager().getPlugin("EpicTroll");
-  }
-
-  @Override
-  public List<String> getSubcommandArguments(Player player, String[] args) {
-    if (args.length == 2) {
-      return TabCompletePlayer.getOnlinePlayerNames();
-    }
-
-    return null;
-  }
-
 }

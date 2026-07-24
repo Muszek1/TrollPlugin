@@ -1,45 +1,24 @@
 package me.muszek_.troll.commands.subcommands;
 
-import java.util.List;
+import dev.rollczi.litecommands.annotations.argument.Arg;
+import dev.rollczi.litecommands.annotations.command.Command;
+import dev.rollczi.litecommands.annotations.context.Context;
+import dev.rollczi.litecommands.annotations.execute.Execute;
+import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.settings.Settings;
-import me.muszek_.troll.utils.TabCompletePlayer;
-import me.muszek_.troll.utils.Utils;
 import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-public class DropInv extends SubCommand {
+@Command(name = "troll dropinv")
+@Permission("epictroll.dropinv")
+public class DropInv {
 
-  @Override
-  public String getName() {
-    return "dropinv";
-  }
-
-  @Override
-  public String getDescription() {
-    return "drops a player's inventory";
-  }
-
-  @Override
-  public String getSyntax() {
-    return "/troll dropinv <player>";
-  }
-
-  @Override
-  public void perform(Player player, String[] args) {
-
-    if (args.length == 1) {
-      player.sendMessage(Colors.color(Settings.LangKey.DROPINV_USAGE.get()));
-      return;
-    }
-
-    Player target = Utils.getTarget(player, args[1]);
-    if (target == null) {
-      return;
-    }
+  @Execute
+  public void execute(@Context CommandSender sender, @Arg("player") Player target) {
 
     PlayerInventory inv = target.getInventory();
     Location loc = target.getLocation();
@@ -59,20 +38,7 @@ public class DropInv extends SubCommand {
 
     inv.clear();
 
-    player.sendMessage(
-        Colors.color(Settings.LangKey.DROPINV_DROPPED.get(), "%player%", args[1]));
-  }
-
-  @Override
-  public String getPermission() {
-    return "epictroll.dropinv";
-  }
-
-  @Override
-  public List<String> getSubcommandArguments(Player player, String[] args) {
-    if (args.length == 2) {
-      return TabCompletePlayer.getOnlinePlayerNames();
-    }
-    return null;
+    sender.sendMessage(
+        Colors.color(Settings.LangKey.DROPINV_DROPPED.get(), "%player%", target.getName()));
   }
 }

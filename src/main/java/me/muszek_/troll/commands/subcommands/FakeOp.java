@@ -1,62 +1,27 @@
 package me.muszek_.troll.commands.subcommands;
 
-import java.util.List;
+import dev.rollczi.litecommands.annotations.argument.Arg;
+import dev.rollczi.litecommands.annotations.command.Command;
+import dev.rollczi.litecommands.annotations.context.Context;
+import dev.rollczi.litecommands.annotations.execute.Execute;
+import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.settings.Settings;
-import me.muszek_.troll.utils.TabCompletePlayer;
-import me.muszek_.troll.utils.Utils;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class FakeOp extends SubCommand {
+@Command(name = "troll fakeop")
+@Permission("epictroll.fakeop")
+public class FakeOp{
 
-  @Override
-  public String getName() {
-    return "fakeop";
-  }
+  @Execute
+  public void execute(@Context CommandSender sender, @Arg("player") Player target) {
 
-  @Override
-  public String getDescription() {
-    return "sends fake message about receiving op";
-  }
-
-  @Override
-  public String getSyntax() {
-    return "/troll fakeop <player>";
-  }
-
-  @Override
-  public void perform(Player player, String[] args) {
-
-    if (args.length == 1) {
-      player.sendMessage(Colors.color(Settings.LangKey.FAKEOP_USAGE.get()));
-      return;
-    }
-
-    Player target = Utils.getTarget(player, args[1]);
-    if (target == null) {
-      return;
-    }
-
+    sender.sendMessage(
+        Colors.color(Settings.LangKey.FAKEOP_MESSAGE_SENT.get(), "%player%", target.getName()));
     target.sendMessage(
-        Colors.color(Settings.LangKey.FAKEOP_MESSAGE_SENT.get(), "%player%", args[0]));
-    player.sendMessage(
-        Colors.color(Settings.LangKey.FAKEOP_MESSAGE_CONFIRMATION.get(), "%player%", args[0]));
+        Colors.color(Settings.LangKey.FAKEOP_MESSAGE_CONFIRMATION.get(), "%player%", target.getName()));
 
 
-  }
-
-  @Override
-  public String getPermission() {
-    return "epictroll.fakeop";
-  }
-
-  @Override
-  public List<String> getSubcommandArguments(Player player, String[] args) {
-    if (args.length == 2) {
-      return TabCompletePlayer.getOnlinePlayerNames();
-    }
-
-    return null;
   }
 }

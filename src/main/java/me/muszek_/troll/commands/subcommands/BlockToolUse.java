@@ -1,15 +1,19 @@
 package me.muszek_.troll.commands.subcommands;
 
-import java.util.List;
+import dev.rollczi.litecommands.annotations.argument.Arg;
+import dev.rollczi.litecommands.annotations.command.Command;
+import dev.rollczi.litecommands.annotations.context.Context;
+import dev.rollczi.litecommands.annotations.execute.Execute;
+import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.commands.SubCommand;
 import me.muszek_.troll.listeners.BlockToolUseListener;
 import me.muszek_.troll.settings.Settings;
-import me.muszek_.troll.utils.TabCompletePlayer;
-import me.muszek_.troll.utils.Utils;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class BlockToolUse extends SubCommand {
+@Command(name = "troll blocktooluse")
+@Permission("epictroll.blocktooluse")
+public class BlockToolUse{
 
   private final BlockToolUseListener listener;
 
@@ -17,55 +21,17 @@ public class BlockToolUse extends SubCommand {
     this.listener = listener;
   }
 
-  @Override
-  public String getName() {
-    return "blocktooluse";
-  }
-
-  @Override
-  public String getDescription() {
-    return "block tool use";
-  }
-
-  @Override
-  public String getSyntax() {
-    return "/troll blocktooluse <player>";
-  }
-
-  @Override
-  public void perform(Player sender, String[] args) {
-
-    if (args.length == 1) {
-      sender.sendMessage(Colors.color(Settings.LangKey.BLOCKTOOLUSE_USAGE.get()));
-      return;
-    }
-
-    Player target = Utils.getTarget(sender, args[1]);
-    if (target == null) {
-      return;
-    }
+  @Execute
+  public void execute(@Context CommandSender sender, @Arg("player") Player target) {
 
     if (listener.isLocked(target)) {
       listener.unlock(target);
       sender.sendMessage(
-          Colors.color(Settings.LangKey.BLOCKTOOLUSE_UNLOCK.get().replace("%player%", args[1])));
+          Colors.color(Settings.LangKey.BLOCKTOOLUSE_UNLOCK.get().replace("%player%", target.getName())));
     } else {
       listener.lock(target);
       sender.sendMessage(
-          Colors.color(Settings.LangKey.BLOCKTOOLUSE_BLOCK.get().replace("%player%", args[1])));
+          Colors.color(Settings.LangKey.BLOCKTOOLUSE_BLOCK.get().replace("%player%", target.getName())));
     }
-  }
-
-  @Override
-  public String getPermission() {
-    return "epictroll.blocktooluse";
-  }
-
-  @Override
-  public List<String> getSubcommandArguments(Player player, String[] args) {
-    if (args.length == 2) {
-      return TabCompletePlayer.getOnlinePlayerNames();
-    }
-    return null;
   }
 }
