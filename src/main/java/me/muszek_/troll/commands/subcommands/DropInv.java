@@ -39,9 +39,11 @@ public class DropInv {
       }
     }
     ItemStack off = inv.getItemInOffHand();
+    if (off != null) {
       target.getWorld().dropItemNaturally(loc, off.clone());
+    }
 
-      inv.clear();
+    inv.clear();
     sender.sendMessage(Colors.color(plugin.getMessageConfig().Dropinv.Dropped, "%player%", target.getName()));
   }
 }

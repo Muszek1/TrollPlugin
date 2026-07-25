@@ -47,11 +47,11 @@ public class GuiCommandMenu extends Menu {
     switch (e.getCurrentItem().getType()) {
       case WOODEN_PICKAXE:
         e.getWhoClicked().closeInventory();
-        player.performCommand("troll blocktooluse " + player.getName());
+        player.performCommand("troll blocktooluse " + target.getName());
         break;
       case EXPERIENCE_BOTTLE:
         e.getWhoClicked().closeInventory();
-        player.performCommand("troll fakexp " + player.getName());
+        player.performCommand("troll fakexp " + target.getName());
         break;
       case ANVIL:
         e.getWhoClicked().closeInventory();
@@ -114,11 +114,11 @@ public class GuiCommandMenu extends Menu {
         break;
       case BELL:
         e.getWhoClicked().closeInventory();
-        player.performCommand("troll annoysounds " + player.getName());
+        player.performCommand("troll annoysounds " + target.getName());
         break;
       case CHEST:
         e.getWhoClicked().closeInventory();
-        player.performCommand("troll dropinv " + player.getName());
+        player.performCommand("troll dropinv " + target.getName());
         break;
       case PAPER:
         e.getWhoClicked().closeInventory();
@@ -184,7 +184,7 @@ public class GuiCommandMenu extends Menu {
 
     //SHUFFLE
     ItemStack shuffle = new ItemStack(Material.COBWEB);
-    ItemMeta shuffleMeta = cookie.getItemMeta();
+    ItemMeta shuffleMeta = shuffle.getItemMeta();
     shuffleMeta.displayName(Colors.color("&d&lShuffle"));
     shuffleMeta.lore(List.of(Colors.color("&e- &fShuffles player's inventory")));
     shuffle.setItemMeta(shuffleMeta);

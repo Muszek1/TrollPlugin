@@ -22,7 +22,7 @@ public class Fire {
   }
 
   @Execute
-  public void execute(@Context CommandSender sender, @Arg("player") Player target, @OptionalArg("number") Integer number) {
+  public void execute(@Context CommandSender sender, @Arg("player") Player target, @OptionalArg("seconds") Integer number) {
     int time = (number == null) ? plugin.getPluginConfig().Fire.Default_Duration : number;
 
     if (time <= 0) {

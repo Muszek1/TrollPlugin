@@ -32,7 +32,7 @@ public class FakeXp implements Listener {
   }
 
   @Execute
-  public void execute(@Context CommandSender sender, @Arg("player") Player target, @Arg("number") int number) {
+  public void execute(@Context CommandSender sender, @Arg("player") Player target, @Arg("amount") int number) {
     restoreMap.put(target.getUniqueId(), new LevelExp(target.getLevel(), target.getExp()));
 
     new BukkitRunnable() {

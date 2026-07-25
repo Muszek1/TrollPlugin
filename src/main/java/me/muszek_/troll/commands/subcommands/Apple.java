@@ -26,7 +26,7 @@ public class Apple {
   }
 
   @Execute
-  public void execute(@Context CommandSender sender, @Arg("player") Player target, @Arg("number") int number) {
+  public void execute(@Context CommandSender sender, @Arg("player") Player target, @Arg("amount") int number) {
     int amount = (number <= 0) ? 1 : number;
 
     ItemStack apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, amount);

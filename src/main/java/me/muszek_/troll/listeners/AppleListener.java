@@ -34,8 +34,7 @@ public class AppleListener implements Listener {
       ItemMeta meta = item.getItemMeta();
       if (meta != null) {
         PersistentDataContainer container = meta.getPersistentDataContainer();
-        NamespacedKey key = new NamespacedKey("troll", "apple");
-        if (container.has(key, PersistentDataType.BYTE)) {
+        if (container.has(appleKey, PersistentDataType.BYTE)) {
           event.setCancelled(true);
           event.getPlayer().sendMessage(Colors.color(plugin.getMessageConfig().Apple.Eaten, "%player%", event.getPlayer().getName()));
           Player player = event.getPlayer();

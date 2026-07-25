@@ -29,7 +29,7 @@ public class Cookie {
   }
 
   @Execute
-  public void execute(@Context CommandSender sender, @Arg("player") Player target, @OptionalArg("number") Integer number) {
+  public void execute(@Context CommandSender sender, @Arg("player") Player target, @OptionalArg("amount") Integer number) {
     int amount = (number == null || number <= 0) ? 1 : number;
 
     ItemStack cookie = new ItemStack(Material.COOKIE, amount);

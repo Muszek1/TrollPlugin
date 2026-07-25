@@ -16,6 +16,7 @@ public class MessageConfig extends OkaeriConfig {
     public String No_Permissions = "&c> &fYou do not have permissions to do that!";
     public String Plugin_Reloaded = "&a> &fYou have successfully reloaded the EpicTroll Plugin!";
     public String Wrong_Number = "&c> &fYou have provided a wrong number!";
+    public String Invalid_Usage = "&c> &fYou have provided an invalid usage!";
 
     public FireSection Fire = new FireSection();
     public MobSection Mob = new MobSection();

@@ -28,7 +28,7 @@ public class Mob {
           @Context CommandSender sender,
           @Arg("player") Player target,
           @Arg("mob") EntityType mob,
-          @OptionalArg("number") Integer number) {
+          @OptionalArg("amount") Integer number) {
 
     int amount = (number == null || number <= 0) ? 1 : number;
     Location playerLocation = target.getLocation();

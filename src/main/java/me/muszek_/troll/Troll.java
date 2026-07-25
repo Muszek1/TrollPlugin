@@ -2,22 +2,31 @@ package me.muszek_.troll;
 
 import dev.rollczi.litecommands.LiteCommands;
 import dev.rollczi.litecommands.bukkit.LiteBukkitFactory;
-import dev.rollczi.litecommands.invalidusage.InvalidUsage;
+import dev.rollczi.litecommands.permission.MissingPermissions;
+import dev.rollczi.litecommands.scope.Scope;
 import eu.okaeri.configs.ConfigManager;
 import eu.okaeri.configs.yaml.bukkit.YamlBukkitConfigurer;
 import me.muszek_.troll.commands.subcommands.*;
 import me.muszek_.troll.config.MessageConfig;
 import me.muszek_.troll.config.PluginConfig;
+import me.muszek_.troll.handlers.CustomInvalidUsageHandler;
+import me.muszek_.troll.handlers.MissingPermissionHandler;
 import me.muszek_.troll.listeners.*;
 import me.muszek_.troll.menusystem.PlayerMenuUtility;
+import me.muszek_.troll.resolve.EntityTypeArgumentResolver;
+import me.muszek_.troll.resolve.PlayerArgumentResolver;
 import me.muszek_.troll.utils.Logger;
 import me.muszek_.troll.utils.UpdateChecker;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffectType;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.UUID;
 
 public final class Troll extends JavaPlugin {
 
@@ -25,8 +34,8 @@ public final class Troll extends JavaPlugin {
   private static Troll instance;
   private PluginConfig pluginConfig;
   private MessageConfig messageConfig;
-  private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
-
+  private JumplockListener jumplockListener;
+  private static final HashMap<UUID, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
   private String latestVersion;
   private boolean updateAvailable = false;
 
@@ -49,7 +58,7 @@ public final class Troll extends JavaPlugin {
       it.load(true);
     });
 
-    JumplockListener jumplockListener = new JumplockListener();
+    this.jumplockListener = new JumplockListener();
     BlockCraftListener blockCraftListener = new BlockCraftListener();
     ReverseChatListener reverseChatListener = new ReverseChatListener();
     BlockToolUseListener blockToolUseListener = new BlockToolUseListener();
@@ -59,7 +68,15 @@ public final class Troll extends JavaPlugin {
     getServer().getPluginManager().registerEvents(reverseChatListener, this);
     getServer().getPluginManager().registerEvents(blockToolUseListener, this);
     this.liteCommands = LiteBukkitFactory.builder("EpicTroll", this)
-            .commands(new ExplodePlayer(this),
+            .editor(Scope.command("troll"), editor ->
+                    editor.aliases("trolling", "etroll", "epictroll")
+            )
+            .argument(EntityType.class, new EntityTypeArgumentResolver(this.messageConfig))
+            .argument(Player.class, new PlayerArgumentResolver(this.messageConfig))
+            .commands
+                   (new Gui(this),
+                    new MainCommand(this),
+                    new ExplodePlayer(this),
                     new AnnoySounds(this),
                     new Anvil(this),
                     new Apple(this),
@@ -72,7 +89,6 @@ public final class Troll extends JavaPlugin {
                     new FakeXp(this),
                     new Fire(this),
                     new Freeze(this),
-                    new Gui(this),
                     new Help(),
                     new Jumplock(jumplockListener, this),
                     new KnockbackStick(this),
@@ -81,18 +97,8 @@ public final class Troll extends JavaPlugin {
                     new Reload(this),
                     new ReverseChat(reverseChatListener, this),
                     new Shuffle(this))
-            .result(InvalidUsage.class, (invocation, result, chain) -> {
-              CommandSender sender = invocation.sender();
-              String rawArg = invocation.arguments().asList().isEmpty()
-                      ? ""
-                      : invocation.arguments().asList().get(0);
-              if (!rawArg.isEmpty()) {
-                String message = this.messageConfig.Player_Not_Found.replace("%player%", rawArg);
-                sender.sendMessage(Colors.color(message));
-                return;
-              }
-              sender.sendMessage(Colors.color("&cUżycie: " + result.getSchematic()));
-            })
+            .result(MissingPermissions.class, new MissingPermissionHandler(this.messageConfig))
+            .invalidUsage(new CustomInvalidUsageHandler(this.messageConfig))
             .build();
 
     getServer().getPluginManager().registerEvents(new AppleListener(this, messageConfig), this);
@@ -132,6 +138,16 @@ public final class Troll extends JavaPlugin {
     if (this.liteCommands != null) {
       this.liteCommands.unregister();
     }
+
+    if (this.jumplockListener != null) {
+      for (UUID uuid : this.jumplockListener.getJumpLocked()) {
+        Player player = Bukkit.getPlayer(uuid);
+        if (player != null && player.isOnline()) {
+          player.removePotionEffect(PotionEffectType.JUMP);
+        }
+      }
+    }
+
     getLogger().warning("EpicTroll plugin has been disabled!");
   }
 
@@ -144,7 +160,7 @@ public final class Troll extends JavaPlugin {
       return playerMenuUtilityMap.get(player);
     } else {
       PlayerMenuUtility playerMenuUtility = new PlayerMenuUtility(player);
-      playerMenuUtilityMap.put(player, playerMenuUtility);
+      playerMenuUtilityMap.put(player.getUniqueId(), playerMenuUtility);
       return playerMenuUtility;
     }
   }
