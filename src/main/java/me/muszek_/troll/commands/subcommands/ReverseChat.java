@@ -6,8 +6,8 @@ import dev.rollczi.litecommands.annotations.context.Context;
 import dev.rollczi.litecommands.annotations.execute.Execute;
 import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
+import me.muszek_.troll.Troll;
 import me.muszek_.troll.listeners.ReverseChatListener;
-import me.muszek_.troll.settings.Settings;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -16,22 +16,20 @@ import org.bukkit.entity.Player;
 public class ReverseChat {
 
   private final ReverseChatListener listener;
+  private final Troll plugin;
 
-  public ReverseChat(ReverseChatListener listener) {
+  public ReverseChat(ReverseChatListener listener, Troll plugin) {
     this.listener = listener;
+    this.plugin = plugin;
   }
 
   @Execute
   public void execute(@Context CommandSender sender, @Arg("player") Player target) {
-
     listener.toggle(target);
-
     if (listener.isReversed(target)) {
-      sender.sendMessage(
-          Colors.color(Settings.LangKey.REVERSEDCHAT_REVERSE.get(), "%player%", target.getName()));
+      sender.sendMessage(Colors.color(plugin.getMessageConfig().Reversechat.Reverse, "%player%", target.getName()));
     } else {
-      sender.sendMessage(
-          Colors.color(Settings.LangKey.REVERSEDCHAT_UNREVERSED.get(), "%player%", target.getName()));
+      sender.sendMessage(Colors.color(plugin.getMessageConfig().Reversechat.Unreversed, "%player%", target.getName()));
     }
   }
 }

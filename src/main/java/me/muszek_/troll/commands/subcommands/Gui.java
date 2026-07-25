@@ -9,15 +9,14 @@ import me.muszek_.troll.Troll;
 import me.muszek_.troll.menusystem.PlayerMenuUtility;
 import me.muszek_.troll.menusystem.menu.GuiCommandMenu;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 @Command(name = "troll gui")
 @Permission("epictroll.gui")
 public class Gui{
 
-  private final JavaPlugin plugin;
+  private final Troll plugin;
 
-  public Gui(JavaPlugin plugin) {
+  public Gui(Troll plugin) {
     this.plugin = plugin;
   }
 

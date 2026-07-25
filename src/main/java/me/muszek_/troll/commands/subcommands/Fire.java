@@ -7,7 +7,7 @@ import dev.rollczi.litecommands.annotations.execute.Execute;
 import dev.rollczi.litecommands.annotations.optional.OptionalArg;
 import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.settings.Settings;
+import me.muszek_.troll.Troll;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -15,25 +15,24 @@ import org.bukkit.entity.Player;
 @Permission("epictroll.fire")
 public class Fire {
 
+  private final Troll plugin;
+
+  public Fire(Troll plugin) {
+    this.plugin = plugin;
+  }
+
   @Execute
   public void execute(@Context CommandSender sender, @Arg("player") Player target, @OptionalArg("number") Integer number) {
-    Integer time = number;
-    if (number == null){
-      time = Settings.ConfigKey.FIRE_DEFAULT_DURATION.get();}
+    int time = (number == null) ? plugin.getPluginConfig().Fire.Default_Duration : number;
 
     if (time <= 0) {
-      sender.sendMessage(Colors.color(Settings.LangKey.FIRE_INVALID_DURATION.get()));
+      sender.sendMessage(Colors.color(plugin.getMessageConfig().Fire.Invalid_Duration));
       return;
     }
+
     target.setFireTicks(20 * time);
+    String msg = plugin.getMessageConfig().Fire.Message;
 
-    target.sendMessage(Colors.color(
-          Settings.LangKey.FIRE_MESSAGE.get().replace("%player%", target.getName())
-              .replace("%time%", Integer.toString(time))));
-
-
-      sender.sendMessage(Colors.color(
-          Settings.LangKey.FIRE_MESSAGE.get().replace("%player%", target.getName())
-              .replace("%time%", Integer.toString(time))));
-    }
+    sender.sendMessage(Colors.color(msg, "%player%", target.getName(), "%time%", String.valueOf(time)));
   }
+}

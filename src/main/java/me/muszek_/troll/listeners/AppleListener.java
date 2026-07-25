@@ -1,7 +1,8 @@
 package me.muszek_.troll.listeners;
 
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.settings.Settings;
+import me.muszek_.troll.Troll;
+import me.muszek_.troll.config.MessageConfig;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -15,7 +16,14 @@ import org.bukkit.persistence.PersistentDataType;
 
 public class AppleListener implements Listener {
 
-  public AppleListener() {
+  private final Troll plugin;
+  private final MessageConfig messageConfig;
+  private final NamespacedKey appleKey;
+
+  public AppleListener(Troll plugin, MessageConfig messageConfig) {
+    this.plugin = plugin;
+    this.messageConfig = messageConfig;
+    this.appleKey = new NamespacedKey(plugin, "apple");
   }
 
   @EventHandler
@@ -29,7 +37,7 @@ public class AppleListener implements Listener {
         NamespacedKey key = new NamespacedKey("troll", "apple");
         if (container.has(key, PersistentDataType.BYTE)) {
           event.setCancelled(true);
-          event.getPlayer().sendMessage(Colors.color(Settings.LangKey.APPLE_EATEN.get()));
+          event.getPlayer().sendMessage(Colors.color(plugin.getMessageConfig().Apple.Eaten, "%player%", event.getPlayer().getName()));
           Player player = event.getPlayer();
           ItemStack handItem = player.getInventory().getItemInMainHand();
 

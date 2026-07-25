@@ -7,7 +7,6 @@ import dev.rollczi.litecommands.annotations.execute.Execute;
 import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
 import me.muszek_.troll.Troll;
-import me.muszek_.troll.settings.Settings;
 import me.muszek_.troll.tasks.AnnoySoundsTask;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
@@ -40,8 +39,10 @@ public class AnnoySounds {
   @Execute
   public void execute(@Context CommandSender sender, @Arg("player") Player target) {
 
-    sender.sendMessage(
-        Colors.color(Settings.LangKey.ANNOYSOUNDS_SENT.get().replace("%player%", target.getName())));
+    String message = this.plugin.getMessageConfig().Annoysounds.Sent
+            .replace("%player%", target.getName());
+
+    sender.sendMessage(Colors.color(message));
 
     new AnnoySoundsTask(target, annoyingSounds)
         .runTaskTimer(this.plugin, 0L, 10L);

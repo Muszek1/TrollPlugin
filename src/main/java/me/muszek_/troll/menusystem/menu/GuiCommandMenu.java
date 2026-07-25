@@ -1,25 +1,25 @@
 package me.muszek_.troll.menusystem.menu;
 
-import java.util.Arrays;
-import java.util.List;
 import me.muszek_.troll.Colors;
+import me.muszek_.troll.Troll;
 import me.muszek_.troll.menusystem.Menu;
 import me.muszek_.troll.menusystem.PlayerMenuUtility;
-import me.muszek_.troll.settings.Settings;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class GuiCommandMenu extends Menu {
 
-  private final JavaPlugin plugin;
+  private final Troll plugin;
 
-  public GuiCommandMenu(PlayerMenuUtility playerMenuUtility, JavaPlugin plugin) {
+  public GuiCommandMenu(PlayerMenuUtility playerMenuUtility, Troll plugin) {
     super(playerMenuUtility);
     this.plugin = plugin;
   }
@@ -175,16 +175,18 @@ public class GuiCommandMenu extends Menu {
     //Cookie
     ItemStack cookie = new ItemStack(Material.COOKIE);
     ItemMeta cookieMeta = cookie.getItemMeta();
-    cookieMeta.displayName(Colors.color(Settings.ConfigKey.COOKIE_ITEM_NAME.get()));
-    cookieMeta.lore(List.of(Colors.color("&e- &fShuffles player's inventory")));
-    cookie.setItemMeta(cookieMeta);
+    if (cookieMeta != null) {
+      cookieMeta.displayName(Colors.color(plugin.getPluginConfig().Cookie.Item_Name));
+      cookieMeta.lore(List.of(Colors.color("&e- &fGives a cookie for player")));
+      cookie.setItemMeta(cookieMeta);
+    }
     inventory.setItem(15, cookie);
 
     //SHUFFLE
     ItemStack shuffle = new ItemStack(Material.COBWEB);
     ItemMeta shuffleMeta = cookie.getItemMeta();
     shuffleMeta.displayName(Colors.color("&d&lShuffle"));
-    shuffleMeta.lore(List.of(Colors.color("&e- &fGives a cookie for player")));
+    shuffleMeta.lore(List.of(Colors.color("&e- &fShuffles player's inventory")));
     shuffle.setItemMeta(shuffleMeta);
     inventory.setItem(16, shuffle);
 

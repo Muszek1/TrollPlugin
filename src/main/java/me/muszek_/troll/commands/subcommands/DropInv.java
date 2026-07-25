@@ -6,7 +6,7 @@ import dev.rollczi.litecommands.annotations.context.Context;
 import dev.rollczi.litecommands.annotations.execute.Execute;
 import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.settings.Settings;
+import me.muszek_.troll.Troll;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -17,9 +17,14 @@ import org.bukkit.inventory.PlayerInventory;
 @Permission("epictroll.dropinv")
 public class DropInv {
 
+  private final Troll plugin;
+
+  public DropInv(Troll plugin) {
+    this.plugin = plugin;
+  }
+
   @Execute
   public void execute(@Context CommandSender sender, @Arg("player") Player target) {
-
     PlayerInventory inv = target.getInventory();
     Location loc = target.getLocation();
 
@@ -34,11 +39,9 @@ public class DropInv {
       }
     }
     ItemStack off = inv.getItemInOffHand();
-    target.getWorld().dropItemNaturally(loc, off.clone());
+      target.getWorld().dropItemNaturally(loc, off.clone());
 
-    inv.clear();
-
-    sender.sendMessage(
-        Colors.color(Settings.LangKey.DROPINV_DROPPED.get(), "%player%", target.getName()));
+      inv.clear();
+    sender.sendMessage(Colors.color(plugin.getMessageConfig().Dropinv.Dropped, "%player%", target.getName()));
   }
 }

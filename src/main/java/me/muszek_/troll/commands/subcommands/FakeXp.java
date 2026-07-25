@@ -6,14 +6,13 @@ import dev.rollczi.litecommands.annotations.context.Context;
 import dev.rollczi.litecommands.annotations.execute.Execute;
 import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.settings.Settings;
+import me.muszek_.troll.Troll;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
@@ -24,28 +23,24 @@ import java.util.UUID;
 @Permission("epictroll.fakexp")
 public class FakeXp implements Listener {
 
-  private final JavaPlugin plugin;
+  private final Troll plugin;
   private static final Map<UUID, LevelExp> restoreMap = new HashMap<>();
 
-  public FakeXp(JavaPlugin plugin) {
+  public FakeXp(Troll plugin) {
     this.plugin = plugin;
     Bukkit.getPluginManager().registerEvents(this, plugin);
   }
 
   @Execute
   public void execute(@Context CommandSender sender, @Arg("player") Player target, @Arg("number") int number) {
-
-    int amount = 200;
-
     restoreMap.put(target.getUniqueId(), new LevelExp(target.getLevel(), target.getExp()));
 
-    int finalAmount = number;
     new BukkitRunnable() {
       int given = 0;
 
       @Override
       public void run() {
-        if (given >= finalAmount) {
+        if (given >= number) {
           restoreOriginal(target);
           cancel();
           return;
@@ -59,9 +54,7 @@ public class FakeXp implements Listener {
       }
     }.runTaskTimer(plugin, 0L, 1L);
 
-    sender.sendMessage(Colors.color(Settings.LangKey.FAKEXP_GIVEN.get()
-        .replace("%player%", target.getName())
-        .replace("%amount%", String.valueOf(amount))));
+    sender.sendMessage(Colors.color(plugin.getMessageConfig().Fakexp.Given, "%player%", target.getName(), "%amount%", String.valueOf(number)));
   }
 
   @EventHandler
@@ -84,7 +77,6 @@ public class FakeXp implements Listener {
   }
 
   private static class LevelExp {
-
     final int level;
     final float exp;
 
@@ -94,4 +86,3 @@ public class FakeXp implements Listener {
     }
   }
 }
-

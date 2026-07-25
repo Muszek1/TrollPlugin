@@ -7,7 +7,7 @@ import dev.rollczi.litecommands.annotations.execute.Execute;
 import dev.rollczi.litecommands.annotations.optional.OptionalArg;
 import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.muszek_.troll.Colors;
-import me.muszek_.troll.settings.Settings;
+import me.muszek_.troll.Troll;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
@@ -19,23 +19,25 @@ import org.bukkit.inventory.meta.ItemMeta;
 @Permission("epictroll.knockbackstick")
 public class KnockbackStick {
 
-  @Execute
-  public void execute(@Context CommandSender sender, @Arg("player") Player target, @OptionalArg("number") Integer number) {
+  private final Troll plugin;
 
-    Integer amount = number;
-    if (amount == null) {
-      amount = 1;
-    }
-    ItemStack knockbackStick = new ItemStack(Material.STICK, amount);
-    ItemMeta meta = knockbackStick.getItemMeta();
-    meta.addEnchant(Enchantment.KNOCKBACK, 10, true);
-    meta.displayName((Colors.color(Settings.ConfigKey.KNOCKBACK_ITEM_NAME.get())));
-    knockbackStick.setItemMeta(meta);
-
-    target.getInventory().addItem(knockbackStick);
-    sender.sendMessage(
-        Colors.color(Settings.LangKey.KNOCKBACK_GIVEN.get(), "%player%", target.getName(),
-            "%amount%", String.valueOf(amount)));
+  public KnockbackStick(Troll plugin) {
+    this.plugin = plugin;
   }
 
+  @Execute
+  public void execute(@Context CommandSender sender, @Arg("player") Player target, @OptionalArg("number") Integer number) {
+    int amount = (number == null || number <= 0) ? 1 : number;
+
+    ItemStack knockbackStick = new ItemStack(Material.STICK, amount);
+    ItemMeta meta = knockbackStick.getItemMeta();
+    if (meta != null) {
+      meta.addEnchant(Enchantment.KNOCKBACK, 10, true);
+      meta.displayName(Colors.color(plugin.getPluginConfig().Knockback.Item_Name));
+      knockbackStick.setItemMeta(meta);
+    }
+
+    target.getInventory().addItem(knockbackStick);
+    sender.sendMessage(Colors.color(plugin.getMessageConfig().Knockback.Given, "%player%", target.getName(), "%amount%", String.valueOf(amount)));
+  }
 }
