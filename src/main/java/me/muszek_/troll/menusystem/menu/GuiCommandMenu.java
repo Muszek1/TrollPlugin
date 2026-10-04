@@ -89,6 +89,10 @@ public class GuiCommandMenu extends Menu {
         e.getWhoClicked().closeInventory();
         player.performCommand("troll fire " + target.getName());
         break;
+      case CARVED_PUMPKIN:
+        e.getWhoClicked().closeInventory();
+        player.performCommand("troll pumpkin " + target.getName());
+        break;
       case PACKED_ICE:
         e.getWhoClicked().closeInventory();
         player.performCommand("troll freeze " + target.getName());
@@ -221,6 +225,14 @@ public class GuiCommandMenu extends Menu {
     fireMeta.lore(List.of(Colors.color("&e- &fFires the player")));
     fire.setItemMeta(fireMeta);
     inventory.setItem(24, fire);
+
+    //Pumpkin
+    ItemStack pumpkin = new ItemStack(Material.CARVED_PUMPKIN);
+    ItemMeta pumpkinMeta = pumpkin.getItemMeta();
+    pumpkinMeta.displayName(Colors.color("&6&lPumpkin"));
+    pumpkinMeta.lore(List.of(Colors.color("&e- &fPut pupkin on the player")));
+    pumpkin.setItemMeta(pumpkinMeta);
+    inventory.setItem(25, pumpkin);
 
     //Freeze
     ItemStack freeze = new ItemStack(Material.PACKED_ICE);

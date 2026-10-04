@@ -42,9 +42,9 @@ public class Pumpkin implements Listener {
     }
 
     @Execute
-    public void execute(@Context CommandSender sender, @Arg("player") Player target, @OptionalArg("seconds") int seconds) {
+    public void execute(@Context CommandSender sender, @Arg("player") Player target, @OptionalArg("seconds") Integer seconds) {
 
-        if (seconds == 0){
+        if (seconds == null || seconds == 0) {
             seconds = plugin.getPluginConfig().Pumpkin.Default_Duration;
         }
         UUID uuid = target.getUniqueId();
