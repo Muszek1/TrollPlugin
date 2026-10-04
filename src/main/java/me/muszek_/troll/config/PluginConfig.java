@@ -17,6 +17,7 @@ public class PluginConfig extends OkaeriConfig {
     public FreezeSection Freeze = new FreezeSection();
     public DiamondSection Diamond = new DiamondSection();
     public CookieSection Cookie = new CookieSection();
+    public PumpkinSection Pumpkin = new PumpkinSection();
 
     public static class FireSection extends OkaeriConfig {
         public int Default_Duration = 3;
@@ -37,5 +38,9 @@ public class PluginConfig extends OkaeriConfig {
     public static class CookieSection extends OkaeriConfig {
         public String Item_Name = "&6&lInfinite Cookie 🍪";
         public boolean Glow = true;
+    }
+
+    public static class PumpkinSection extends OkaeriConfig {
+        public int Default_Duration = 5;
     }
 }

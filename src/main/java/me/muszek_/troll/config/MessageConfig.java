@@ -37,6 +37,7 @@ public class MessageConfig extends OkaeriConfig {
     public BlocktooluseSection Blocktooluse = new BlocktooluseSection();
     public FakexpSection Fakexp = new FakexpSection();
     public ShuffleSection Shuffle = new ShuffleSection();
+    public PumpkinSection Pumpkin = new  PumpkinSection();
 
     public static class FireSection extends OkaeriConfig {
         public String Message = "&e> &fYou fired %player% for %time% seconds";
@@ -123,5 +124,9 @@ public class MessageConfig extends OkaeriConfig {
 
     public static class ShuffleSection extends OkaeriConfig {
         public String Sent = "&e> &fYou shuffled %player%'s inventory!";
+    }
+
+    public static class PumpkinSection extends OkaeriConfig {
+        public String Put = "&e> &fYou put a pumpkin on the %player%'s head!";
     }
 }

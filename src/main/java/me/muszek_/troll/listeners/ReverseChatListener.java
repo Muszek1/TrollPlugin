@@ -1,14 +1,16 @@
 package me.muszek_.troll.listeners;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerQuitEvent;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 public class ReverseChatListener implements Listener {
 
@@ -39,5 +41,13 @@ public class ReverseChatListener implements Listener {
     String reversedText = new StringBuilder(plainText).reverse().toString();
 
     event.message(Component.text(reversedText));
+  }
+
+  @EventHandler
+  public void onQuit(PlayerQuitEvent event) {
+    Player player = event.getPlayer();
+    if (isReversed(player)) {
+      toggle(player);
+    }
   }
 }

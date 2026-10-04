@@ -21,6 +21,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffectType;
 
@@ -28,7 +31,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.UUID;
 
-public final class Troll extends JavaPlugin {
+public final class Troll extends JavaPlugin implements Listener {
 
   private LiteCommands<CommandSender> liteCommands;
   private static Troll instance;
@@ -63,6 +66,7 @@ public final class Troll extends JavaPlugin {
     ReverseChatListener reverseChatListener = new ReverseChatListener();
     BlockToolUseListener blockToolUseListener = new BlockToolUseListener();
 
+    getServer().getPluginManager().registerEvents(this, this);
     getServer().getPluginManager().registerEvents(jumplockListener, this);
     getServer().getPluginManager().registerEvents(blockCraftListener, this);
     getServer().getPluginManager().registerEvents(reverseChatListener, this);
@@ -86,7 +90,7 @@ public final class Troll extends JavaPlugin {
                     new Diamond(this),
                     new DropInv(this),
                     new FakeOp(this),
-                    new FakeXp(this),
+                    new com.muszek_.troll.commands.subcommands.FakeXp(this),
                     new Fire(this),
                     new Freeze(this),
                     new Help(),
@@ -94,6 +98,7 @@ public final class Troll extends JavaPlugin {
                     new KnockbackStick(this),
                     new Launch(this),
                     new Mob(this),
+                    new Pumpkin(this),
                     new Reload(this),
                     new ReverseChat(reverseChatListener, this),
                     new Shuffle(this))
@@ -133,6 +138,12 @@ public final class Troll extends JavaPlugin {
     return latestVersion;
   }
 
+  @EventHandler
+  public void onPlayerQuit(PlayerQuitEvent event) {
+    Player player = event.getPlayer();
+    playerMenuUtilityMap.remove(player.getUniqueId());
+  }
+
   @Override
   public void onDisable() {
     if (this.liteCommands != null) {
@@ -156,8 +167,8 @@ public final class Troll extends JavaPlugin {
   }
 
   public static PlayerMenuUtility getPlayerMenuUtility(Player player) {
-    if (playerMenuUtilityMap.containsKey(player)) {
-      return playerMenuUtilityMap.get(player);
+    if (playerMenuUtilityMap.containsKey(player.getUniqueId())) {
+      return playerMenuUtilityMap.get(player.getUniqueId());
     } else {
       PlayerMenuUtility playerMenuUtility = new PlayerMenuUtility(player);
       playerMenuUtilityMap.put(player.getUniqueId(), playerMenuUtility);
