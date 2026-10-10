@@ -71,6 +71,10 @@ public class GuiCommandMenu extends Menu {
         break;
       case COBWEB:
         e.getWhoClicked().closeInventory();
+        player.performCommand("troll cobweb " + target.getName());
+        break;
+      case DROPPER:
+        e.getWhoClicked().closeInventory();
         player.performCommand("troll shuffle " + target.getName());
         break;
       case DIAMOND:
@@ -187,7 +191,7 @@ public class GuiCommandMenu extends Menu {
     inventory.setItem(15, cookie);
 
     //SHUFFLE
-    ItemStack shuffle = new ItemStack(Material.COBWEB);
+    ItemStack shuffle = new ItemStack(Material.DROPPER);
     ItemMeta shuffleMeta = shuffle.getItemMeta();
     shuffleMeta.displayName(Colors.color("&d&lShuffle"));
     shuffleMeta.lore(List.of(Colors.color("&e- &fShuffles player's inventory")));
@@ -267,6 +271,14 @@ public class GuiCommandMenu extends Menu {
     mob.setItemMeta(mobMeta);
     inventory.setItem(33, mob);
 
+    //COBWEB
+    ItemStack cobweb = new ItemStack(Material.COBWEB);
+    ItemMeta cobwebMeta = cobweb.getItemMeta();
+    cobwebMeta.displayName(Colors.color("&f&lCobweb Trap"));
+    cobwebMeta.lore(List.of(Colors.color("&e- &fTraps player in fake cobwebs")));
+    cobweb.setItemMeta(cobwebMeta);
+    inventory.setItem(34, cobweb);
+
     //Reversechat
     ItemStack Reversechat = new ItemStack(Material.PAPER);
     ItemMeta ReversechatMeta = Reversechat.getItemMeta();
@@ -315,7 +327,7 @@ public class GuiCommandMenu extends Menu {
 
       @Override
       public void run() {
-        if (inventory.getViewers().isEmpty()) { // Zatrzymanie taska, jeśli nikt nie patrzy
+        if (inventory.getViewers().isEmpty()) {
           this.cancel();
           return;
         }

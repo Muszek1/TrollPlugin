@@ -1,12 +1,15 @@
 package me.muszek_.troll;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 public class Colors {
 
   public static Component color(String args) {
-    return LegacyComponentSerializer.legacyAmpersand().deserialize(args);
+    return LegacyComponentSerializer.legacyAmpersand()
+            .deserialize(args)
+            .decoration(TextDecoration.ITALIC, false);
   }
 
   public static Component color(String text, String... replacements) {

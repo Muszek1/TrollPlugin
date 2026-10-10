@@ -38,6 +38,7 @@ public class MessageConfig extends OkaeriConfig {
     public FakexpSection Fakexp = new FakexpSection();
     public ShuffleSection Shuffle = new ShuffleSection();
     public PumpkinSection Pumpkin = new  PumpkinSection();
+    public CobwebSection Cobweb = new CobwebSection();
 
     public static class FireSection extends OkaeriConfig {
         public String Message = "&e> &fYou fired %player% for %time% seconds";
@@ -128,5 +129,9 @@ public class MessageConfig extends OkaeriConfig {
 
     public static class PumpkinSection extends OkaeriConfig {
         public String Put = "&e> &fYou put a pumpkin on the %player%'s head!";
+    }
+
+    public static class CobwebSection extends OkaeriConfig {
+        public String Sent = "&e> &fYou have created a cobweb around %player%!";
     }
 }

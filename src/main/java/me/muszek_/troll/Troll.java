@@ -101,7 +101,8 @@ public final class Troll extends JavaPlugin implements Listener {
                     new Pumpkin(this),
                     new Reload(this),
                     new ReverseChat(reverseChatListener, this),
-                    new Shuffle(this))
+                    new Shuffle(this),
+                    new Cobweb(this))
             .result(MissingPermissions.class, new MissingPermissionHandler(this.messageConfig))
             .invalidUsage(new CustomInvalidUsageHandler(this.messageConfig))
             .build();

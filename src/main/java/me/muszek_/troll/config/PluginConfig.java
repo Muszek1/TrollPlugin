@@ -18,6 +18,7 @@ public class PluginConfig extends OkaeriConfig {
     public DiamondSection Diamond = new DiamondSection();
     public CookieSection Cookie = new CookieSection();
     public PumpkinSection Pumpkin = new PumpkinSection();
+    public CobwebSection Cobweb = new CobwebSection();
 
     public static class FireSection extends OkaeriConfig {
         public int Default_Duration = 3;
@@ -41,6 +42,10 @@ public class PluginConfig extends OkaeriConfig {
     }
 
     public static class PumpkinSection extends OkaeriConfig {
+        public int Default_Duration = 5;
+    }
+
+    public static class CobwebSection extends OkaeriConfig {
         public int Default_Duration = 5;
     }
 }
