@@ -103,12 +103,15 @@ public class Pumpkin implements Listener {
 
     private void restoreOriginal(Player target) {
         UUID id = target.getUniqueId();
-        ItemStack orig = restoreMap.remove(id);
-        if (orig != null && orig.getType() != Material.AIR) {
-            target.getInventory().setHelmet(orig);
+
+        ItemStack originalHelmet = restoreMap.remove(id);
+        if (originalHelmet != null && originalHelmet.getType() != Material.AIR) {
+            target.getInventory().setHelmet(originalHelmet);
         } else {
             target.getInventory().setHelmet(null);
         }
+
+        target.removePotionEffect(PotionEffectType.BLINDNESS);
 
         BukkitTask task = activeTasks.remove(id);
         if (task != null) {
@@ -121,18 +124,9 @@ public class Pumpkin implements Listener {
         Player player = event.getPlayer();
         UUID id = player.getUniqueId();
 
-        ItemStack orig = restoreMap.remove(id);
-        if (orig != null) {
-            player.getInventory().setHelmet(orig);
-        } else {
-            player.getInventory().setHelmet(null);
-        }
-
-        event.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
-
-        BukkitTask task = activeTasks.remove(id);
-        if (task != null) {
-            task.cancel();
+        if (restoreMap.containsKey(id)) {
+            restoreOriginal(player);
+            player.removePotionEffect(PotionEffectType.BLINDNESS);
         }
     }
 

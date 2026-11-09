@@ -19,6 +19,7 @@ public class PluginConfig extends OkaeriConfig {
     public CookieSection Cookie = new CookieSection();
     public PumpkinSection Pumpkin = new PumpkinSection();
     public CobwebSection Cobweb = new CobwebSection();
+    public BatSwarmSection BatSwarm = new BatSwarmSection();
 
     public static class FireSection extends OkaeriConfig {
         public int Default_Duration = 3;
@@ -47,5 +48,9 @@ public class PluginConfig extends OkaeriConfig {
 
     public static class CobwebSection extends OkaeriConfig {
         public int Default_Duration = 5;
+    }
+
+    public static class BatSwarmSection extends OkaeriConfig {
+        public int Default_Number = 30;
     }
 }

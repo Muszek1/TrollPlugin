@@ -65,12 +65,14 @@ public final class Troll extends JavaPlugin implements Listener {
     BlockCraftListener blockCraftListener = new BlockCraftListener();
     ReverseChatListener reverseChatListener = new ReverseChatListener();
     BlockToolUseListener blockToolUseListener = new BlockToolUseListener();
+    HoleHandsListener holeHandsListener = new HoleHandsListener();
 
     getServer().getPluginManager().registerEvents(this, this);
     getServer().getPluginManager().registerEvents(jumplockListener, this);
     getServer().getPluginManager().registerEvents(blockCraftListener, this);
     getServer().getPluginManager().registerEvents(reverseChatListener, this);
     getServer().getPluginManager().registerEvents(blockToolUseListener, this);
+    getServer().getPluginManager().registerEvents(holeHandsListener, this);
     this.liteCommands = LiteBukkitFactory.builder("EpicTroll", this)
             .editor(Scope.command("troll"), editor ->
                     editor.aliases("trolling", "etroll", "epictroll")
@@ -86,6 +88,7 @@ public final class Troll extends JavaPlugin implements Listener {
                     new Apple(this),
                     new BlockCraft(blockCraftListener, this),
                     new BlockToolUse(blockToolUseListener, this),
+                    new HoleHands(holeHandsListener, this),
                     new Cookie(this),
                     new Diamond(this),
                     new DropInv(this),
@@ -102,7 +105,8 @@ public final class Troll extends JavaPlugin implements Listener {
                     new Reload(this),
                     new ReverseChat(reverseChatListener, this),
                     new Shuffle(this),
-                    new Cobweb(this))
+                    new Cobweb(this),
+                    new BatSwarm(this))
             .result(MissingPermissions.class, new MissingPermissionHandler(this.messageConfig))
             .invalidUsage(new CustomInvalidUsageHandler(this.messageConfig))
             .build();

@@ -39,6 +39,8 @@ public class MessageConfig extends OkaeriConfig {
     public ShuffleSection Shuffle = new ShuffleSection();
     public PumpkinSection Pumpkin = new  PumpkinSection();
     public CobwebSection Cobweb = new CobwebSection();
+    public BatSwarmSection BatSwarm = new BatSwarmSection();
+    public HoleHandsSection HoleHands = new HoleHandsSection();
 
     public static class FireSection extends OkaeriConfig {
         public String Message = "&e> &fYou fired %player% for %time% seconds";
@@ -133,5 +135,14 @@ public class MessageConfig extends OkaeriConfig {
 
     public static class CobwebSection extends OkaeriConfig {
         public String Sent = "&e> &fYou have created a cobweb around %player%!";
+    }
+
+    public static class BatSwarmSection extends OkaeriConfig {
+        public String Sent = "&e> &fYou have created a batswarm of %amount% bats around %player%!";
+    }
+
+    public static class HoleHandsSection extends OkaeriConfig {
+        public String Enabled = "&e> &fYou enabled hole hands for %player%";
+        public String Disabled = "&e> &fYou disabled hole hands for %player%";
     }
 }

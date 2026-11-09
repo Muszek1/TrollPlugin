@@ -113,6 +113,14 @@ public class GuiCommandMenu extends Menu {
         e.getWhoClicked().closeInventory();
         player.performCommand("troll mob " + target.getName() + " creeper");
         break;
+      case BAT_SPAWN_EGG:
+        e.getWhoClicked().closeInventory();
+        player.performCommand("troll batswarm " + target.getName());
+        break;
+      case HOPPER:
+        e.getWhoClicked().closeInventory();
+        player.performCommand("troll holehands " + target.getName());
+        break;
       case BARRIER:
         e.getWhoClicked().closeInventory();
         break;
@@ -176,7 +184,7 @@ public class GuiCommandMenu extends Menu {
     ItemMeta craftingtableMeta = craftingtable.getItemMeta();
     craftingtableMeta.displayName(Colors.color("&c&lBlock/Unblock crafting"));
     craftingtableMeta.lore(
-        List.of(Colors.color("&e- &fBlocks/Unblocks crafting for player")));
+            List.of(Colors.color("&e- &fBlocks/Unblocks crafting for player")));
     craftingtable.setItemMeta(craftingtableMeta);
     inventory.setItem(14, craftingtable);
 
@@ -267,9 +275,26 @@ public class GuiCommandMenu extends Menu {
     ItemMeta mobMeta = mob.getItemMeta();
     mobMeta.displayName(Colors.color("&6&lCreeper"));
     mobMeta.lore(Arrays.asList(Colors.color("&e- &fSpawns creeper behind the player"),
-        Colors.color("&e- &fUse /troll mob <player> <mob> for more mobs")));
+            Colors.color("&e- &fUse /troll mob <player> <mob> for more mobs")));
     mob.setItemMeta(mobMeta);
     inventory.setItem(33, mob);
+
+    //BatSwarm
+    ItemStack batswarm = new ItemStack(Material.BAT_SPAWN_EGG);
+    ItemMeta batswarmMeta = batswarm.getItemMeta();
+    batswarmMeta.displayName(Colors.color("&5&lBat Swarm"));
+    batswarmMeta.lore(List.of(Colors.color("&e- &fSurrounds player with a swarm of bats")));
+    batswarm.setItemMeta(batswarmMeta);
+    inventory.setItem(28, batswarm);
+
+    //HoleHands
+    ItemStack holeHands = new ItemStack(Material.HOPPER);
+    ItemMeta holeHandsMeta = holeHands.getItemMeta();
+    holeHandsMeta.displayName(Colors.color("&6&lHole Hands"));
+    holeHandsMeta.lore(
+            List.of(Colors.color("&e- &fItems fall out of the player's hand")));
+    holeHands.setItemMeta(holeHandsMeta);
+    inventory.setItem(40, holeHands);
 
     //COBWEB
     ItemStack cobweb = new ItemStack(Material.COBWEB);
@@ -284,7 +309,7 @@ public class GuiCommandMenu extends Menu {
     ItemMeta ReversechatMeta = Reversechat.getItemMeta();
     ReversechatMeta.displayName(Colors.color("&6&lReversechat"));
     ReversechatMeta.lore(
-        List.of(Colors.color("&e- &fReverse players' massages for the player")));
+            List.of(Colors.color("&e- &fReverse players' massages for the player")));
     Reversechat.setItemMeta(ReversechatMeta);
     inventory.setItem(22, Reversechat);
 
@@ -333,26 +358,26 @@ public class GuiCommandMenu extends Menu {
         }
 
         Material material =
-            toggle ? Material.WHITE_STAINED_GLASS_PANE : Material.LIME_STAINED_GLASS_PANE;
+                toggle ? Material.WHITE_STAINED_GLASS_PANE : Material.LIME_STAINED_GLASS_PANE;
         ItemStack glass1 = new ItemStack(material);
         ItemMeta meta = glass1.getItemMeta();
         meta.displayName(Colors.color("&f"));
         glass1.setItemMeta(meta);
         int[] panes = {
-            0, 9, 18, 35, 44, 53
+                0, 9, 18, 35, 44, 53
         };
         for (int i : panes) {
           inventory.setItem(i, glass1);
         }
 
         Material material2 =
-            toggle ? Material.LIME_STAINED_GLASS_PANE : Material.WHITE_STAINED_GLASS_PANE;
+                toggle ? Material.LIME_STAINED_GLASS_PANE : Material.WHITE_STAINED_GLASS_PANE;
         ItemStack glass2 = new ItemStack(material2);
         ItemMeta meta2 = glass2.getItemMeta();
         meta2.displayName(Colors.color("&f"));
         glass2.setItemMeta(meta2);
         int[] panes2 = {
-            8, 17, 26, 27, 36, 45
+                8, 17, 26, 27, 36, 45
         };
         for (int i : panes2) {
           inventory.setItem(i, glass2);

@@ -1,20 +1,19 @@
 package me.muszek_.troll.listeners;
 
-import io.papermc.paper.event.player.AsyncChatEvent;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 public class ReverseChatListener implements Listener {
 
-  private final Set<UUID> reversedChatTargets = new HashSet<>();
+  private final Set<UUID> reversedChatTargets =
+          java.util.concurrent.ConcurrentHashMap.newKeySet();
 
   public void toggle(Player player) {
     UUID uuid = player.getUniqueId();
@@ -27,20 +26,15 @@ public class ReverseChatListener implements Listener {
     return reversedChatTargets.contains(player.getUniqueId());
   }
 
-  @EventHandler
-  public void onChat(AsyncChatEvent event) {
-    Player player = event.getPlayer();
-    if (!isReversed(player)) {
+  @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+  public void onChat(AsyncPlayerChatEvent event) {
+    if (!isReversed(event.getPlayer())) {
       return;
     }
 
-    Component originalComponent = event.message();
-
-    String plainText = PlainTextComponentSerializer.plainText().serialize(originalComponent);
-
-    String reversedText = new StringBuilder(plainText).reverse().toString();
-
-    event.message(Component.text(reversedText));
+    event.setMessage(
+            new StringBuilder(event.getMessage()).reverse().toString()
+    );
   }
 
   @EventHandler
