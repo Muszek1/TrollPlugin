@@ -1,5 +1,7 @@
 # EpicTroll
 
+[![bStats](https://bstats.org/signatures/bukkit/EpicTroll.svg)](https://bstats.org/plugin/bukkit/EpicTroll/25451)
+
 
 ## Links
 
